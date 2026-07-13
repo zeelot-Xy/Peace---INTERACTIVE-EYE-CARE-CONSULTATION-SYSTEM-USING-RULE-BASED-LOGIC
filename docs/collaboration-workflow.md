@@ -8,6 +8,15 @@
 
 Slack is coordination, not permanent technical documentation. Accepted decisions are copied into an ADR, requirement, phase report, or academic document.
 
+## Connected project destinations
+
+- [Google Drive workspace](https://drive.google.com/drive/folders/1FyQi4tO8tqkd1Bf2xFkEJuEyDoziAFXI)
+- [Project tracker](https://docs.google.com/spreadsheets/d/1d9mcW9AyPAuenbmQyL4Nk3rCISiWayQC8ORJ4mTDNCs/edit)
+- Slack workspace: `Trivest Ltd`
+- Private coordination channel: `eye-care-project` (`C0BGWKL96HX`)
+
+These destinations were created and verified on 2026-07-13. The tracker contains `Project Tasks` and `Briefing Log` tabs, controlled priority and status fields, Phase 1 evidence, and the Phase 2 backlog.
+
 ## Suggested Drive structure
 
 1. Planning and Tracking
@@ -33,7 +42,6 @@ Record completed work, verification results, carry-over work, blockers, and tomo
 
 Commit accepted source and documentation, update the tracker, mirror the phase report and evidence to Drive, post a short Slack completion notice with the report link, and wait for approval.
 
-## Connection limitation
+## Connector safety
 
-External folders, Sheets, channels, and messages are created only through an available authenticated connector and an explicit target. If connector access is unavailable, this repository documentation remains the ready-to-apply setup specification.
-
+External writes use the verified destinations above. Slack kickoff or progress wording should be drafted for review unless the user explicitly requests immediate posting. If connector access is unavailable, this repository documentation remains the setup specification.

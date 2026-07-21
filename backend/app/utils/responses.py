@@ -22,7 +22,34 @@ def error_response(message: str, status_code: int, code: str):
     return jsonify(payload), status_code
 
 
+def validation_error_response(errors: dict):
+    formatted = [
+        {"code": "validation_error", "field": field, "message": message}
+        for field, messages in errors.items()
+        for message in (messages if isinstance(messages, list) else [messages])
+    ]
+    return jsonify({"data": None, "errors": formatted, "correlation_id": _correlation_id()}), 422
+
+
 def register_error_handlers(app: Flask) -> None:
+    from app.services.auth_service import AuthenticationError, ConflictError, PasswordPolicyError
+    from app.utils.validation import RequestValidationError
+
+    @app.errorhandler(RequestValidationError)
+    def handle_validation_error(error: RequestValidationError):
+        return validation_error_response(error.errors)
+
+    @app.errorhandler(AuthenticationError)
+    def handle_authentication_error(error: AuthenticationError):
+        return error_response(str(error), 401, "authentication_failed")
+
+    @app.errorhandler(ConflictError)
+    def handle_conflict_error(error: ConflictError):
+        return error_response(str(error), 409, "conflict")
+
+    @app.errorhandler(PasswordPolicyError)
+    def handle_password_policy_error(error: PasswordPolicyError):
+        return validation_error_response({"password": [str(error)]})
     @app.errorhandler(HTTPException)
     def handle_http_error(error: HTTPException):
         error_code = error.name.lower().replace(" ", "_")

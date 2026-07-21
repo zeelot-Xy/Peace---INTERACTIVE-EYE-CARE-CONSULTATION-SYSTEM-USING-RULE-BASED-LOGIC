@@ -47,3 +47,8 @@ Routes translate HTTP requests and responses. Services own use-case coordination
 }
 ```
 
+Phase 2 adds cookie-authenticated `/api/v1/auth`, `/api/v1/users`, and `/api/v1/admin` resources. See the authentication contract for the complete endpoint table.
+
+## Persistence and authentication flow
+
+The application factory initializes SQLAlchemy, Alembic, and JWT management. Routes validate transport data and call services; services own password, token, revocation, and audit behavior. Browser tokens remain in HttpOnly cookies, while CSRF values are returned in separate readable cookies and echoed in request headers.

@@ -10,9 +10,8 @@ COPY . .
 
 FROM base AS development
 EXPOSE 5000
-CMD ["python", "-m", "flask", "--app", "run.py", "run", "--host=0.0.0.0", "--port=5000", "--debug"]
+CMD ["sh", "-c", "python -m flask --app run.py db upgrade && exec python -m flask --app run.py run --host=0.0.0.0 --port=5000 --debug"]
 
 FROM base AS production
 EXPOSE 5000
-CMD ["waitress-serve", "--host=0.0.0.0", "--port=5000", "--call", "app:create_app"]
-
+CMD ["sh", "-c", "python -m flask --app run.py db upgrade && exec waitress-serve --host=0.0.0.0 --port=5000 --call app:create_app"]

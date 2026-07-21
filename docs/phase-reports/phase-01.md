@@ -25,7 +25,7 @@
 
 ## Collaboration utility readiness
 
-The repository defines the Drive folder taxonomy, planning-Sheet fields, morning briefing, end-of-day update, and phase-approval workflow. No external folder, Sheet, or Slack message was created because an explicit destination was not selected; this avoids unintended writes while leaving the workflow ready to apply.
+The repository defines the Drive folder taxonomy, planning-Sheet fields, morning briefing, end-of-day update, and phase-approval workflow. After Phase 1 acceptance, the Drive workspace, tracker, private Slack channel, and weekday morning-briefing automation were created and verified.
 
 ## Limitations carried forward by design
 

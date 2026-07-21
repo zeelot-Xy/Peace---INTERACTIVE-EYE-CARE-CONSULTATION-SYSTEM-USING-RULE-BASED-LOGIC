@@ -8,3 +8,4 @@ All notable changes are documented here using a simplified Keep a Changelog form
 
 - Phase 1 project governance, application scaffolding, verification, and documentation foundation.
 - Connected Google Drive project workspace, native project tracker, private Slack coordination channel, and kickoff draft.
+- Phase 2 SQLite schema, migrations, secure cookie authentication, profile APIs, minimal authenticated UI, tests, and documentation.

@@ -13,5 +13,12 @@
 
 Later phases add database integration, authentication, knowledge validation, table-driven inference, consultation flows, security-negative testing, PDF verification, accessibility checks, and end-to-end defense scenarios.
 
-Evidence belongs in the phase report and evidence register. A check is not considered passed without a reproducible command or artifact.
+## Phase 2 quality gates
 
+- Backend integration tests create and destroy an isolated in-memory SQLite schema.
+- Authentication tests cover registration, generic login failure, CSRF, refresh rotation and replay, profile updates, password revocation, audit safety, and patient/admin separation.
+- Migration verification performs downgrade to base, upgrade to head, and schema-drift checking.
+- Frontend tests cover public safety content, protected redirects, registration validation, and successful login navigation.
+- Docker smoke testing applies migrations automatically, exercises registration/profile/logout, and verifies frontend and API health.
+
+Evidence belongs in the phase report and evidence register. A check is not considered passed without a reproducible command or artifact.

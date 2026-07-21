@@ -4,7 +4,7 @@ An educational consultation-support application that uses transparent rule-based
 
 ## Project status
 
-Phase 1 establishes the governed React and Flask development foundation. Authentication, consultations, expert rules, reports, and administration are introduced only in their approved phases.
+Phase 1 established the governed React and Flask foundation. Phase 2 adds migrated SQLite persistence, secure cookie authentication, patient profiles, an administrator bootstrap workflow, and a minimal authenticated interface. Consultations, expert rules, reports, and the full administration experience remain in later phases.
 
 ## Technology
 
@@ -24,10 +24,17 @@ cd backend
 python -m venv .venv
 .venv\Scripts\python -m pip install -r requirements-dev.txt
 Copy-Item ..\.env.example ..\.env
+.venv\Scripts\python -m flask --app run.py db upgrade
 .venv\Scripts\python -m flask --app run.py run --debug
 ```
 
 The API health endpoint is `http://localhost:5000/api/v1/health`.
+
+Create the first administrator interactively after applying migrations:
+
+```powershell
+.venv\Scripts\python -m flask --app run.py bootstrap-admin
+```
 
 ### Frontend
 
@@ -66,4 +73,3 @@ Project governance, architecture, testing, academic-report development, evidence
 ## Safety statement
 
 This project is an academic prototype. Its future knowledge base will use published sources and transparent citations but will not be clinically validated. Urgent symptoms must always be referred to qualified eye-care or emergency professionals.
-

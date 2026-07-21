@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://eyecare.local/schemas/condition.schema.json",
+  "title": "Possible indication catalogue",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "content_version", "conditions"],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "content_version": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"},
+    "conditions": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "name", "category", "possible_indication_label", "summary", "limitations", "citation_ids"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^condition_[a-z0-9_]+$"},
+          "name": {"type": "string", "minLength": 2},
+          "category": {"enum": ["common", "chronic_risk", "urgent_pattern"]},
+          "possible_indication_label": {"type": "string", "minLength": 3},
+          "summary": {"type": "string", "minLength": 15},
+          "limitations": {"type": "string", "minLength": 15},
+          "citation_ids": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "pattern": "^source_[a-z0-9_]+$"}}
+        }
+      }
+    }
+  }
+}

@@ -11,7 +11,7 @@
 
 ## Later layers
 
-Later phases add database integration, authentication, knowledge validation, table-driven inference, consultation flows, security-negative testing, PDF verification, accessibility checks, and end-to-end defense scenarios.
+Later phases add table-driven inference, consultation flows, security-negative testing, PDF verification, accessibility checks, and end-to-end defence scenarios.
 
 ## Phase 2 quality gates
 
@@ -22,3 +22,11 @@ Later phases add database integration, authentication, knowledge validation, tab
 - Docker smoke testing applies migrations automatically, exercises registration/profile/logout, and verifies frontend and API health.
 
 Evidence belongs in the phase report and evidence register. A check is not considered passed without a reproducible command or artifact.
+
+## Phase 3 quality gates
+
+- Draft 2020-12 meta-validation checks every schema.
+- The authoring validator verifies package structure, semantic version consistency, SHA-256 values, stable IDs, cross-references, citations, prohibited wording, emergency evidence, and risk order.
+- Positive tests validate the accepted package and its minimum approved scope.
+- Negative tests alter content to prove checksum tampering, broken references, diagnostic wording, and invalid risk order are detected.
+- The full backend, frontend, build, Docker, and secret-scanning gates remain mandatory even when application runtime behavior is unchanged.

@@ -2,7 +2,9 @@
 
 - Phase: Database and Secure Authentication
 - Date: 2026-07-13
-- Status: Complete — awaiting approval
+- Status: Approved and merged
+- Approval date: 2026-07-21
+- Merge commit: `c0b2ad9956803a07238d6d74e446a2ee6d1d97ee`
 
 ## Delivered
 
@@ -32,4 +34,4 @@ Email verification, forgotten-password delivery, MFA, social login, advanced rat
 
 ## Approval gate
 
-Phase 3 must not begin until all checks pass, the work is committed, and the user approves continuation.
+The user approved Phase 2, and pull request #1 was merged before Phase 3 began.

@@ -4,14 +4,14 @@ An educational consultation-support application that uses transparent rule-based
 
 ## Project status
 
-Phase 1 established the governed React and Flask foundation. Phase 2 adds migrated SQLite persistence, secure cookie authentication, patient profiles, an administrator bootstrap workflow, and a minimal authenticated interface. Consultations, expert rules, reports, and the full administration experience remain in later phases.
+Phases 1 and 2 established the governed React/Flask foundation, migrated SQLite persistence, secure cookie authentication, patient profiles, and administrator bootstrap. Phase 3 adds a schema-validated, source-traceable adult eye-care knowledge package. Runtime loading, inference, consultations, reports, and the full administration experience remain in later phases.
 
 ## Technology
 
 - React 19, Vite, TypeScript, Tailwind CSS
 - Flask REST API with Python
-- SQLite for application data in later phases
-- Versioned JSON for expert knowledge in later phases
+- SQLite for application data
+- Versioned JSON Schema Draft 2020-12 knowledge packages
 - pytest, Vitest, Testing Library, ESLint, and Ruff
 - Docker Compose for reproducible development
 
@@ -52,6 +52,7 @@ The frontend runs at `http://localhost:5173` and reads `VITE_API_BASE_URL` from 
 cd backend
 .venv\Scripts\python -m pytest
 .venv\Scripts\python -m ruff check .
+.venv\Scripts\python tools\validate_knowledge_package.py --json
 
 cd ..\frontend
 npm.cmd run lint
@@ -72,4 +73,4 @@ Project governance, architecture, testing, academic-report development, evidence
 
 ## Safety statement
 
-This project is an academic prototype. Its future knowledge base will use published sources and transparent citations but will not be clinically validated. Urgent symptoms must always be referred to qualified eye-care or emergency professionals.
+This project is an academic prototype. Its knowledge base uses published sources and transparent citations but has not been clinically validated. It supports adults only and never diagnoses or prescribes. Urgent symptoms must always be referred to qualified eye-care or emergency professionals.

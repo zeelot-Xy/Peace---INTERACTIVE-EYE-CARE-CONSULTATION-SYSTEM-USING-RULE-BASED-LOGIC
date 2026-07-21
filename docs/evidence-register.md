@@ -11,5 +11,11 @@
 | E-P2-003 | 2 | Migration downgrade, upgrade, and drift check | Phase 2 completion report | 2026-07-13 |
 | E-P2-004 | 2 | Docker authentication smoke test | Phase 2 completion report | 2026-07-13 |
 | E-P2-005 | 2 | GitGuardian clean-history security check | GitHub pull request #1 | 2026-07-21 |
+| E-P3-001 | 3 | Draft 2020-12 schemas and valid versioned package | `backend/knowledge/` | 2026-07-21 |
+| E-P3-002 | 3 | Source provenance and evidence mapping | `docs/source-register.md` | 2026-07-21 |
+| E-P3-003 | 3 | Positive and negative authoring-validation tests | Phase 3 completion report | 2026-07-21 |
+| E-P3-004 | 3 | Scope, safety, and knowledge-representation decision | ADR 0002 and Phase 3 methodology | 2026-07-21 |
+| E-P3-005 | 3 | Backend/frontend lint, tests, and production build | Phase 3 completion report | 2026-07-21 |
+| E-P3-006 | 3 | Docker image build and live service smoke test | Phase 3 completion report | 2026-07-21 |
 
 External screenshots and large artifacts may be mirrored in the project Google Drive. Each external item must retain a stable filename or link and must not contain patient data or secrets.

@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://eyecare.local/schemas/recommendation.schema.json",
+  "title": "Safety recommendations",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "content_version", "recommendations"],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "content_version": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"},
+    "recommendations": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "title", "message", "urgency", "citation_ids"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^recommendation_[a-z0-9_]+$"},
+          "title": {"type": "string", "minLength": 3},
+          "message": {"type": "string", "minLength": 10},
+          "urgency": {"enum": ["routine", "prompt", "urgent", "emergency"]},
+          "citation_ids": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "pattern": "^source_[a-z0-9_]+$"}}
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "schema_version":"1.0.0",
+  "content_version":"1.0.0",
+  "recommendations":[
+    {"id":"recommendation_emergency_now","title":"Emergency eye care now","message":"Seek emergency eye care now. Do not drive yourself if your vision is suddenly impaired.","urgency":"emergency","citation_ids":["source_nhs_vision_loss","source_nhs_eye_injuries"]},
+    {"id":"recommendation_chemical_first_aid","title":"Rinse and seek emergency care","message":"Immediately rinse the affected eye with plenty of clean water for at least 20 minutes, avoid rubbing it, and seek emergency care.","urgency":"emergency","citation_ids":["source_nhs_eye_injuries","source_medlineplus_eye_emergencies"]},
+    {"id":"recommendation_protect_injury","title":"Protect the injured eye","message":"Do not rub, press, or try to remove an embedded object. Seek emergency eye care now.","urgency":"emergency","citation_ids":["source_nhs_eye_injuries","source_medlineplus_eye_emergencies"]},
+    {"id":"recommendation_contact_lens_urgent","title":"Remove lenses and obtain urgent care","message":"Remove contact lenses, do not put them back in, and obtain same-day professional eye assessment.","urgency":"urgent","citation_ids":["source_cdc_contact_lens_infections","source_nhs_eye_injuries"]},
+    {"id":"recommendation_same_day_assessment","title":"Same-day assessment","message":"Seek same-day assessment from an eye-care professional or urgent service.","urgency":"urgent","citation_ids":["source_nhs_vision_loss","source_nhs_eye_injuries"]},
+    {"id":"recommendation_prompt_exam","title":"Prompt eye examination","message":"Arrange an eye examination promptly. Seek urgent help sooner if pain, sudden change, or worsening vision develops.","urgency":"prompt","citation_ids":["source_who_vision_impairment","source_nigeria_eye_health_policy"]},
+    {"id":"recommendation_routine_exam","title":"Routine comprehensive eye examination","message":"Arrange a routine comprehensive eye examination to check vision and eye health.","urgency":"routine","citation_ids":["source_who_refractive_errors","source_nigeria_eye_health_policy"]},
+    {"id":"recommendation_infection_hygiene","title":"Reduce spread","message":"Wash hands often, avoid touching or rubbing the eyes, and do not share towels, eye cosmetics, or personal eye-care items.","urgency":"prompt","citation_ids":["source_cdc_conjunctivitis","source_nei_pink_eye"]},
+    {"id":"recommendation_eyelid_hygiene","title":"Gentle eyelid care","message":"Keep the eyelids clean and arrange assessment if the problem persists, becomes painful, or affects vision.","urgency":"routine","citation_ids":["source_nei_blepharitis","source_nhs_eye_injuries"]},
+    {"id":"recommendation_diabetes_eye_exam","title":"Diabetes eye examination","message":"Arrange a comprehensive dilated eye examination and continue regular diabetes and eye-health reviews.","urgency":"prompt","citation_ids":["source_nei_diabetic_retinopathy","source_nigeria_eye_health_policy"]}
+  ]
+}

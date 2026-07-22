@@ -1,0 +1,10 @@
+{
+  "schema_version":"1.0.0",
+  "content_version":"1.0.0",
+  "risk_levels":[
+    {"id":"risk_routine","label":"Routine","rank":1,"action_window":"Arrange a routine comprehensive eye examination.","citation_ids":["source_who_vision_impairment","source_nigeria_eye_health_policy"]},
+    {"id":"risk_prompt","label":"Prompt assessment","rank":2,"action_window":"Arrange professional eye assessment promptly, especially if symptoms persist or worsen.","citation_ids":["source_who_vision_impairment","source_nigeria_eye_health_policy"]},
+    {"id":"risk_urgent","label":"Same-day urgent","rank":3,"action_window":"Seek same-day assessment from an eye-care professional or urgent service.","citation_ids":["source_nhs_vision_loss","source_nhs_eye_injuries"]},
+    {"id":"risk_emergency","label":"Emergency","rank":4,"action_window":"Seek emergency eye care now; do not wait for a routine appointment.","citation_ids":["source_nhs_vision_loss","source_nhs_eye_injuries"]}
+  ]
+}

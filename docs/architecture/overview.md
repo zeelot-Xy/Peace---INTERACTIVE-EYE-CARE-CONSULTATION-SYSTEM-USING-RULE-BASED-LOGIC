@@ -15,9 +15,9 @@ Flask routes and validation
         |
 Application services
         |
-Consultation and inference engines (later phases)
+Knowledge loader and inference engine (later phases)
         |
-SQLite application data + versioned JSON knowledge
+SQLite application data + immutable versioned JSON packages
 ```
 
 Routes translate HTTP requests and responses. Services own use-case coordination. The future inference engine evaluates normalized facts against a separately versioned knowledge base.
@@ -52,3 +52,9 @@ Phase 2 adds cookie-authenticated `/api/v1/auth`, `/api/v1/users`, and `/api/v1/
 ## Persistence and authentication flow
 
 The application factory initializes SQLAlchemy, Alembic, and JWT management. Routes validate transport data and call services; services own password, token, revocation, and audit behavior. Browser tokens remain in HttpOnly cookies, while CSRF values are returned in separate readable cookies and echoed in request headers.
+
+## Knowledge boundary
+
+Phase 3 establishes immutable knowledge packages outside the Flask runtime. A package manifest freezes semantic version, adult English-language scope, disclaimer, file inventory, and SHA-256 digests. Draft 2020-12 schemas define sources, facts, questions, possible indications, recommendations, ordinal risk levels, and declarative rules.
+
+All medical assertions carry source IDs. Rules contain explanation text and cite their evidence. Emergency rules occupy the highest priority band and require multiple sources. Phase 4 will add a runtime loader and last-valid fallback; Phase 5 will execute the rules. Neither routes nor database models contain medical decision logic.

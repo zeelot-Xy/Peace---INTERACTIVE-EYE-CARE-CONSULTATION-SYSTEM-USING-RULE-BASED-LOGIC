@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://eyecare.local/schemas/rule.schema.json",
+  "title": "Forward-chaining authoring rules",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "content_version", "rules"],
+  "$defs": {
+    "predicate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["fact_id", "operator", "value"],
+      "properties": {
+        "fact_id": {"type": "string", "pattern": "^fact_[a-z0-9_]+$"},
+        "operator": {"enum": ["eq", "neq", "in", "not_in", "gt", "gte", "lt", "lte"]},
+        "value": {"type": ["string", "integer", "boolean", "array"], "items": {"type": ["string", "integer", "boolean"]}}
+      }
+    },
+    "expression": {
+      "oneOf": [
+        {"$ref": "#/$defs/predicate"},
+        {"type": "object", "additionalProperties": false, "required": ["all"], "properties": {"all": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/expression"}}}},
+        {"type": "object", "additionalProperties": false, "required": ["any"], "properties": {"any": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/expression"}}}},
+        {"type": "object", "additionalProperties": false, "required": ["not"], "properties": {"not": {"$ref": "#/$defs/expression"}}}
+      ]
+    }
+  },
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "content_version": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"},
+    "rules": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "name", "priority", "when", "conclusion_ids", "risk_id", "recommendation_ids", "rationale", "explanation_template", "citation_ids"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^rule_[a-z0-9_]+$"},
+          "name": {"type": "string", "minLength": 3},
+          "priority": {"type": "integer", "minimum": 1, "maximum": 1000},
+          "when": {"$ref": "#/$defs/expression"},
+          "conclusion_ids": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "pattern": "^condition_[a-z0-9_]+$"}},
+          "risk_id": {"type": "string", "pattern": "^risk_[a-z0-9_]+$"},
+          "recommendation_ids": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "pattern": "^recommendation_[a-z0-9_]+$"}},
+          "rationale": {"type": "string", "minLength": 15},
+          "explanation_template": {"type": "string", "minLength": 15},
+          "citation_ids": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "pattern": "^source_[a-z0-9_]+$"}}
+        }
+      }
+    }
+  }
+}

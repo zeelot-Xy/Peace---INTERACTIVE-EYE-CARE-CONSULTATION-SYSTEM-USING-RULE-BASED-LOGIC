@@ -1,0 +1,25 @@
+{
+  "schema_version":"1.0.0",
+  "content_version":"1.0.0",
+  "package_id":"eye-care-en-1.0.0",
+  "title":"Adult English Eye-Care Consultation Knowledge Package",
+  "language":"en",
+  "status":"draft",
+  "published_on":null,
+  "scope":{
+    "minimum_age":18,
+    "maximum_age":null,
+    "jurisdiction_note":"Educational adult eye-care support with Nigerian service context and internationally authoritative clinical sources.",
+    "exclusions":["Children and adolescents under 18 years","Pregnancy-specific eye concerns","Image interpretation","Medication selection or dosage","Diagnosis and prescribing"]
+  },
+  "disclaimer":"This educational system is not a diagnosis, prescription, or substitute for an examination by a qualified eye-care professional. Its knowledge base has not been clinically validated. Seek emergency help for severe, sudden, or injury-related symptoms.",
+  "files":[
+    {"name":"conditions.json","schema":"condition.schema.json","sha256":"40ba0e5232e2530a7ee2858bc178d71aca543dea96d04f95112a5e4a2402087c"},
+    {"name":"questions.json","schema":"question.schema.json","sha256":"d9bca510b5ef202b17813330d7d42fad70987c127bd546f83c51dd50b54408e4"},
+    {"name":"recommendations.json","schema":"recommendation.schema.json","sha256":"622191ef563edcbb9216ea1115d6509b80058e8450fb183edf3733e0f0ae1637"},
+    {"name":"risk-levels.json","schema":"risk-level.schema.json","sha256":"5eb00b0f7ab21fdde8f21372b6f21be2ed93bffb078036cb4493769e83743fe7"},
+    {"name":"rules.json","schema":"rule.schema.json","sha256":"ea7cdb0f11b45e9fc20cfc1190c59e4280417528109d1d7aaf9446602fd809fd"},
+    {"name":"sources.json","schema":"source.schema.json","sha256":"a82d1ae54ae23ed4b6e5b91e7907783fc8af351d528aac09fced48efe14d8fa1"},
+    {"name":"symptoms.json","schema":"symptom.schema.json","sha256":"e477921bd3270fc54d71d105c140c0905936529f6c732f180b47a8ce7c61ca46"}
+  ]
+}

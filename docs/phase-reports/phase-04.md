@@ -3,7 +3,7 @@
 - Phase: Knowledge Loader and Validation
 - Date: 2026-07-22
 - Status: Ready for user review
-- Pull request: Pending publication
+- Pull request: `#3`
 
 ## Delivered
 

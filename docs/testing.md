@@ -30,3 +30,12 @@ Evidence belongs in the phase report and evidence register. A check is not consi
 - Positive tests validate the accepted package and its minimum approved scope.
 - Negative tests alter content to prove checksum tampering, broken references, diagnostic wording, and invalid risk order are detected.
 - The full backend, frontend, build, Docker, and secret-scanning gates remain mandatory even when application runtime behavior is unchanged.
+
+## Phase 4 quality gates
+
+- Loader tests cover valid and invalid JSON, schemas, inventory, versions, checksums, IDs, references, and deterministic reports.
+- Snapshot tests cover deep immutability, read-only indexes, cache identity, change invalidation, and forced reload.
+- Activation tests prove invalid candidates preserve the last valid package and missing initial knowledge prevents startup.
+- Concurrency tests prove simultaneous readers observe one complete fingerprint.
+- Factory and CLI tests verify extension registration, status output, candidate-only validation, JSON contracts, and exit codes.
+- Backend/frontend lint, tests, build, Docker startup, live status, placeholder, and secret checks remain phase acceptance gates.

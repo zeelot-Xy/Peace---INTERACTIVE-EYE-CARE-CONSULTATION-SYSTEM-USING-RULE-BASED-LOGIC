@@ -23,3 +23,9 @@
 | SAFE-301 | Prevent diagnostic, prescribing, and unsafe-delay wording | 3 | Safety policy and prohibited-wording validator | Negative wording test and manual review | Implemented |
 | SAFE-302 | Preserve deterministic safety escalation | 3 | Fixed four-level risk ranks and emergency priority band | Risk-order and emergency-evidence tests | Implemented |
 | DOC-301 | Document knowledge authoring, evidence, rule language, safety, and methodology | 3 | Phase 3 documentation set and ADR 0002 | Documentation review | Implemented |
+| KB-401 | Load a configured package into a deeply immutable runtime snapshot | 4 | `app/knowledge` contracts and manager | Loader, immutability, and factory tests | Implemented |
+| KB-402 | Reject malformed, incompatible, incomplete, or unsafe packages deterministically | 4 | Shared runtime validator and validation report | Table-driven negative and deterministic-report tests | Implemented |
+| KB-403 | Cache unchanged packages and invalidate changes safely | 4 | Metadata signatures and SHA-256 fingerprints | Identity, change, and forced-reload tests | Implemented |
+| SAFE-401 | Preserve the last valid snapshot and fail closed without initial knowledge | 4 | Atomic activation and startup integration | Failed-activation and startup-failure tests | Implemented |
+| OPS-401 | Expose non-HTTP package validation and status operations | 4 | Flask and authoring CLI commands | CLI JSON and exit-code tests | Implemented |
+| DOC-401 | Document loading, recovery, architecture, evaluation, and methodology | 4 | Runtime guide, ADR 0003, and Phase 4 methodology | Documentation review | Implemented |

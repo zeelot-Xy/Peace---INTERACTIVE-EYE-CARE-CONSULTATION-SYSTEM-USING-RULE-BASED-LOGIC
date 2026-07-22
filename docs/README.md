@@ -19,6 +19,11 @@ Repository documentation is versioned with the implementation. Collaborative aca
 - [`requirements-traceability.md`](requirements-traceability.md) — requirement-to-evidence mapping
 - [`evidence-register.md`](evidence-register.md) — durable evidence index
 
+- [`knowledge-runtime.md`](knowledge-runtime.md) — runtime loading, cache, activation, CLI, and recovery
+- [`adr/0003-atomic-runtime-knowledge-snapshots.md`](adr/0003-atomic-runtime-knowledge-snapshots.md) — fail-closed atomic snapshot decision
+- [`academic/phase-04-methodology.md`](academic/phase-04-methodology.md) — defensive runtime loading and snapshot isolation
+- [`phase-reports/phase-04.md`](phase-reports/phase-04.md) — Phase 4 completion record
+
 ## Project delivery
 
 - [`academic-report-outline.md`](academic-report-outline.md) — evolving final-year report structure

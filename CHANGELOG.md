@@ -10,3 +10,4 @@ All notable changes are documented here using a simplified Keep a Changelog form
 - Connected Google Drive project workspace, native project tracker, private Slack coordination channel, and kickoff draft.
 - Phase 2 SQLite schema, migrations, secure cookie authentication, profile APIs, minimal authenticated UI, tests, and documentation.
 - Phase 3 Draft 2020-12 knowledge schemas, sourced adult eye-care package, deterministic authoring validator, safety tests, and knowledge-authoring documentation.
+- Phase 4 fail-closed runtime validation, immutable indexed knowledge snapshots, safe cache invalidation, atomic last-valid activation, operational CLI commands, tests, and documentation.

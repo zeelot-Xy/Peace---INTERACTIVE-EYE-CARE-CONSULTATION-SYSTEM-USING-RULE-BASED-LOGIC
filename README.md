@@ -4,7 +4,7 @@ An educational consultation-support application that uses transparent rule-based
 
 ## Project status
 
-Phases 1 and 2 established the governed React/Flask foundation, migrated SQLite persistence, secure cookie authentication, patient profiles, and administrator bootstrap. Phase 3 adds a schema-validated, source-traceable adult eye-care knowledge package. Runtime loading, inference, consultations, reports, and the full administration experience remain in later phases.
+Phases 1–3 established the governed React/Flask foundation, secure persistence and authentication, and a schema-validated, source-traceable adult eye-care knowledge package. Phase 4 adds fail-closed runtime validation, immutable indexed snapshots, safe caching, and atomic last-valid activation. Rule execution, consultations, reports, and the full administration experience remain in later phases.
 
 ## Technology
 
@@ -53,6 +53,7 @@ cd backend
 .venv\Scripts\python -m pytest
 .venv\Scripts\python -m ruff check .
 .venv\Scripts\python tools\validate_knowledge_package.py --json
+.venv\Scripts\python -m flask --app run.py knowledge-status --json
 
 cd ..\frontend
 npm.cmd run lint

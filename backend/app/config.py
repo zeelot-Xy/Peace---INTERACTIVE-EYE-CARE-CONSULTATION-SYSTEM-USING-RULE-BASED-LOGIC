@@ -2,6 +2,9 @@ import os
 import secrets
 from dataclasses import dataclass, field
 from datetime import timedelta
+from pathlib import Path
+
+BACKEND_ROOT = Path(__file__).resolve().parents[1]
 
 
 def _cors_origins() -> list[str]:
@@ -44,6 +47,16 @@ class BaseConfig:
     )
     PASSWORD_MIN_LENGTH: int = int(os.getenv("PASSWORD_MIN_LENGTH", "12"))
     PASSWORD_MAX_LENGTH: int = 128
+    KNOWLEDGE_PACKAGES_DIR: str = os.getenv(
+        "KNOWLEDGE_PACKAGES_DIR", str(BACKEND_ROOT / "knowledge" / "packages")
+    )
+    KNOWLEDGE_SCHEMAS_DIR: str = os.getenv(
+        "KNOWLEDGE_SCHEMAS_DIR", str(BACKEND_ROOT / "knowledge" / "schemas")
+    )
+    KNOWLEDGE_ACTIVE_PACKAGE: str = os.getenv(
+        "KNOWLEDGE_ACTIVE_PACKAGE", "eye-care-en-1.0.0"
+    )
+    KNOWLEDGE_RELOAD_ON_CHANGE: bool = _as_bool("KNOWLEDGE_RELOAD_ON_CHANGE")
 
 
 @dataclass(frozen=True)

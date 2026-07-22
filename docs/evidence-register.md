@@ -18,5 +18,10 @@
 | E-P3-005 | 3 | Backend/frontend lint, tests, and production build | Phase 3 completion report | 2026-07-21 |
 | E-P3-006 | 3 | Docker image build and live service smoke test | Phase 3 completion report | 2026-07-21 |
 | E-P3-007 | 3 | GitGuardian hosted security check and user approval | GitHub pull request #2 | 2026-07-22 |
+| E-P4-001 | 4 | Runtime loader, immutable contracts, and atomic manager | `backend/app/knowledge/` | 2026-07-22 |
+| E-P4-002 | 4 | Positive, negative, cache, concurrency, factory, and CLI tests | Phase 4 completion report | 2026-07-22 |
+| E-P4-003 | 4 | Runtime operations and recovery guide | `docs/knowledge-runtime.md` | 2026-07-22 |
+| E-P4-004 | 4 | Atomic snapshot architecture decision and methodology | ADR 0003 and Phase 4 methodology | 2026-07-22 |
+| E-P4-005 | 4 | Hosted GitGuardian security check | GitHub pull request #3 | 2026-07-22 |
 
 External screenshots and large artifacts may be mirrored in the project Google Drive. Each external item must retain a stable filename or link and must not contain patient data or secrets.

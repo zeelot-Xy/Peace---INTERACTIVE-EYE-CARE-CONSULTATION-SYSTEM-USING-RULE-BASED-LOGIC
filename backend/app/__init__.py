@@ -8,6 +8,7 @@ from sqlalchemy.engine import Engine
 from app.commands import register_commands
 from app.config import get_config
 from app.extensions import db, jwt, migrate
+from app.knowledge import KnowledgeLoadError, KnowledgeManager
 from app.routes.admin import admin_blueprint
 from app.routes.auth import auth_blueprint
 from app.routes.health import health_blueprint
@@ -24,12 +25,32 @@ def enable_sqlite_foreign_keys(connection, connection_record) -> None:
         cursor.close()
 
 
-def create_app(config_name: str | None = None) -> Flask:
+def create_app(
+    config_name: str | None = None, config_overrides: dict[str, object] | None = None
+) -> Flask:
     """Create and configure the Flask application."""
     app = Flask(__name__)
     config = get_config(config_name)
     app.config.from_object(config)
+    if config_overrides:
+        app.config.update(config_overrides)
     Path(app.instance_path).mkdir(parents=True, exist_ok=True)
+
+    knowledge = KnowledgeManager(Path(app.config["KNOWLEDGE_SCHEMAS_DIR"]))
+    active_path = (
+        Path(app.config["KNOWLEDGE_PACKAGES_DIR"]) / app.config["KNOWLEDGE_ACTIVE_PACKAGE"]
+    )
+    report = knowledge.activate(active_path)
+    if not report.valid:
+        codes = ", ".join(sorted({issue.code for issue in report.issues}))
+        raise KnowledgeLoadError(
+            f"Unable to start without a valid knowledge package "
+            f"'{app.config['KNOWLEDGE_ACTIVE_PACKAGE']}': {codes}."
+        )
+    app.extensions["knowledge"] = knowledge
+    app.logger.info(
+        "Activated knowledge package %s (%s).", report.package_id, report.fingerprint
+    )
 
     db.init_app(app)
     migrate.init_app(app, db)

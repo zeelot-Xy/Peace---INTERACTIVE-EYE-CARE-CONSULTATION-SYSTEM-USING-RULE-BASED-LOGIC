@@ -21,7 +21,8 @@ def _rewrite_json(path: Path, document) -> None:
 def _refresh_manifest_checksum(package: Path, filename: str) -> None:
     manifest_path = package / "manifest.json"
     manifest = _read(manifest_path)
-    digest = hashlib.sha256((package / filename).read_bytes()).hexdigest()
+    data = (package / filename).read_bytes().replace(b"\r\n", b"\n")
+    digest = hashlib.sha256(data).hexdigest()
     next(entry for entry in manifest["files"] if entry["name"] == filename)["sha256"] = digest
     _rewrite_json(manifest_path, manifest)
 

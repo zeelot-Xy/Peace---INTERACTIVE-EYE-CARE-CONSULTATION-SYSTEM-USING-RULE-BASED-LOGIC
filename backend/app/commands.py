@@ -1,5 +1,8 @@
+import json
+from pathlib import Path
+
 import click
-from flask import Flask
+from flask import Flask, current_app
 
 from app.extensions import db
 from app.models import User
@@ -8,6 +11,40 @@ from app.services.auth_service import normalize_email, validate_password
 
 
 def register_commands(app: Flask) -> None:
+    @app.cli.command("knowledge-status")
+    @click.option("--json", "as_json", is_flag=True, help="Emit machine-readable JSON.")
+    def knowledge_status(as_json: bool) -> None:
+        """Show the configured active knowledge package."""
+        status = current_app.extensions["knowledge"].get_status()
+        if as_json:
+            click.echo(json.dumps(status, indent=2))
+        else:
+            click.echo(
+                f"Active package: {status['package_id']} "
+                f"(content {status['content_version']}, {status['manifest_status']})"
+            )
+
+    @app.cli.command("knowledge-validate")
+    @click.argument("package", required=False, type=click.Path(path_type=Path))
+    @click.option("--json", "as_json", is_flag=True, help="Emit machine-readable JSON.")
+    def knowledge_validate(package: Path | None, as_json: bool) -> None:
+        """Validate a package without changing the active snapshot."""
+        manager = current_app.extensions["knowledge"]
+        candidate = package or (
+            Path(current_app.config["KNOWLEDGE_PACKAGES_DIR"])
+            / current_app.config["KNOWLEDGE_ACTIVE_PACKAGE"]
+        )
+        report = manager.validate(candidate)
+        if as_json:
+            click.echo(json.dumps(report.to_dict(), indent=2))
+        elif report.valid:
+            click.echo(f"Knowledge package is valid: {candidate}")
+        else:
+            for issue in report.issues:
+                click.echo(f"{issue.code}: {issue.location}: {issue.message}")
+        if not report.valid:
+            raise click.exceptions.Exit(1)
+
     @app.cli.command("bootstrap-admin")
     @click.option("--email", prompt=True)
     @click.option("--name", prompt="Full name")

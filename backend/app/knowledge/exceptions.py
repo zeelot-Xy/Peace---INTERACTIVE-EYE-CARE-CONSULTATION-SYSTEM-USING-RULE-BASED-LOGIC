@@ -3,4 +3,3 @@
 
 class KnowledgeLoadError(RuntimeError):
     """Raised when the application cannot establish a valid active package."""
-

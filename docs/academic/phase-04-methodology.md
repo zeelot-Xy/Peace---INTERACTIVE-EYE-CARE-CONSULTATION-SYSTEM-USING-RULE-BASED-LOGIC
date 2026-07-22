@@ -19,4 +19,3 @@ Positive, negative, integration, CLI, and concurrency tests cover valid loading,
 ## Limitation
 
 Runtime validation demonstrates technical consistency, not clinical validity. The package remains a draft academic knowledge artefact. Phase 4 does not evaluate rules or infer a condition, recommendation, or risk. Clinical expert review remains unavailable and is documented as a project limitation.
-

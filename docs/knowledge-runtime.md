@@ -73,4 +73,3 @@ Pass a candidate path to `knowledge-validate` to inspect it without changing the
 - Missing prior snapshot: startup or `get_active()` fails clearly; there is no empty or partially valid fallback.
 
 Phase 8 will add authenticated upload, preview, publishing, retention, and rollback workflows. Until then, package selection is configuration-controlled.
-

@@ -21,4 +21,3 @@ Validation is shared by the authoring CLI and runtime manager. Checksums normali
 - Each process maintains its own cache; hosted multi-process synchronization will require the Phase 8 publication mechanism.
 - Filesystem watching and request-time reload polling are intentionally absent. Reload is explicit and testable.
 - Rule evaluation remains independent and begins in Phase 5.
-

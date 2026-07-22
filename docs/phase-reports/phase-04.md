@@ -2,7 +2,8 @@
 
 - Phase: Knowledge Loader and Validation
 - Date: 2026-07-22
-- Status: Ready for user review
+- Status: Approved - ready to merge
+- Approval date: 2026-07-22
 - Pull request: `#3`
 
 ## Delivered
@@ -33,4 +34,4 @@ Invalid or incomplete candidates never replace the active knowledge snapshot. Th
 
 ## Approval gate
 
-Phase 4 stops at this review report and pull request. Phase 5 will not begin until the user approves Phase 4 and authorizes merge.
+The user reviewed and approved Phase 4 on 2026-07-22. Pull request #3 is authorized for merge; Phase 5 planning may begin after the merge is complete.

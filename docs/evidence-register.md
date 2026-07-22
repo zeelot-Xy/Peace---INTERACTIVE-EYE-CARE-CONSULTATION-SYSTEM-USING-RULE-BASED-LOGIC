@@ -17,5 +17,6 @@
 | E-P3-004 | 3 | Scope, safety, and knowledge-representation decision | ADR 0002 and Phase 3 methodology | 2026-07-21 |
 | E-P3-005 | 3 | Backend/frontend lint, tests, and production build | Phase 3 completion report | 2026-07-21 |
 | E-P3-006 | 3 | Docker image build and live service smoke test | Phase 3 completion report | 2026-07-21 |
+| E-P3-007 | 3 | GitGuardian hosted security check and user approval | GitHub pull request #2 | 2026-07-22 |
 
 External screenshots and large artifacts may be mirrored in the project Google Drive. Each external item must retain a stable filename or link and must not contain patient data or secrets.

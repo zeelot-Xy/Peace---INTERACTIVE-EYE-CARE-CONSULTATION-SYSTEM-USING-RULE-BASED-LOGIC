@@ -25,7 +25,7 @@
 - Frontend ESLint passed with no warnings, Vitest passed all 6 tests, and the TypeScript/Vite production build succeeded.
 - Clean backend and frontend Docker images built successfully; the runtime-only backend image installed `jsonschema`, and npm reported zero vulnerabilities.
 - Live Compose verification reached a healthy API, HTTP 200 frontend, and the same active package fingerprint inside Linux; temporary services were removed afterward.
-- Repository diff, placeholder, and local high-risk secret-pattern scans passed. The hosted GitGuardian check remains an approval-PR gate.
+- Repository diff, placeholder, and local high-risk secret-pattern scans passed. The hosted GitGuardian security check passed on pull request #3.
 
 ## Safety and scope boundary
 

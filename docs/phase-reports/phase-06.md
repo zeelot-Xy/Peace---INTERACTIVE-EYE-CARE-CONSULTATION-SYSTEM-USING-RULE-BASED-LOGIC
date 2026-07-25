@@ -31,7 +31,7 @@
   created a consultation, persisted an answer, and returned emergency escalation with
   revision `1`.
 - Repository diff, implementation-placeholder, and local high-risk secret-pattern checks
-  passed. The hosted GitGuardian result will be recorded on pull request #5.
+  passed. The hosted GitGuardian security check passed on pull request #5.
 
 ## Safety and scope boundary
 

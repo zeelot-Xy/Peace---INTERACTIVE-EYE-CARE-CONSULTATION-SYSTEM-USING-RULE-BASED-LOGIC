@@ -17,6 +17,8 @@ Application services
         |
 Runtime knowledge loader + deterministic inference engine
         |
+Consultation lifecycle and version-frozen result snapshots
+        |
 SQLite application data + immutable versioned JSON packages
 ```
 
@@ -69,3 +71,11 @@ inference engine guide.
 All medical assertions carry source IDs. Rules contain explanation text and cite their
 evidence. Emergency rules occupy the highest priority band and require multiple sources.
 Neither routes nor database models contain medical decision logic.
+
+## Consultation boundary
+
+Phase 6 adds an authenticated consultation service and resource layer. Each session freezes
+package ID, version, and fingerprint, autosaves typed answers, and uses a monotonic revision to
+detect concurrent changes. Declarative question conditions determine applicability, but
+safety-critical questions always remain active. Completed results are immutable snapshots;
+routes contain transport handling only.

@@ -9,8 +9,8 @@ SQLite stores dynamic application data only. Expert-system questions, symptoms, 
 | Table | Purpose | Important constraints |
 |---|---|---|
 | `users` | Patient and administrator identities | UUID primary key; normalized unique email; hashed password; indexed role |
-| `consultation_sessions` | Structural ownership shell for later consultation work | User foreign key with cascade; indexed status |
-| `consultation_responses` | Future JSON answers tied to stable question IDs | Consultation foreign key; consultation/question composite index |
+| `consultation_sessions` | Version-frozen lifecycle, revision, skips, and completed inference snapshot | User foreign key; indexed status; package fingerprint; terminal timestamps |
+| `consultation_responses` | Autosaved typed answers tied to stable question and fact IDs | Consultation foreign key; unique consultation/question pair; indexed fact |
 | `reports` | Future immutable report snapshots | One report per consultation; user ownership |
 | `refresh_tokens` | Hashed refresh-token identifiers and rotation families | Unique JTI hash; expiry, use, and revocation timestamps |
 | `token_revocations` | Revoked access/refresh identifiers | Unique JTI hash and expiry |

@@ -17,3 +17,33 @@ def test_phase_two_schema_and_sqlite_foreign_keys(app):
     with app.app_context():
         assert expected.issubset(set(inspect(db.engine).get_table_names()))
         assert db.session.execute(text("PRAGMA foreign_keys")).scalar() == 1
+
+
+def test_phase_six_consultation_constraints(app):
+    with app.app_context():
+        inspector = inspect(db.engine)
+        session_columns = {
+            column["name"]
+            for column in inspector.get_columns("consultation_sessions")
+        }
+        response_columns = {
+            column["name"]
+            for column in inspector.get_columns("consultation_responses")
+        }
+        unique_constraints = {
+            constraint["name"]
+            for constraint in inspector.get_unique_constraints(
+                "consultation_responses"
+            )
+        }
+
+    assert {
+        "knowledge_package_id",
+        "knowledge_fingerprint",
+        "revision",
+        "skipped_question_ids",
+        "result_snapshot",
+        "cancelled_at",
+    } <= session_columns
+    assert "fact_id" in response_columns
+    assert "uq_response_consultation_question" in unique_constraints

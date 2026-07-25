@@ -2,7 +2,19 @@ import uuid
 from datetime import date, datetime
 from typing import Any
 
-from sqlalchemy import JSON, Boolean, Date, DateTime, ForeignKey, Index, String, Text, func
+from sqlalchemy import (
+    JSON,
+    Boolean,
+    Date,
+    DateTime,
+    ForeignKey,
+    Index,
+    Integer,
+    String,
+    Text,
+    UniqueConstraint,
+    func,
+)
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from werkzeug.security import check_password_hash, generate_password_hash
 
@@ -60,9 +72,17 @@ class ConsultationSession(TimestampMixin, db.Model):
 
     id: Mapped[str] = mapped_column(String(36), primary_key=True, default=new_uuid)
     user_id: Mapped[str] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"), index=True)
-    status: Mapped[str] = mapped_column(String(20), nullable=False, default="started", index=True)
+    status: Mapped[str] = mapped_column(
+        String(20), nullable=False, default="in_progress", index=True
+    )
+    knowledge_package_id: Mapped[str | None] = mapped_column(String(80))
     knowledge_version: Mapped[str | None] = mapped_column(String(50))
+    knowledge_fingerprint: Mapped[str | None] = mapped_column(String(64))
+    revision: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
+    skipped_question_ids: Mapped[list[str]] = mapped_column(JSON, nullable=False, default=list)
+    result_snapshot: Mapped[dict[str, Any] | None] = mapped_column(JSON)
     completed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    cancelled_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
 
     user: Mapped[User] = relationship(back_populates="consultations")
     responses: Mapped[list["ConsultationResponse"]] = relationship(
@@ -78,10 +98,16 @@ class ConsultationResponse(TimestampMixin, db.Model):
         ForeignKey("consultation_sessions.id", ondelete="CASCADE"), index=True
     )
     question_id: Mapped[str] = mapped_column(String(80), nullable=False)
+    fact_id: Mapped[str | None] = mapped_column(String(80))
     answer: Mapped[dict[str, Any]] = mapped_column(JSON, nullable=False)
 
     consultation: Mapped[ConsultationSession] = relationship(back_populates="responses")
-    __table_args__ = (Index("ix_response_consultation_question", "consultation_id", "question_id"),)
+    __table_args__ = (
+        UniqueConstraint(
+            "consultation_id", "question_id", name="uq_response_consultation_question"
+        ),
+        Index("ix_response_consultation_fact", "consultation_id", "fact_id"),
+    )
 
 
 class Report(TimestampMixin, db.Model):

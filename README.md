@@ -7,8 +7,9 @@ An educational consultation-support application that uses transparent rule-based
 Phases 1–4 established the governed React/Flask foundation, secure persistence and
 authentication, sourced eye-care knowledge, and fail-closed immutable runtime loading. Phase 5
 adds deterministic tri-state rule evaluation, safety-first conflict resolution, and explainable
-results. Consultation APIs, patient result presentation, reports, and knowledge administration
-remain in later phases.
+results. Phase 6 adds authenticated, version-frozen consultation lifecycle APIs with autosave,
+resume, concurrency protection, safety escalation, and reproducible results. Patient-facing
+consultation screens, PDFs, and knowledge administration remain in later phases.
 
 ## Technology
 

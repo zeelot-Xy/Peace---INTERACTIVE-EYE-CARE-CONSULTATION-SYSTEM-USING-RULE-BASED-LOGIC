@@ -52,3 +52,18 @@ Evidence belongs in the phase report and evidence register. A check is not consi
   Python changes.
 - CLI tests verify machine-readable output and non-zero invalid-input behavior.
 - All earlier lint, test, build, Docker, placeholder, and secret gates remain mandatory.
+
+## Phase 6 quality gates
+
+- Service and API tests cover authenticated creation, ownership, one-question ordering,
+  autosave, resume, answer revision, back navigation, progress, and history.
+- Validation tests cover strict fact types, invalid question IDs, required-question skips,
+  optional skips, and conditional question visibility.
+- State tests cover stale revision conflicts, incomplete completion, immutable terminal states,
+  cancellation, and completed result retrieval.
+- Safety tests prove partial emergency escalation and that conditional logic cannot hide or
+  skip safety-critical questions.
+- Migration checks verify new lifecycle columns, response uniqueness, downgrade, re-upgrade,
+  and schema drift.
+- Earlier inference, authentication, frontend, build, Docker, hygiene, and hosted secret gates
+  remain mandatory.

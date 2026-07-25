@@ -36,3 +36,10 @@
 | SAFE-502 | Reject invalid facts and authored operands | 5 | Fact normalizer and semantic validation | Type, boundary, choice, and operand tests | Implemented |
 | OPS-501 | Evaluate non-sensitive demonstration facts locally | 5 | `inference-evaluate` CLI | CLI JSON and failure tests | Implemented |
 | DOC-501 | Document inference semantics, limitations, and methodology | 5 | Engine guide, ADR 0004, methodology, and report | Documentation review | Implemented |
+| CON-601 | Start, autosave, resume, revise, complete, and cancel consultations | 6 | Consultation service and REST resources | Lifecycle service/API tests | Implemented |
+| CON-602 | Present one applicable question at a time with progress and skip behavior | 6 | Ordered state, branching, and optional skips | Branch, progress, and skip tests | Implemented |
+| CON-603 | Freeze knowledge for reproducible sessions and results | 6 | Package identity fields and result snapshot | Persistence and result tests | Implemented |
+| CON-604 | Prevent concurrent answer loss | 6 | Monotonic revision checks | Stale-write conflict test | Implemented |
+| SAFE-601 | Prevent branching or manipulation from bypassing red flags | 6 | Mandatory safety applicability and completion checks | Safety branch and emergency tests | Implemented |
+| API-601 | Expose owned consultation, history, and result resources | 6 | `/api/v1/consultations` blueprint | Authentication and ownership tests | Implemented |
+| DOC-601 | Document lifecycle APIs, safety, privacy, and methodology | 6 | API guide, ADR 0005, methodology, and report | Documentation review | Implemented |

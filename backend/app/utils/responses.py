@@ -33,6 +33,7 @@ def validation_error_response(errors: dict):
 
 def register_error_handlers(app: Flask) -> None:
     from app.services.auth_service import AuthenticationError, ConflictError, PasswordPolicyError
+    from app.services.consultation_service import ConsultationError
     from app.utils.validation import RequestValidationError
 
     @app.errorhandler(RequestValidationError)
@@ -50,6 +51,11 @@ def register_error_handlers(app: Flask) -> None:
     @app.errorhandler(PasswordPolicyError)
     def handle_password_policy_error(error: PasswordPolicyError):
         return validation_error_response({"password": [str(error)]})
+
+    @app.errorhandler(ConsultationError)
+    def handle_consultation_error(error: ConsultationError):
+        return error_response(str(error), error.status_code, error.code)
+
     @app.errorhandler(HTTPException)
     def handle_http_error(error: HTTPException):
         error_code = error.name.lower().replace(" ", "_")

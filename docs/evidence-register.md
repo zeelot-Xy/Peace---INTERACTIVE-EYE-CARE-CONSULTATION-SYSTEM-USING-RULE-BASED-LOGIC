@@ -27,5 +27,10 @@
 | E-P5-002 | 5 | Expression, fact, rule, scenario, concurrency, and CLI tests | Phase 5 completion report | 2026-07-23 |
 | E-P5-003 | 5 | Inference semantics and explainability guide | `docs/inference-engine.md` | 2026-07-23 |
 | E-P5-004 | 5 | Safety-first inference decision and methodology | ADR 0004 and Phase 5 methodology | 2026-07-23 |
+| E-P5-005 | 5 | Approved and merged inference implementation | GitHub pull request #4 | 2026-07-25 |
+| E-P6-001 | 6 | Consultation lifecycle service, routes, and persistence | `backend/app/services/consultation_service.py` | 2026-07-25 |
+| E-P6-002 | 6 | Lifecycle, safety, ownership, concurrency, and API tests | Phase 6 completion report | 2026-07-25 |
+| E-P6-003 | 6 | Consultation API and reproducibility guide | `docs/consultation-api.md` | 2026-07-25 |
+| E-P6-004 | 6 | Version-frozen lifecycle decision and methodology | ADR 0005 and Phase 6 methodology | 2026-07-25 |
 
 External screenshots and large artifacts may be mirrored in the project Google Drive. Each external item must retain a stable filename or link and must not contain patient data or secrets.

@@ -136,14 +136,15 @@ def _iter_predicates(expression: dict[str, Any]):
 
 def _check_operator_operands(documents: dict[str, Any], issues: list[ValidationIssue]) -> None:
     facts = {item["id"]: item for item in documents["symptoms.json"]["symptoms"]}
-    for rule in documents["rules.json"]["rules"]:
-        for predicate in _iter_predicates(rule["when"]):
+
+    def check(expression: dict[str, Any], prefix: str) -> None:
+        for predicate in _iter_predicates(expression):
             fact = facts.get(predicate["fact_id"])
             if fact is None:
                 continue
             operator = predicate["operator"]
             value = predicate["value"]
-            location = f"rules.json:{rule['id']}.when.{predicate['fact_id']}"
+            location = f"{prefix}.{predicate['fact_id']}"
             if operator in {"in", "not_in"} and not isinstance(value, list):
                 issues.append(
                     ValidationIssue(
@@ -170,6 +171,15 @@ def _check_operator_operands(documents: dict[str, Any], issues: list[ValidationI
                         f"Operator '{operator}' is limited to integer facts and values.",
                     )
                 )
+
+    for rule in documents["rules.json"]["rules"]:
+        check(rule["when"], f"rules.json:{rule['id']}.when")
+    for question in documents["questions.json"]["questions"]:
+        if "show_when" in question:
+            check(
+                question["show_when"],
+                f"questions.json:{question['id']}.show_when",
+            )
 
 
 def _check_references(
@@ -215,6 +225,16 @@ def _check_references(
                     f"Unknown fact ID: {question['fact_id']}",
                 )
             )
+        if "show_when" in question:
+            for fact_id in _collect_fact_refs(question["show_when"]):
+                if fact_id not in identifiers["symptoms"]:
+                    issues.append(
+                        ValidationIssue(
+                            "broken_reference",
+                            f"questions.json:{question['id']}.show_when",
+                            f"Unknown fact ID: {fact_id}",
+                        )
+                    )
     for rule in documents["rules.json"]["rules"]:
         location = f"rules.json:{rule['id']}"
         for fact_id in _collect_fact_refs(rule["when"]):

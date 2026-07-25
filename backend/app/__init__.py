@@ -12,6 +12,7 @@ from app.inference import InferenceEngine
 from app.knowledge import KnowledgeLoadError, KnowledgeManager
 from app.routes.admin import admin_blueprint
 from app.routes.auth import auth_blueprint
+from app.routes.consultations import consultations_blueprint
 from app.routes.health import health_blueprint
 from app.routes.users import users_blueprint
 from app.services.auth_service import is_token_revoked
@@ -64,6 +65,9 @@ def create_app(
     app.register_blueprint(auth_blueprint, url_prefix="/api/v1/auth")
     app.register_blueprint(users_blueprint, url_prefix="/api/v1/users")
     app.register_blueprint(admin_blueprint, url_prefix="/api/v1/admin")
+    app.register_blueprint(
+        consultations_blueprint, url_prefix="/api/v1/consultations"
+    )
     register_commands(app)
     register_error_handlers(app)
 

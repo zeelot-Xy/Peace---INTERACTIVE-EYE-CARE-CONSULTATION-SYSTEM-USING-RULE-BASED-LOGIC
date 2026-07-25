@@ -23,5 +23,9 @@
 | E-P4-003 | 4 | Runtime operations and recovery guide | `docs/knowledge-runtime.md` | 2026-07-22 |
 | E-P4-004 | 4 | Atomic snapshot architecture decision and methodology | ADR 0003 and Phase 4 methodology | 2026-07-22 |
 | E-P4-005 | 4 | Hosted GitGuardian security check | GitHub pull request #3 | 2026-07-22 |
+| E-P5-001 | 5 | Deterministic inference implementation and contracts | `backend/app/inference/` | 2026-07-23 |
+| E-P5-002 | 5 | Expression, fact, rule, scenario, concurrency, and CLI tests | Phase 5 completion report | 2026-07-23 |
+| E-P5-003 | 5 | Inference semantics and explainability guide | `docs/inference-engine.md` | 2026-07-23 |
+| E-P5-004 | 5 | Safety-first inference decision and methodology | ADR 0004 and Phase 5 methodology | 2026-07-23 |
 
 External screenshots and large artifacts may be mirrored in the project Google Drive. Each external item must retain a stable filename or link and must not contain patient data or secrets.

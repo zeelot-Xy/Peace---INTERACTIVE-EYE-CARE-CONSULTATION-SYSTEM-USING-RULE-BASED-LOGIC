@@ -8,8 +8,10 @@ Phases 1–4 established the governed React/Flask foundation, secure persistence
 authentication, sourced eye-care knowledge, and fail-closed immutable runtime loading. Phase 5
 adds deterministic tri-state rule evaluation, safety-first conflict resolution, and explainable
 results. Phase 6 adds authenticated, version-frozen consultation lifecycle APIs with autosave,
-resume, concurrency protection, safety escalation, and reproducible results. Patient-facing
-consultation screens, PDFs, and knowledge administration remain in later phases.
+resume, concurrency protection, safety escalation, and reproducible results. Phase 7 adds the
+responsive patient experience for consultation, history, explainable results, printable report
+view, profile management, and accessible light/dark presentation. Downloadable PDFs and
+knowledge administration remain in later phases.
 
 ## Technology
 

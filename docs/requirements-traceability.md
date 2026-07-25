@@ -43,3 +43,9 @@
 | SAFE-601 | Prevent branching or manipulation from bypassing red flags | 6 | Mandatory safety applicability and completion checks | Safety branch and emergency tests | Implemented |
 | API-601 | Expose owned consultation, history, and result resources | 6 | `/api/v1/consultations` blueprint | Authentication and ownership tests | Implemented |
 | DOC-601 | Document lifecycle APIs, safety, privacy, and methodology | 6 | API guide, ADR 0005, methodology, and report | Documentation review | Implemented |
+| UI-701 | Provide a responsive authenticated patient shell and dashboard | 7 | React navigation, dashboard, responsive and dark themes | Semantic frontend tests and browser inspection | Implemented |
+| UI-702 | Present one applicable question at a time with progress and revision | 7 | Consultation page and API client | Autosave and question-flow tests | Implemented |
+| UI-703 | Provide consultation history, results, and printable report views | 7 | History and result pages | Result-separation and source-link tests | Implemented |
+| SAFE-701 | Communicate urgent action prominently and keep indications non-diagnostic | 7 | Safety alert and structured result hierarchy | Alert and wording tests | Implemented |
+| ACC-701 | Support keyboard, semantic, responsive, and light/dark operation | 7 | Native controls, landmarks, focus, mobile navigation, theme styles | Semantic tests and manual inspection | Implemented |
+| DOC-701 | Document the patient journey, accessibility, privacy, and methodology | 7 | Interface guide, ADR 0006, methodology, and report | Documentation review | Implemented |

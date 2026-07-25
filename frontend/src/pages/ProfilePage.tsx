@@ -60,7 +60,7 @@ export function ProfilePage() {
       {notice && <div className="mt-6 rounded-xl bg-emerald-50 p-4 text-sm text-emerald-800" role="status">{notice}</div>}
       {serverError && <div className="mt-6 rounded-xl bg-red-50 p-4 text-sm text-red-800" role="alert">{serverError}</div>}
       <div className="mt-10 grid gap-8 lg:grid-cols-2">
-        <section className="rounded-2xl border border-slate-200 bg-white p-6">
+        <section className="rounded-2xl border border-slate-200 bg-white p-6 dark:border-slate-700 dark:bg-slate-900">
           <h2 className="text-xl font-semibold">Personal details</h2>
           <p className="mt-2 text-sm text-slate-600">Your email is fixed for this phase: {user?.email}</p>
           <form className="mt-6 grid gap-5" onSubmit={saveProfile}>
@@ -70,7 +70,7 @@ export function ProfilePage() {
             <button className="rounded-xl bg-teal-700 px-5 py-3 font-semibold text-white disabled:opacity-60" disabled={profile.formState.isSubmitting}>Save profile</button>
           </form>
         </section>
-        <section className="rounded-2xl border border-slate-200 bg-white p-6">
+        <section className="rounded-2xl border border-slate-200 bg-white p-6 dark:border-slate-700 dark:bg-slate-900">
           <h2 className="text-xl font-semibold">Password</h2>
           <form className="mt-6 grid gap-5" onSubmit={submitCredentialChange}>
             <FormField id="current-password" label="Current password" type="password" autoComplete="current-password" error={credentialForm.formState.errors.current_password?.message} {...credentialForm.register('current_password')} />

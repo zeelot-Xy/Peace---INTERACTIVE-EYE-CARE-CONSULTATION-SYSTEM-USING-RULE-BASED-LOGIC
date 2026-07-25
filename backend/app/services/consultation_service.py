@@ -151,6 +151,9 @@ def _state(session: ConsultationSession, package: KnowledgePackage) -> dict[str,
             "question_id": response.question_id,
             "fact_id": response.fact_id,
             "answer": response.answer["value"],
+            "question": _question_payload(
+                package.indexes["questions"][response.question_id]
+            ),
         }
         for response in sorted(session.responses, key=lambda item: item.question_id)
     ]

@@ -39,3 +39,16 @@ Evidence belongs in the phase report and evidence register. A check is not consi
 - Concurrency tests prove simultaneous readers observe one complete fingerprint.
 - Factory and CLI tests verify extension registration, status output, candidate-only validation, JSON contracts, and exit codes.
 - Backend/frontend lint, tests, build, Docker startup, live status, placeholder, and secret checks remain phase acceptance gates.
+
+## Phase 5 quality gates
+
+- Expression tests cover all comparisons, nested logic, effective negation, and strong-Kleene
+  truth tables.
+- Fact tests cover unknown IDs, omitted versus null values, exact types, ranges, choices, and
+  immutability.
+- Engine tests cover ordering, highest-risk conflicts, recommendation suppression, no-match
+  and incomplete outcomes, deduplication, score wording, stable traces, and concurrency.
+- Scenario tests make all current rules match and prove a new JSON rule executes without
+  Python changes.
+- CLI tests verify machine-readable output and non-zero invalid-input behavior.
+- All earlier lint, test, build, Docker, placeholder, and secret gates remain mandatory.

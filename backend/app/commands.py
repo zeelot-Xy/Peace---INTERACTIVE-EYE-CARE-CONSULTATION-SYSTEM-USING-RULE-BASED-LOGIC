@@ -5,12 +5,50 @@ import click
 from flask import Flask, current_app
 
 from app.extensions import db
+from app.inference import FactValidationError, InferenceConfigurationError
 from app.models import User
 from app.services.audit_service import record_audit
 from app.services.auth_service import normalize_email, validate_password
 
 
 def register_commands(app: Flask) -> None:
+    @app.cli.command("inference-evaluate")
+    @click.option(
+        "--facts-file",
+        required=True,
+        type=click.Path(exists=True, dir_okay=False, path_type=Path),
+        help="Path to a local JSON object containing non-sensitive demonstration facts.",
+    )
+    @click.option("--json", "as_json", is_flag=True, help="Emit machine-readable JSON.")
+    def inference_evaluate(facts_file: Path, as_json: bool) -> None:
+        """Evaluate non-sensitive demonstration facts against the active package."""
+        try:
+            facts = json.loads(facts_file.read_text(encoding="utf-8"))
+        except (OSError, UnicodeError, json.JSONDecodeError) as error:
+            raise click.ClickException(f"Unable to read facts JSON: {error}") from error
+        try:
+            result = current_app.extensions["inference"].evaluate(
+                current_app.extensions["knowledge"].get_active(), facts
+            )
+        except FactValidationError as error:
+            if as_json:
+                click.echo(json.dumps(error.to_dict(), indent=2))
+                raise click.exceptions.Exit(1) from error
+            details = "; ".join(f"{issue.fact_id}: {issue.code}" for issue in error.issues)
+            raise click.ClickException(f"Invalid facts: {details}") from error
+        except InferenceConfigurationError as error:
+            raise click.ClickException(str(error)) from error
+        payload = result.to_dict()
+        if as_json:
+            click.echo(json.dumps(payload, indent=2))
+        else:
+            risk = payload["overall_risk"]
+            risk_label = risk["label"] if risk else "No matched risk level"
+            click.echo(
+                f"Outcome: {payload['outcome_state']} ({payload['completeness_state']}); "
+                f"risk: {risk_label}; matched rules: {len(payload['matched_rules'])}"
+            )
+
     @app.cli.command("knowledge-status")
     @click.option("--json", "as_json", is_flag=True, help="Emit machine-readable JSON.")
     def knowledge_status(as_json: bool) -> None:

@@ -13,6 +13,7 @@ Repository documentation is versioned with the implementation. Collaborative aca
 - [`knowledge-authoring.md`](knowledge-authoring.md) — safe package authoring and review workflow
 - [`knowledge-schema-reference.md`](knowledge-schema-reference.md) — JSON collection contracts and invariants
 - [`rule-language.md`](rule-language.md) — declarative rule expression language
+- [`inference-engine.md`](inference-engine.md) — tri-state evaluation, safety conflicts, scores, traces, and CLI
 - [`knowledge-scope-and-safety.md`](knowledge-scope-and-safety.md) — supported population and safety policy
 - [`source-register.md`](source-register.md) — published evidence catalogue
 - [`port-registry.md`](port-registry.md) — reserved localhost ports and release policy
@@ -23,6 +24,9 @@ Repository documentation is versioned with the implementation. Collaborative aca
 - [`adr/0003-atomic-runtime-knowledge-snapshots.md`](adr/0003-atomic-runtime-knowledge-snapshots.md) — fail-closed atomic snapshot decision
 - [`academic/phase-04-methodology.md`](academic/phase-04-methodology.md) — defensive runtime loading and snapshot isolation
 - [`phase-reports/phase-04.md`](phase-reports/phase-04.md) — Phase 4 completion record
+- [`adr/0004-tristate-safety-first-inference.md`](adr/0004-tristate-safety-first-inference.md) — incomplete-fact and risk-resolution decision
+- [`academic/phase-05-methodology.md`](academic/phase-05-methodology.md) — rule-based inference methodology
+- [`phase-reports/phase-05.md`](phase-reports/phase-05.md) — Phase 5 completion record
 
 ## Project delivery
 

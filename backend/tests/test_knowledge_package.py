@@ -126,3 +126,17 @@ def test_risk_order_is_fixed_for_safety(tmp_path: Path):
     issues = validate_package(package)
 
     assert any(issue.code == "invalid_risk_order" for issue in issues)
+
+
+def test_rule_operator_operand_mismatch_is_reported(tmp_path: Path):
+    package = tmp_path / "package"
+    shutil.copytree(DEFAULT_PACKAGE, package)
+    rules_path = package / "rules.json"
+    rules = _read(rules_path)
+    rules["rules"][0]["when"]["operator"] = "in"
+    _rewrite_json(rules_path, rules)
+    _refresh_manifest_checksum(package, "rules.json")
+
+    issues = validate_package(package)
+
+    assert any(issue.code == "invalid_operator_operand" for issue in issues)

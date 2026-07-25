@@ -15,12 +15,14 @@ Flask routes and validation
         |
 Application services
         |
-Runtime knowledge loader + inference engine (Phase 5)
+Runtime knowledge loader + deterministic inference engine
         |
 SQLite application data + immutable versioned JSON packages
 ```
 
-Routes translate HTTP requests and responses. Services own use-case coordination. The future inference engine evaluates normalized facts against the separately versioned snapshot supplied by the runtime loader.
+Routes translate HTTP requests and responses. Services own use-case coordination. The
+inference engine evaluates normalized facts against the separately versioned snapshot supplied
+by the runtime loader.
 
 ## Phase 1 runtime profiles
 
@@ -59,4 +61,11 @@ Phase 3 establishes immutable knowledge packages. A package manifest freezes sem
 
 Phase 4 validates the configured package during Flask creation, recursively freezes it, builds read-only ID indexes, and exposes it through `app.extensions["knowledge"]`. A metadata cache returns the same object for unchanged files. Candidate activation is atomic, invalid candidates preserve the last valid snapshot, and startup fails if no valid snapshot can be established. See ADR 0003 and the runtime loading guide.
 
-All medical assertions carry source IDs. Rules contain explanation text and cite their evidence. Emergency rules occupy the highest priority band and require multiple sources. Phase 5 will execute the rules. Neither routes nor database models contain medical decision logic.
+Phase 5 registers a stateless engine at `app.extensions["inference"]`. Strictly typed facts use
+three-valued logic so missing values remain unknown. Highest risk wins, recommendations come
+only from that tier, and every rule retains a deterministic trace. See ADR 0004 and the
+inference engine guide.
+
+All medical assertions carry source IDs. Rules contain explanation text and cite their
+evidence. Emergency rules occupy the highest priority band and require multiple sources.
+Neither routes nor database models contain medical decision logic.

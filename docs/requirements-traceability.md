@@ -29,3 +29,10 @@
 | SAFE-401 | Preserve the last valid snapshot and fail closed without initial knowledge | 4 | Atomic activation and startup integration | Failed-activation and startup-failure tests | Implemented |
 | OPS-401 | Expose non-HTTP package validation and status operations | 4 | Flask and authoring CLI commands | CLI JSON and exit-code tests | Implemented |
 | DOC-401 | Document loading, recovery, architecture, evaluation, and methodology | 4 | Runtime guide, ADR 0003, and Phase 4 methodology | Documentation review | Implemented |
+| INF-501 | Evaluate authored rules deterministically without Python rule logic | 5 | `app/inference` stateless engine | Every-rule and runtime-extension scenarios | Implemented |
+| INF-502 | Preserve incomplete facts with nested three-valued logic | 5 | Recursive expression evaluator | Operator and truth-table tests | Implemented |
+| INF-503 | Produce transparent repeatable outcomes and traces | 5 | Immutable inference contracts | Stable JSON and repeatability tests | Implemented |
+| SAFE-501 | Let highest safety risk prevail and prevent advice dilution | 5 | Risk aggregation and tier filtering | Conflict and suppression tests | Implemented |
+| SAFE-502 | Reject invalid facts and authored operands | 5 | Fact normalizer and semantic validation | Type, boundary, choice, and operand tests | Implemented |
+| OPS-501 | Evaluate non-sensitive demonstration facts locally | 5 | `inference-evaluate` CLI | CLI JSON and failure tests | Implemented |
+| DOC-501 | Document inference semantics, limitations, and methodology | 5 | Engine guide, ADR 0004, methodology, and report | Documentation review | Implemented |

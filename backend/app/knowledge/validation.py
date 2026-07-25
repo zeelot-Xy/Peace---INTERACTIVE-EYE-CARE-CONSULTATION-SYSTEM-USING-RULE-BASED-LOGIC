@@ -122,6 +122,56 @@ def _collect_fact_refs(expression: dict[str, Any]) -> set[str]:
     return refs
 
 
+def _iter_predicates(expression: dict[str, Any]):
+    if "fact_id" in expression:
+        yield expression
+        return
+    if "not" in expression:
+        yield from _iter_predicates(expression["not"])
+        return
+    for key in ("all", "any"):
+        for child in expression.get(key, []):
+            yield from _iter_predicates(child)
+
+
+def _check_operator_operands(documents: dict[str, Any], issues: list[ValidationIssue]) -> None:
+    facts = {item["id"]: item for item in documents["symptoms.json"]["symptoms"]}
+    for rule in documents["rules.json"]["rules"]:
+        for predicate in _iter_predicates(rule["when"]):
+            fact = facts.get(predicate["fact_id"])
+            if fact is None:
+                continue
+            operator = predicate["operator"]
+            value = predicate["value"]
+            location = f"rules.json:{rule['id']}.when.{predicate['fact_id']}"
+            if operator in {"in", "not_in"} and not isinstance(value, list):
+                issues.append(
+                    ValidationIssue(
+                        "invalid_operator_operand",
+                        location,
+                        f"Operator '{operator}' requires an array value.",
+                    )
+                )
+            if operator not in {"in", "not_in"} and isinstance(value, list):
+                issues.append(
+                    ValidationIssue(
+                        "invalid_operator_operand",
+                        location,
+                        f"Operator '{operator}' requires a scalar value.",
+                    )
+                )
+            if operator in {"gt", "gte", "lt", "lte"} and (
+                fact["value_type"] != "integer" or type(value) is not int
+            ):
+                issues.append(
+                    ValidationIssue(
+                        "invalid_operator_operand",
+                        location,
+                        f"Operator '{operator}' is limited to integer facts and values.",
+                    )
+                )
+
+
 def _check_references(
     documents: dict[str, Any], issues: list[ValidationIssue]
 ) -> dict[str, set[str]]:
@@ -381,6 +431,7 @@ def validate_package_data(
             )
     elif not any(issue.code in {"schema_validation", "invalid_schema"} for issue in issues):
         _check_references(documents, issues)
+        _check_operator_operands(documents, issues)
         _check_safety(documents, issues)
 
     sorted_issues = _sorted(issues)

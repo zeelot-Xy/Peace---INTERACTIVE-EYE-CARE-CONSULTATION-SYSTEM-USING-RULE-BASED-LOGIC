@@ -8,6 +8,7 @@ from sqlalchemy.engine import Engine
 from app.commands import register_commands
 from app.config import get_config
 from app.extensions import db, jwt, migrate
+from app.inference import InferenceEngine
 from app.knowledge import KnowledgeLoadError, KnowledgeManager
 from app.routes.admin import admin_blueprint
 from app.routes.auth import auth_blueprint
@@ -48,9 +49,8 @@ def create_app(
             f"'{app.config['KNOWLEDGE_ACTIVE_PACKAGE']}': {codes}."
         )
     app.extensions["knowledge"] = knowledge
-    app.logger.info(
-        "Activated knowledge package %s (%s).", report.package_id, report.fingerprint
-    )
+    app.extensions["inference"] = InferenceEngine()
+    app.logger.info("Activated knowledge package %s (%s).", report.package_id, report.fingerprint)
 
     db.init_app(app)
     migrate.init_app(app, db)

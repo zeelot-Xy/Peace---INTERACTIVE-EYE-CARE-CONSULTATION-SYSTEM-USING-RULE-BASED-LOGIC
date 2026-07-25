@@ -10,8 +10,9 @@ adds deterministic tri-state rule evaluation, safety-first conflict resolution, 
 results. Phase 6 adds authenticated, version-frozen consultation lifecycle APIs with autosave,
 resume, concurrency protection, safety escalation, and reproducible results. Phase 7 adds the
 responsive patient experience for consultation, history, explainable results, printable report
-view, profile management, and accessible light/dark presentation. Downloadable PDFs and
-knowledge administration remain in later phases.
+view, profile management, and accessible light/dark presentation. Phase 8 adds administrator
+summaries, audit review, safe knowledge-package validation and diffing, atomic publication, and
+retained rollback. Downloadable PDFs remain in Phase 9.
 
 ## Technology
 

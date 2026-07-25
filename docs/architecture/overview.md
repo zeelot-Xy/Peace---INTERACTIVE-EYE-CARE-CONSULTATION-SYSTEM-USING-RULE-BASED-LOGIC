@@ -88,3 +88,13 @@ question branching or medical rules. Partial urgent alerts precede the active qu
 Completed snapshots are rendered as separate action, red-flag, recommendation, possible-
 indication, explanation, evidence, and disclaimer sections. HttpOnly authentication remains
 unchanged, and browser storage contains only the non-sensitive theme preference.
+
+## Administration boundary
+
+Phase 8 adds administrator-only reporting and knowledge governance. Uploaded archives are
+bounded, inspected, staged, passed through the shared validator, and compared with the active
+snapshot. A candidate is retained under a unique package ID but remains inactive until an
+explicit publish request revalidates and atomically activates it. The active ID and fingerprint
+are persisted outside the package directory and verified during startup. Retired versions are
+never overwritten, allowing frozen consultations and controlled rollback to resolve the exact
+package they reference. See ADR 0007 and the administration guide.

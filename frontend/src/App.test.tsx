@@ -28,6 +28,14 @@ const patient = {
   created_at: '2026-07-13T00:00:00Z',
 }
 
+const administrator = {
+  ...patient,
+  id: 'admin-1',
+  email: 'admin@example.com',
+  full_name: 'System Administrator',
+  role: 'admin' as const,
+}
+
 describe('App authentication experience', () => {
   beforeEach(() => {
     vi.clearAllMocks()
@@ -201,5 +209,63 @@ describe('App authentication experience', () => {
     expect(screen.getByText(/a safety warning matched/i)).toBeInTheDocument()
     expect(screen.getByText(/this is not a diagnosis/i)).toBeInTheDocument()
     expect(screen.getByRole('link', { name: /dry eye/i })).toHaveAttribute('target', '_blank')
+  })
+
+  it('renders administrator summaries and retained knowledge versions for administrators', async () => {
+    apiMock.get.mockImplementation((url: string) => {
+      const payloads: Record<string, unknown> = {
+        '/users/me': { user: administrator },
+        '/admin/summary': {
+          summary: {
+            users: { total: 4, patients: 3, administrators: 1 },
+            consultations: { total: 2, in_progress: 1, completed: 1, cancelled: 0 },
+            reports: 0,
+          },
+        },
+        '/admin/users?per_page=10': { items: [administrator] },
+        '/admin/consultations?per_page=10': { items: [] },
+        '/admin/audit-logs?per_page=12': { items: [] },
+        '/admin/knowledge': {
+          items: [{
+            id: 'version-1',
+            package_id: 'eye-care-en-1.0.0',
+            schema_version: '1.0.0',
+            content_version: '1.0.0',
+            fingerprint: 'abcdef1234567890',
+            title: 'Adult English Eye-Care Consultation Knowledge Package',
+            status: 'published',
+            is_valid: true,
+            is_active: true,
+            validation_report: { valid: true, issues: [] },
+            diff_summary: null,
+            uploaded_at: '2026-07-26T00:00:00Z',
+            published_at: '2026-07-26T00:00:00Z',
+            retired_at: null,
+          }],
+        },
+      }
+      return Promise.resolve({ data: { data: payloads[url], errors: [] } })
+    })
+
+    render(<MemoryRouter initialEntries={['/admin']}><App /></MemoryRouter>)
+
+    expect(await screen.findByRole('heading', { name: /operations and knowledge governance/i })).toBeInTheDocument()
+    expect(await screen.findByText(/adult english eye-care consultation knowledge package/i)).toBeInTheDocument()
+    expect(screen.getByText(/previous versions remain available/i)).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: /admin/i })).toBeInTheDocument()
+  })
+
+  it('redirects patients away from the administrator workspace', async () => {
+    apiMock.get.mockImplementation((url: string) => Promise.resolve({
+      data: {
+        data: url === '/users/me' ? { user: patient } : { items: [] },
+        errors: [],
+      },
+    }))
+
+    render(<MemoryRouter initialEntries={['/admin']}><App /></MemoryRouter>)
+
+    expect(await screen.findByRole('heading', { name: /hello, test patient/i })).toBeInTheDocument()
+    expect(screen.queryByRole('heading', { name: /operations and knowledge governance/i })).not.toBeInTheDocument()
   })
 })

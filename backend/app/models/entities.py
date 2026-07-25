@@ -177,3 +177,38 @@ class AuditLog(db.Model):
     ip_address: Mapped[str | None] = mapped_column(String(64))
     user_agent: Mapped[str | None] = mapped_column(String(256))
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
+
+
+class KnowledgeVersion(db.Model):
+    __tablename__ = "knowledge_versions"
+
+    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=new_uuid)
+    package_id: Mapped[str | None] = mapped_column(
+        String(80), unique=True, nullable=True, index=True
+    )
+    schema_version: Mapped[str | None] = mapped_column(String(30))
+    content_version: Mapped[str | None] = mapped_column(String(30), index=True)
+    fingerprint: Mapped[str | None] = mapped_column(
+        String(64), unique=True, nullable=True, index=True
+    )
+    title: Mapped[str | None] = mapped_column(String(200))
+    status: Mapped[str] = mapped_column(
+        String(20), nullable=False, default="invalid", index=True
+    )
+    is_valid: Mapped[bool] = mapped_column(Boolean, nullable=False, default=False)
+    is_active: Mapped[bool] = mapped_column(
+        Boolean, nullable=False, default=False, index=True
+    )
+    storage_path: Mapped[str | None] = mapped_column(String(1024))
+    validation_report: Mapped[dict[str, Any]] = mapped_column(
+        JSON, nullable=False, default=dict
+    )
+    diff_summary: Mapped[dict[str, Any] | None] = mapped_column(JSON)
+    uploaded_by_user_id: Mapped[str | None] = mapped_column(
+        ForeignKey("users.id", ondelete="SET NULL"), index=True
+    )
+    uploaded_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), server_default=func.now()
+    )
+    published_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    retired_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))

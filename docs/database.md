@@ -47,3 +47,11 @@ Create migrations only after model review:
 ```
 
 Review generated upgrade and downgrade operations before applying them. Docker runs `db upgrade` before starting the API. Back up `instance/eye_care.db` while the application is stopped; restore only to the same schema revision, then run `db upgrade`.
+
+## Phase 8 knowledge-version record
+
+`knowledge_versions` retains package identity, semantic and schema versions, fingerprint,
+validation report, diff preview, storage path, uploader, publication/retirement timestamps, and
+active state. Package IDs and fingerprints are unique so historical knowledge cannot be
+silently overwritten. Package JSON remains in the immutable package store; SQLite holds
+governance metadata and audit references.

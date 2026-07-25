@@ -13,7 +13,9 @@ The application refuses to start unless its configured package passes every stru
 | `KNOWLEDGE_PACKAGES_DIR` | `backend/knowledge/packages` | Parent directory of immutable packages |
 | `KNOWLEDGE_SCHEMAS_DIR` | `backend/knowledge/schemas` | Draft 2020-12 schema directory |
 | `KNOWLEDGE_ACTIVE_PACKAGE` | `eye-care-en-1.0.0` | Package directory selected at startup |
-| `KNOWLEDGE_RELOAD_ON_CHANGE` | `false` | Reserved development reload policy; no request-time polling occurs in Phase 4 |
+| `KNOWLEDGE_RELOAD_ON_CHANGE` | `false` | Reserved development reload policy; no request-time polling occurs |
+| `KNOWLEDGE_STATE_FILE` | application instance `knowledge-active.json` | Atomic active package ID and fingerprint written by Phase 8 publication |
+| `KNOWLEDGE_UPLOAD_MAX_BYTES` | `5242880` | Maximum uploaded and expanded candidate size |
 
 Paths may be absolute. Relative paths are resolved from the process working directory, which is `backend/` in the documented local and Docker commands.
 
@@ -72,4 +74,7 @@ Pass a candidate path to `knowledge-validate` to inspect it without changing the
 - Changed active directory fails reload: restore the immutable directory from version control or select a separately validated package directory. Do not repair an active directory in place in production.
 - Missing prior snapshot: startup or `get_active()` fails clearly; there is no empty or partially valid fallback.
 
-Phase 8 will add authenticated upload, preview, publishing, retention, and rollback workflows. Until then, package selection is configuration-controlled.
+Phase 8 adds authenticated upload, preview, publication, retention, and rollback. Before the
+first administrator publication, package selection uses `KNOWLEDGE_ACTIVE_PACKAGE`. Afterwards,
+startup reads `KNOWLEDGE_STATE_FILE` and fails closed if the named directory or fingerprint no
+longer matches. See the administration guide for the complete workflow.

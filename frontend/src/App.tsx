@@ -1,11 +1,13 @@
-import { Activity, ArrowRight, History, LayoutDashboard, LogOut, Menu, Moon, ShieldCheck, Sun, UserRound, X } from 'lucide-react'
+import { Activity, ArrowRight, History, LayoutDashboard, LogOut, Menu, Moon, Settings, ShieldCheck, Sun, UserRound, X } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { Link, Route, Routes } from 'react-router-dom'
 
 import { ProtectedRoute } from './components/ProtectedRoute'
+import { AdminRoute } from './components/AdminRoute'
 import { AuthProvider } from './context/AuthContext'
 import { useAuth } from './context/auth-context'
 import { AboutPage } from './pages/AboutPage'
+import { AdminPage } from './pages/AdminPage'
 import { ConsultationPage } from './pages/ConsultationPage'
 import { DashboardPage } from './pages/DashboardPage'
 import { HistoryPage } from './pages/HistoryPage'
@@ -50,6 +52,7 @@ function Header() {
               <Link className="nav-link" onClick={() => setOpen(false)} to="/dashboard"><LayoutDashboard aria-hidden="true" size={16} /> Dashboard</Link>
               <Link className="nav-link" onClick={() => setOpen(false)} to="/history"><History aria-hidden="true" size={16} /> History</Link>
               <Link className="nav-link" onClick={() => setOpen(false)} to="/profile"><UserRound aria-hidden="true" size={16} /> Profile</Link>
+              {user.role === 'admin' && <Link className="nav-link" onClick={() => setOpen(false)} to="/admin"><Settings aria-hidden="true" size={16} /> Admin</Link>}
               <button className="nav-link text-red-700 dark:text-red-300" onClick={() => logout()} type="button"><LogOut aria-hidden="true" size={16} /> Sign out</button>
             </>
           ) : (
@@ -78,6 +81,9 @@ function App() {
             <Route path="/consultations/:consultationId" element={<ConsultationPage />} />
             <Route path="/consultations/:consultationId/results" element={<ResultsPage />} />
             <Route path="/reports/:consultationId" element={<ResultsPage />} />
+          </Route>
+          <Route element={<AdminRoute />}>
+            <Route path="/admin" element={<AdminPage />} />
           </Route>
         </Routes>
         <footer className="no-print border-t border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-950">

@@ -14,3 +14,4 @@ All notable changes are documented here using a simplified Keep a Changelog form
 - Phase 5 strict fact validation, tri-state rule evaluation, safety-first conflict resolution, explainable traces, rule-match scoring, local inference CLI, tests, and documentation.
 - Phase 6 version-frozen consultation sessions, autosave and revision control, conditional question capability, safety escalation, completion snapshots, authenticated lifecycle APIs, tests, and documentation.
 - Phase 7 responsive and accessible patient interface with one-question consultation, immediate urgent escalation, history, explainable results, printable report view, dark mode, tests, and documentation.
+- Phase 8 administrator workspace, operational summaries, audit and result review, retained knowledge-package validation, diff preview, atomic publication, rollback, tests, and documentation.

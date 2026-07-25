@@ -49,3 +49,9 @@
 | SAFE-701 | Communicate urgent action prominently and keep indications non-diagnostic | 7 | Safety alert and structured result hierarchy | Alert and wording tests | Implemented |
 | ACC-701 | Support keyboard, semantic, responsive, and light/dark operation | 7 | Native controls, landmarks, focus, mobile navigation, theme styles | Semantic tests and manual inspection | Implemented |
 | DOC-701 | Document the patient journey, accessibility, privacy, and methodology | 7 | Interface guide, ADR 0006, methodology, and report | Documentation review | Implemented |
+| ADM-801 | Restrict operational administration to administrators | 8 | Admin role guard, routes, and workspace | Backend and frontend authorization tests | Implemented |
+| ADM-802 | Summarize users, consultations, stored reports, and audit activity | 8 | Administrator reporting service and React workspace | API and semantic interface tests | Implemented |
+| KB-801 | Validate and preview complete uploaded knowledge packages | 8 | Staged ZIP inspection, shared validator, collection diff, affected-rule preview | Valid, invalid, duplicate, and diff tests | Implemented |
+| KB-802 | Publish only valid packages and preserve prior versions | 8 | Retained directories, version records, atomic manager activation | Publish and frozen-consultation tests | Implemented |
+| KB-803 | Support audited rollback and restart restoration | 8 | Fingerprint-protected state file and rollback service | Restart, rollback, and audit tests | Implemented |
+| DOC-801 | Document administration, knowledge governance, recovery, and methodology | 8 | Admin guide, ADR 0007, methodology, and report | Documentation review | Implemented |

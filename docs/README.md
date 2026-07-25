@@ -15,6 +15,7 @@ Repository documentation is versioned with the implementation. Collaborative aca
 - [`rule-language.md`](rule-language.md) — declarative rule expression language
 - [`inference-engine.md`](inference-engine.md) — tri-state evaluation, safety conflicts, scores, traces, and CLI
 - [`consultation-api.md`](consultation-api.md) — lifecycle resources, branching, concurrency, safety, and reproducibility
+- [`patient-interface.md`](patient-interface.md) — patient journey, accessibility, safety, recovery, and privacy
 - [`knowledge-scope-and-safety.md`](knowledge-scope-and-safety.md) — supported population and safety policy
 - [`source-register.md`](source-register.md) — published evidence catalogue
 - [`port-registry.md`](port-registry.md) — reserved localhost ports and release policy
@@ -31,6 +32,9 @@ Repository documentation is versioned with the implementation. Collaborative aca
 - [`adr/0005-version-frozen-consultation-lifecycle.md`](adr/0005-version-frozen-consultation-lifecycle.md) — consultation state and reproducibility decision
 - [`academic/phase-06-methodology.md`](academic/phase-06-methodology.md) — stateful consultation methodology
 - [`phase-reports/phase-06.md`](phase-reports/phase-06.md) — Phase 6 completion record
+- [`adr/0006-accessible-safety-first-patient-interface.md`](adr/0006-accessible-safety-first-patient-interface.md) — patient interaction and risk-communication decision
+- [`academic/phase-07-methodology.md`](academic/phase-07-methodology.md) — patient interaction-design methodology
+- [`phase-reports/phase-07.md`](phase-reports/phase-07.md) — Phase 7 completion record
 
 ## Project delivery
 

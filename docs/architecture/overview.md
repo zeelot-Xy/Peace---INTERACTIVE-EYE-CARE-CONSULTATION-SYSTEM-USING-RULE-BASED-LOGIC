@@ -79,3 +79,12 @@ package ID, version, and fingerprint, autosaves typed answers, and uses a monoto
 detect concurrent changes. Declarative question conditions determine applicability, but
 safety-critical questions always remain active. Completed results are immutable snapshots;
 routes contain transport handling only.
+
+## Patient-interface boundary
+
+Phase 7 adds a responsive React journey over the consultation resources. The browser renders
+server-owned state and submits the current revision with every mutation; it does not implement
+question branching or medical rules. Partial urgent alerts precede the active question.
+Completed snapshots are rendered as separate action, red-flag, recommendation, possible-
+indication, explanation, evidence, and disclaimer sections. HttpOnly authentication remains
+unchanged, and browser storage contains only the non-sensitive theme preference.

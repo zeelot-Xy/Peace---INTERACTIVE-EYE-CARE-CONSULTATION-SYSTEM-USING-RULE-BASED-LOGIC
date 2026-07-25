@@ -32,5 +32,10 @@
 | E-P6-002 | 6 | Lifecycle, safety, ownership, concurrency, and API tests | Phase 6 completion report | 2026-07-25 |
 | E-P6-003 | 6 | Consultation API and reproducibility guide | `docs/consultation-api.md` | 2026-07-25 |
 | E-P6-004 | 6 | Version-frozen lifecycle decision and methodology | ADR 0005 and Phase 6 methodology | 2026-07-25 |
+| E-P6-005 | 6 | Approved and merged consultation lifecycle | GitHub pull request #5 | 2026-07-25 |
+| E-P7-001 | 7 | Patient consultation, history, results, report, profile, and navigation interface | `frontend/src/` | 2026-07-25 |
+| E-P7-002 | 7 | Semantic patient-flow and safety tests | Phase 7 completion report | 2026-07-25 |
+| E-P7-003 | 7 | Patient journey, accessibility, privacy, and recovery guide | `docs/patient-interface.md` | 2026-07-25 |
+| E-P7-004 | 7 | Safety-first interface decision and interaction methodology | ADR 0006 and Phase 7 methodology | 2026-07-25 |
 
 External screenshots and large artifacts may be mirrored in the project Google Drive. Each external item must retain a stable filename or link and must not contain patient data or secrets.

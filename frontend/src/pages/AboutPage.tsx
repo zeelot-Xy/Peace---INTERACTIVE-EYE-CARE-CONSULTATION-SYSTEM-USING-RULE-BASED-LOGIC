@@ -13,11 +13,21 @@ export function AboutPage() {
           ophthalmologist, emergency service, or other qualified healthcare professional.
         </p>
         <p>
-          The future rule base will remain separate from application data, cite reputable published
-          guidance, and retain an explanation of why each rule matched.
+          The rule base remains separate from application data, cites reputable published
+          guidance, and retains an explanation of why each rule matched.
+        </p>
+        <h2 className="pt-3 text-2xl font-bold text-slate-900 dark:text-white">How a consultation works</h2>
+        <ol className="grid gap-3 pl-5 list-decimal">
+          <li>Questions collect structured facts without using image recognition or machine learning.</li>
+          <li>Versioned rules compare those facts and always preserve the highest safety risk.</li>
+          <li>Results separate possible indications from diagnoses and explain which rules matched.</li>
+          <li>Every medical statement links back to the knowledge base’s published evidence.</li>
+        </ol>
+        <p className="rounded-2xl bg-slate-100 p-5 text-sm dark:bg-slate-800">
+          The knowledge base is transparent but has not been clinically validated. Seek qualified
+          professional care whenever symptoms are severe, sudden, worsening, or concerning.
         </p>
       </div>
     </main>
   )
 }
-

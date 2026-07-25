@@ -23,6 +23,14 @@ Later phases add table-driven inference, consultation flows, security-negative t
 
 Evidence belongs in the phase report and evidence register. A check is not considered passed without a reproducible command or artifact.
 
+## Docker verification cadence
+
+Following the project-owner decision on 2026-07-25, routine phases use local backend and
+frontend lint, test, type, and production-build gates. Full Docker image rebuilds are required
+when container configuration or runtime dependencies change, and during the Phase 12 packaging
+and Phase 14 final clean-machine audit. This avoids repeated CPU-intensive image work while
+preserving final deployment assurance.
+
 ## Phase 3 quality gates
 
 - Draft 2020-12 meta-validation checks every schema.
@@ -67,3 +75,14 @@ Evidence belongs in the phase report and evidence register. A check is not consi
   and schema drift.
 - Earlier inference, authentication, frontend, build, Docker, hygiene, and hosted secret gates
   remain mandatory.
+
+## Phase 7 quality gates
+
+- Semantic frontend tests cover safety language, protected navigation, registration, login,
+  profile, logout, one-question input, autosave, urgent partial guidance, result separation,
+  source links, and loading/error landmarks.
+- Keyboard and responsive inspection covers navigation, radio and numeric inputs, progress,
+  answer review, confirmation controls, history filtering, theme switching, and print layout.
+- Contract tests verify saved answers carry their original safe question context.
+- TypeScript, Vite, ESLint, Ruff, all backend regressions, Docker, hygiene, and hosted secret
+  checks remain mandatory.

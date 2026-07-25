@@ -74,7 +74,10 @@ def test_answer_autosaves_resumes_and_can_be_revised(app, client):
     assert session["revision"] == 1
     assert session["next_question"]["id"] == "question_sudden_vision_loss"
     resumed = client.get(f"/api/v1/consultations/{session['id']}")
-    assert resumed.get_json()["data"]["consultation"]["answers"][0]["answer"] == 40
+    saved_answer = resumed.get_json()["data"]["consultation"]["answers"][0]
+    assert saved_answer["answer"] == 40
+    assert saved_answer["question"]["prompt"] == "What is your age in completed years?"
+    assert saved_answer["question"]["citation_ids"]
 
     session = _answer(client, session, "question_age_years", 41)
     assert session["revision"] == 2

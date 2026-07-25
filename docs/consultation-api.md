@@ -36,6 +36,10 @@ Every consultation representation contains:
 - an urgent safety alert when partial inference reaches urgent or emergency risk; and
 - lifecycle timestamps.
 
+Each saved answer includes the safe public question payload used to collect it. This lets the
+patient interface label previous answers during revision without loading knowledge files or
+reconstructing prompts in the browser.
+
 Question order follows the frozen package. Optional `show_when` expressions use the same
 tri-state expression language as rules. A branch appears only when its condition is true.
 Safety-critical questions are always applicable, even if an authored condition is present, so

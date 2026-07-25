@@ -2,7 +2,7 @@
 
 - Phase: Consultation Engine and APIs
 - Date: 2026-07-25
-- Status: Ready for review
+- Status: Approved and merged
 - Pull request: #5
 
 ## Delivered
@@ -41,4 +41,4 @@ reporting, or knowledge administration.
 
 ## Approval gate
 
-Phase 6 must be reviewed and explicitly approved before Phase 7 begins.
+Approved on 2026-07-25. Pull request #5 merged as `59ab03e`.

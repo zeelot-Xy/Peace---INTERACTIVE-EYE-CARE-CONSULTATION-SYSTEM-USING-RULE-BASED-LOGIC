@@ -36,7 +36,7 @@
   answer review, and emergency hierarchy were inspected. The final browser run contained no
   warnings or errors.
 - Repository diff, implementation-placeholder, and local high-risk secret-pattern checks passed.
-  The hosted GitGuardian result will be recorded on pull request #6.
+  The hosted GitGuardian security check passed on pull request #6.
 
 ## Scope boundary
 

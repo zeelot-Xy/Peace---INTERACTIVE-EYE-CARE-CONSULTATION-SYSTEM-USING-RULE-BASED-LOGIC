@@ -23,6 +23,14 @@ Later phases add table-driven inference, consultation flows, security-negative t
 
 Evidence belongs in the phase report and evidence register. A check is not considered passed without a reproducible command or artifact.
 
+## Docker verification cadence
+
+Following the project-owner decision on 2026-07-25, routine phases use local backend and
+frontend lint, test, type, and production-build gates. Full Docker image rebuilds are required
+when container configuration or runtime dependencies change, and during the Phase 12 packaging
+and Phase 14 final clean-machine audit. This avoids repeated CPU-intensive image work while
+preserving final deployment assurance.
+
 ## Phase 3 quality gates
 
 - Draft 2020-12 meta-validation checks every schema.

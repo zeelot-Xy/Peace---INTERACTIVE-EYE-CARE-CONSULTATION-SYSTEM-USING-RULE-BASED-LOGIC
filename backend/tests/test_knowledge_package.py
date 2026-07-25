@@ -140,3 +140,25 @@ def test_rule_operator_operand_mismatch_is_reported(tmp_path: Path):
     issues = validate_package(package)
 
     assert any(issue.code == "invalid_operator_operand" for issue in issues)
+
+
+def test_question_branch_reference_is_validated(tmp_path: Path):
+    package = tmp_path / "package"
+    shutil.copytree(DEFAULT_PACKAGE, package)
+    questions_path = package / "questions.json"
+    questions = _read(questions_path)
+    questions["questions"][0]["show_when"] = {
+        "fact_id": "fact_not_defined",
+        "operator": "eq",
+        "value": True,
+    }
+    _rewrite_json(questions_path, questions)
+    _refresh_manifest_checksum(package, "questions.json")
+
+    issues = validate_package(package)
+
+    assert any(
+        issue.code == "broken_reference"
+        and "show_when" in issue.location
+        for issue in issues
+    )

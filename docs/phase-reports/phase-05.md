@@ -2,7 +2,7 @@
 
 - Phase: Rule-Based Inference Engine
 - Date: 2026-07-25
-- Status: Ready for review
+- Status: Approved and merged
 - Pull request: `#4`
 
 ## Delivered
@@ -42,4 +42,5 @@ an educational academic artefact that has not been clinically validated.
 
 ## Approval gate
 
-Phase 5 must be reviewed and explicitly approved before Phase 6 begins.
+The user approved Phase 5 on 2026-07-25 after all acceptance gates passed. Pull request #4 was
+merged as `d7faa6b`, authorizing Phase 6 implementation.

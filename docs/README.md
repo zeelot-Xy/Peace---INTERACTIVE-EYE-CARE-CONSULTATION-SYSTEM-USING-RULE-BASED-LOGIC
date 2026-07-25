@@ -14,6 +14,7 @@ Repository documentation is versioned with the implementation. Collaborative aca
 - [`knowledge-schema-reference.md`](knowledge-schema-reference.md) — JSON collection contracts and invariants
 - [`rule-language.md`](rule-language.md) — declarative rule expression language
 - [`inference-engine.md`](inference-engine.md) — tri-state evaluation, safety conflicts, scores, traces, and CLI
+- [`consultation-api.md`](consultation-api.md) — lifecycle resources, branching, concurrency, safety, and reproducibility
 - [`knowledge-scope-and-safety.md`](knowledge-scope-and-safety.md) — supported population and safety policy
 - [`source-register.md`](source-register.md) — published evidence catalogue
 - [`port-registry.md`](port-registry.md) — reserved localhost ports and release policy
@@ -27,6 +28,9 @@ Repository documentation is versioned with the implementation. Collaborative aca
 - [`adr/0004-tristate-safety-first-inference.md`](adr/0004-tristate-safety-first-inference.md) — incomplete-fact and risk-resolution decision
 - [`academic/phase-05-methodology.md`](academic/phase-05-methodology.md) — rule-based inference methodology
 - [`phase-reports/phase-05.md`](phase-reports/phase-05.md) — Phase 5 completion record
+- [`adr/0005-version-frozen-consultation-lifecycle.md`](adr/0005-version-frozen-consultation-lifecycle.md) — consultation state and reproducibility decision
+- [`academic/phase-06-methodology.md`](academic/phase-06-methodology.md) — stateful consultation methodology
+- [`phase-reports/phase-06.md`](phase-reports/phase-06.md) — Phase 6 completion record
 
 ## Project delivery
 

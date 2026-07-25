@@ -4,5 +4,13 @@ from app.schemas.auth import (
     ProfileUpdateSchema,
     RegistrationSchema,
 )
+from app.schemas.consultation import ConsultationAnswerSchema, ConsultationRevisionSchema
 
-__all__ = ["LoginSchema", "PasswordChangeSchema", "ProfileUpdateSchema", "RegistrationSchema"]
+__all__ = [
+    "ConsultationAnswerSchema",
+    "ConsultationRevisionSchema",
+    "LoginSchema",
+    "PasswordChangeSchema",
+    "ProfileUpdateSchema",
+    "RegistrationSchema",
+]

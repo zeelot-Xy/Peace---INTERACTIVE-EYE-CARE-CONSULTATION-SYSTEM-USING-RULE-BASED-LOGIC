@@ -14,6 +14,9 @@ view, profile management, and accessible light/dark presentation. Phase 8 adds a
 summaries, audit review, safe knowledge-package validation and diffing, atomic publication, and
 retained rollback. Phase 9 adds immutable downloadable PDF reports, secure patient and
 administrator retrieval, checksum-backed repeatability, and server-filtered patient history.
+Phase 10 adds comprehensive cross-layer verification, defence rehearsals, an enforced 90%
+backend coverage floor, React accessibility and recovery scenarios, and executable
+requirements-to-test evidence.
 
 ## Technology
 
@@ -57,6 +60,12 @@ npm.cmd run dev
 The frontend runs at `http://localhost:5173` and reads `VITE_API_BASE_URL` from the environment.
 
 ### Verification
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\verify-phase10.ps1
+```
+
+Individual checks can also be run directly:
 
 ```powershell
 cd backend

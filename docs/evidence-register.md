@@ -47,5 +47,10 @@
 | E-P9-002 | 9 | PDF, ownership, repeatability, long-content, history, and audit tests | Phase 9 completion report | 2026-07-26 |
 | E-P9-003 | 9 | Extracted-text and rendered-page PDF inspection | Phase 9 completion report | 2026-07-26 |
 | E-P9-004 | 9 | Report architecture and snapshot-generation methodology | `docs/reports-and-history.md`, ADR 0008 | 2026-07-26 |
+| E-P10-001 | 10 | Cross-layer patient, role-boundary, and security-negative scenarios | `backend/tests/test_defence_demo.py` | 2026-07-26 |
+| E-P10-002 | 10 | React accessibility, stale-state, and API-failure recovery scenarios | `frontend/src/App.test.tsx` | 2026-07-26 |
+| E-P10-003 | 10 | Executable requirement-to-test completeness evidence | `docs/requirements-to-test-report.md`, `backend/tests/test_quality_evidence.py` | 2026-07-26 |
+| E-P10-004 | 10 | Reproducible full local verification command | `scripts/verify-phase10.ps1` | 2026-07-26 |
+| E-P10-005 | 10 | Full gate, migration cycle, live health, and browser smoke evidence | `docs/phase-reports/phase-10.md` | 2026-07-26 |
 
 External screenshots and large artifacts may be mirrored in the project Google Drive. Each external item must retain a stable filename or link and must not contain patient data or secrets.

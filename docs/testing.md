@@ -43,6 +43,24 @@ Representative pages are rendered to images and visually inspected. ReportLab is
 dependency, so the deferred-build policy requires one Docker image build and live report smoke
 test at the end of this phase.
 
+## Phase 10 comprehensive verification
+
+- `powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\verify-phase10.ps1` runs the
+  local whitespace, Ruff, backend coverage, ESLint, Vitest,
+  TypeScript, and production-build gates in one reproducible command.
+- Backend application coverage must remain at or above 90%.
+- Cross-layer defence tests cover registration, CSRF, one-question consultation, emergency
+  escalation, deterministic results, immutable PDF generation, filtered history, ownership,
+  administration, audit safety, and stable negative API envelopes.
+- React tests cover the critical patient and administrator views, accessible navigation and
+  controls, stale-revision reload, retry recovery, and report failure recovery.
+- `requirements-to-test-report.md` names evidence for every traceability-matrix requirement;
+  an automated test prevents silent omissions.
+- The live defence rehearsal follows `defence-demo.md` with fictional data only.
+
+Phase 10 introduces no container configuration or runtime dependency change, so the approved
+deferred Docker-build policy applies. The live services may be smoke-tested without rebuilding.
+
 ## Phase 3 quality gates
 
 - Draft 2020-12 meta-validation checks every schema.

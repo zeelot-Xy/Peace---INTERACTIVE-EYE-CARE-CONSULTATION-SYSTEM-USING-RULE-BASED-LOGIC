@@ -19,6 +19,7 @@ from app.routes.reports import reports_blueprint
 from app.routes.users import users_blueprint
 from app.services.auth_service import is_token_revoked
 from app.utils.responses import error_response, register_error_handlers
+from app.utils.security import configure_security
 
 
 @event.listens_for(Engine, "connect")
@@ -85,6 +86,7 @@ def create_app(
         resources={r"/api/*": {"origins": app.config["CORS_ORIGINS"]}},
         supports_credentials=True,
     )
+    configure_security(app)
     app.register_blueprint(health_blueprint, url_prefix="/api/v1")
     app.register_blueprint(auth_blueprint, url_prefix="/api/v1/auth")
     app.register_blueprint(users_blueprint, url_prefix="/api/v1/users")

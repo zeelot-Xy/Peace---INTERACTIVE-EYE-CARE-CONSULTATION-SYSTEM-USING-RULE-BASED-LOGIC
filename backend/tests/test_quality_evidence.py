@@ -1,4 +1,4 @@
-"""Executable checks for Phase 10 requirements-to-test evidence."""
+"""Executable checks for requirements-to-test evidence through Phase 11."""
 
 import re
 from pathlib import Path
@@ -33,5 +33,18 @@ def test_phase_10_evidence_names_reproducible_commands_and_scenarios():
         "verify-phase10.ps1",
         "Patient safety-path demonstration",
         "Administrator governance demonstration",
+    ):
+        assert expected in report_text
+
+
+def test_phase_11_evidence_names_security_and_privacy_gates():
+    report_text = REPORT.read_text(encoding="utf-8")
+
+    for expected in (
+        "test_security.py",
+        "verify-phase11.ps1",
+        "Atomic refresh",
+        "Audit redaction",
+        "npm production advisory",
     ):
         assert expected in report_text

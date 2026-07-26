@@ -7,6 +7,7 @@ import json
 import os
 import shutil
 import stat
+import threading
 import uuid
 import zipfile
 from datetime import UTC, datetime
@@ -21,6 +22,8 @@ from app.knowledge import KnowledgePackage
 from app.knowledge.validation import COLLECTION_KEYS
 from app.models import KnowledgeVersion
 from app.services.audit_service import record_audit
+
+_publication_lock = threading.Lock()
 
 
 class KnowledgeAdminError(RuntimeError):
@@ -128,6 +131,29 @@ def _archive_files(data: bytes) -> dict[str, bytes]:
         files = [entry for entry in archive.infolist() if not entry.is_dir()]
         if not files:
             raise KnowledgeAdminError("The archive is empty.", "invalid_archive", 422)
+        if len(files) > current_app.config["KNOWLEDGE_ARCHIVE_MAX_ENTRIES"]:
+            raise KnowledgeAdminError(
+                "The archive contains too many entries.",
+                "unsafe_archive",
+                422,
+            )
+        if any(entry.flag_bits & 0x1 for entry in files):
+            raise KnowledgeAdminError(
+                "Encrypted archive entries are not supported.",
+                "unsafe_archive",
+                422,
+            )
+        ratio_limit = current_app.config["KNOWLEDGE_ARCHIVE_MAX_COMPRESSION_RATIO"]
+        if any(
+            entry.file_size > 0
+            and entry.file_size / max(entry.compress_size, 1) > ratio_limit
+            for entry in files
+        ):
+            raise KnowledgeAdminError(
+                "The archive compression ratio exceeds the safety limit.",
+                "unsafe_archive",
+                422,
+            )
         if sum(entry.file_size for entry in files) > current_app.config[
             "KNOWLEDGE_UPLOAD_MAX_BYTES"
         ]:
@@ -162,10 +188,28 @@ def _archive_files(data: bytes) -> dict[str, bytes]:
                 "incomplete_package",
                 422,
             )
-        return {
-            name: archive.read(entry)
-            for name, entry in zip(normalized, files, strict=True)
-        }
+        extracted: dict[str, bytes] = {}
+        total_read = 0
+        limit = current_app.config["KNOWLEDGE_UPLOAD_MAX_BYTES"]
+        try:
+            for name, entry in zip(normalized, files, strict=True):
+                with archive.open(entry, "r") as source:
+                    content = source.read(limit - total_read + 1)
+                total_read += len(content)
+                if total_read > limit or len(content) != entry.file_size:
+                    raise KnowledgeAdminError(
+                        "The extracted knowledge package is too large or inconsistent.",
+                        "package_too_large",
+                        413,
+                    )
+                extracted[name] = content
+        except (RuntimeError, NotImplementedError, zipfile.BadZipFile) as error:
+            raise KnowledgeAdminError(
+                "The archive uses an unsupported or invalid entry format.",
+                "invalid_archive",
+                422,
+            ) from error
+        return extracted
 
 
 def _rule_refs(rule: Any) -> set[str]:
@@ -348,7 +392,7 @@ def _write_active_state(package_id: str, fingerprint: str) -> None:
         temporary.unlink(missing_ok=True)
 
 
-def activate_version(
+def _activate_version(
     version_id: str, actor_user_id: str, *, rollback: bool = False
 ) -> dict[str, Any]:
     ensure_active_version()
@@ -371,13 +415,32 @@ def activate_version(
     previous = db.session.scalar(
         db.select(KnowledgeVersion).where(KnowledgeVersion.is_active.is_(True))
     )
-    report = manager.activate(Path(version.storage_path), force=True)
+    report = manager.validate(Path(version.storage_path))
     if not report.valid:
         raise KnowledgeAdminError(
             "The retained package no longer passes validation.",
             "knowledge_revalidation_failed",
             409,
         )
+    expected_identity = (
+        version.package_id,
+        version.schema_version,
+        version.content_version,
+        version.fingerprint,
+    )
+    actual_identity = (
+        report.package_id,
+        report.schema_version,
+        report.content_version,
+        report.fingerprint,
+    )
+    if actual_identity != expected_identity:
+        raise KnowledgeAdminError(
+            "The retained package no longer matches its immutable version record.",
+            "knowledge_identity_mismatch",
+            409,
+        )
+    manager.activate(Path(version.storage_path), force=True)
     try:
         _write_active_state(str(version.package_id), str(version.fingerprint))
         now = datetime.now(UTC)
@@ -412,3 +475,16 @@ def activate_version(
             )
         raise
     return _version_payload(version)
+
+
+def activate_version(
+    version_id: str, actor_user_id: str, *, rollback: bool = False
+) -> dict[str, Any]:
+    # The packaged release is single-process. This lock prevents overlapping
+    # publish/rollback operations from producing multiple active DB rows.
+    with _publication_lock:
+        return _activate_version(
+            version_id,
+            actor_user_id,
+            rollback=rollback,
+        )

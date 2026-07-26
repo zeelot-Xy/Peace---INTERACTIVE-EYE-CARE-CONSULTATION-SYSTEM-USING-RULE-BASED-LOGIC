@@ -17,6 +17,9 @@ administrator retrieval, checksum-backed repeatability, and server-filtered pati
 Phase 10 adds comprehensive cross-layer verification, defence rehearsals, an enforced 90%
 backend coverage floor, React accessibility and recovery scenarios, and executable
 requirements-to-test evidence.
+Phase 11 adds request throttling and bounds, strict browser and CORS policy, atomic session
+rotation, current-role enforcement, hardened uploads, redacted append-only audit handling,
+verified SQLite maintenance, retention controls, and dependency advisory checks.
 
 ## Technology
 
@@ -62,7 +65,7 @@ The frontend runs at `http://localhost:5173` and reads `VITE_API_BASE_URL` from 
 ### Verification
 
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\verify-phase10.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\verify-phase11.ps1
 ```
 
 Individual checks can also be run directly:

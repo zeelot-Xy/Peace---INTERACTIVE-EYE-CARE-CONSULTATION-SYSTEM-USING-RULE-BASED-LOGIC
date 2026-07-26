@@ -61,6 +61,24 @@ test at the end of this phase.
 Phase 10 introduces no container configuration or runtime dependency change, so the approved
 deferred Docker-build policy applies. The live services may be smoke-tested without rebuilding.
 
+## Phase 11 security and privacy gates
+
+- `scripts/verify-phase11.ps1` retains the Phase 10 lint, 90% backend coverage, frontend test,
+  TypeScript, and production-build gates.
+- Security-negative tests verify JSON handling, request-size rejection, rate-limit responses,
+  defensive headers, explicit CORS, Unicode control rejection, audit redaction, and immutability.
+- Operations tests verify SQLite backup, integrity-checked restore, dry-run retention preview,
+  and explicit retention application.
+- Authentication review verifies atomic refresh consumption and persisted administrator role.
+- Knowledge review covers ZIP size, entries, ratio, paths, links, encryption, exact names,
+  bounded reads, immutable identity, and serialized publication.
+- `pip check`, `pip-audit -r requirements.txt`, and `check-npm-audit.mjs` form the dependency
+  gate. The npm check accepts only the documented RSC-only advisory while that upstream fix is
+  unpublished; every other high or critical production advisory fails. Network failures must
+  be retried and are not treated as a clean audit.
+- Docker rebuilding remains deferred because no runtime dependency or container configuration
+  changed. Phases 12 and 14 retain clean-container and clean-machine checks.
+
 ## Phase 3 quality gates
 
 - Draft 2020-12 meta-validation checks every schema.

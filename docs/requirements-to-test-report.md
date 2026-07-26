@@ -37,19 +37,26 @@ requirement is absent from this report.
 | `TRC-1001` | `test_quality_evidence.py` | This evidence report and the traceability matrix |
 | `ACC-1001` | `App.test.tsx` accessible-name, error recovery, stale revision, and report failure tests | Live keyboard and responsive review |
 | `DOC-1001` | `test_quality_evidence.py` | Phase 10 methodology, testing guide, defence guide, and completion report |
+| `SEC-1101`, `SEC-1102` | `test_security.py`, `test_config.py` | Request, headers, CORS, media-type, rate-limit, and normalization evidence |
+| `SEC-1103` | `test_auth.py`, `test_security.py` | Atomic refresh and current administrator-role review |
+| `SEC-1104` | `test_admin.py`, `test_security.py` | Bounded archive and immutable publication review |
+| `PRIV-1101`, `PRIV-1102` | `test_security.py` | Audit redaction, immutability, retention, backup, and restore evidence |
+| `DEP-1101` | `verify-phase11.ps1` | Python and npm production advisory checks |
+| `DOC-1101` | `test_quality_evidence.py` | Phase 11 security guide, methodology, and completion report |
 
 ## Gate commands
 
 The canonical Windows command is:
 
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\verify-phase10.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\verify-phase11.ps1
 ```
 
 It runs Git whitespace validation, Ruff, pytest with a 90% minimum application-coverage gate,
-ESLint, Vitest, TypeScript, and the Vite production build. Migration downgrade, upgrade, current,
-and drift checks are recorded separately because they operate on the dedicated verification
-database.
+ESLint, Vitest, TypeScript, the Vite production build, Python dependency compatibility and
+vulnerability review, and the npm production dependency audit. Migration downgrade, upgrade,
+current, and drift checks are recorded separately because they operate on the dedicated
+verification database.
 
 ## Interpretation
 

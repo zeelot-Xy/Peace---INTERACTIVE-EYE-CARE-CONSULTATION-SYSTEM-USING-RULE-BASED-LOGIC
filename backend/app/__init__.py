@@ -15,6 +15,7 @@ from app.routes.admin import admin_blueprint
 from app.routes.auth import auth_blueprint
 from app.routes.consultations import consultations_blueprint
 from app.routes.health import health_blueprint
+from app.routes.reports import reports_blueprint
 from app.routes.users import users_blueprint
 from app.services.auth_service import is_token_revoked
 from app.utils.responses import error_response, register_error_handlers
@@ -91,6 +92,7 @@ def create_app(
     app.register_blueprint(
         consultations_blueprint, url_prefix="/api/v1/consultations"
     )
+    app.register_blueprint(reports_blueprint, url_prefix="/api/v1/reports")
     register_commands(app)
     register_error_handlers(app)
 

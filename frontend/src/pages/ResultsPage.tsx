@@ -1,11 +1,11 @@
-import { AlertTriangle, ArrowLeft, BookOpen, Info, Printer, ShieldCheck } from 'lucide-react'
+import { AlertTriangle, ArrowLeft, BookOpen, Download, FileText, Info, Printer, ShieldCheck } from 'lucide-react'
 import { useCallback, useEffect, useState } from 'react'
 import { Link, useLocation, useParams } from 'react-router-dom'
 
 import { PageError, PageLoading } from '../components/PageState'
 import { api, apiErrorMessage } from '../lib/api'
 import type { ApiEnvelope } from '../types/auth'
-import type { ConsultationResult, KnowledgeItem } from '../types/consultation'
+import type { ConsultationReport, ConsultationResult, KnowledgeItem } from '../types/consultation'
 
 function ItemList({ items, empty, field = 'title' }: { items: KnowledgeItem[]; empty: string; field?: 'title' | 'possible_indication_label' }) {
   if (!items.length) return <p className="text-slate-600 dark:text-slate-300">{empty}</p>
@@ -29,6 +29,9 @@ export function ResultsPage() {
   const location = useLocation()
   const reportView = location.pathname.startsWith('/reports/')
   const [result, setResult] = useState<ConsultationResult | null>(null)
+  const [report, setReport] = useState<ConsultationReport | null>(null)
+  const [reportBusy, setReportBusy] = useState(false)
+  const [reportError, setReportError] = useState('')
   const [error, setError] = useState('')
 
   const load = useCallback(async () => {
@@ -51,15 +54,37 @@ export function ResultsPage() {
   if (!result) return <PageLoading message="Preparing your consultation guidance…" />
 
   const urgent = (result.overall_risk?.rank ?? 0) >= 3
+  const createReport = async () => {
+    setReportBusy(true)
+    setReportError('')
+    try {
+      const response = await api.post<ApiEnvelope<{ report: ConsultationReport }>>(`/consultations/${consultationId}/report`)
+      setReport(response.data.data?.report ?? null)
+    } catch (requestError) {
+      setReportError(apiErrorMessage(requestError))
+    } finally {
+      setReportBusy(false)
+    }
+  }
+  const downloadUrl = report
+    ? new URL(report.download_url, api.defaults.baseURL ?? window.location.origin).toString()
+    : null
   return (
     <main className="mx-auto max-w-5xl px-5 py-10 sm:px-6 sm:py-14">
       <div className="no-print mb-7 flex flex-wrap items-center justify-between gap-3">
         <Link className="inline-flex items-center gap-2 font-semibold text-slate-600 dark:text-slate-300" to="/history"><ArrowLeft aria-hidden="true" size={17} /> History</Link>
         <div className="flex gap-3">
           {!reportView && <Link className="rounded-xl border border-slate-300 px-4 py-2 font-semibold dark:border-slate-600" to={`/reports/${consultationId}`}>Report view</Link>}
+          {downloadUrl ? (
+            <a className="inline-flex items-center gap-2 rounded-xl bg-teal-700 px-4 py-2 font-semibold text-white" href={downloadUrl}><Download aria-hidden="true" size={17} /> Download PDF</a>
+          ) : (
+            <button className="inline-flex items-center gap-2 rounded-xl bg-teal-700 px-4 py-2 font-semibold text-white disabled:opacity-60" disabled={reportBusy} onClick={() => void createReport()} type="button"><FileText aria-hidden="true" size={17} /> {reportBusy ? 'Generating…' : 'Generate PDF'}</button>
+          )}
           <button className="inline-flex items-center gap-2 rounded-xl bg-slate-900 px-4 py-2 font-semibold text-white dark:bg-white dark:text-slate-900" onClick={() => window.print()} type="button"><Printer aria-hidden="true" size={17} /> Print</button>
         </div>
       </div>
+      {reportError && <p className="no-print mb-5 rounded-xl bg-red-50 p-4 text-sm font-medium text-red-800" role="alert">{reportError}</p>}
+      {report && <p className="no-print mb-5 rounded-xl bg-teal-50 p-4 text-sm text-teal-900" role="status">Your immutable PDF report is ready. It remains tied to knowledge version {report.knowledge_version}.</p>}
 
       <header>
         <p className="text-sm font-semibold uppercase tracking-[0.18em] text-teal-700 dark:text-teal-300">{reportView ? 'Consultation report' : 'Your consultation results'}</p>

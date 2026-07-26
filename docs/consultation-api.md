@@ -21,6 +21,7 @@ protection, and retain the standard `{data, errors, correlation_id}` envelope.
 | `POST` | `/consultations/{id}/complete` | Validate completeness and freeze the result |
 | `POST` | `/consultations/{id}/cancel` | Cancel an in-progress consultation |
 | `GET` | `/consultations/{id}/result` | Read a completed immutable result snapshot |
+| `POST` | `/consultations/{id}/report` | Create or return its immutable PDF report |
 
 Create returns HTTP 201. Ownership failures use the same 404 response as unknown IDs.
 
@@ -77,8 +78,8 @@ later changes, the loader resolves the original package directory and verifies i
 before allowing the session to continue. A missing or mismatched historical package fails
 closed.
 
-Completed and cancelled consultations cannot be changed. Phase 9 will compose downloadable
-reports from completed snapshots without rerunning current knowledge.
+Completed and cancelled consultations cannot be changed. Phase 9 composes downloadable reports
+from completed snapshots without rerunning current knowledge. See the reports and history guide.
 
 ## Privacy and audit
 

@@ -12,7 +12,8 @@ resume, concurrency protection, safety escalation, and reproducible results. Pha
 responsive patient experience for consultation, history, explainable results, printable report
 view, profile management, and accessible light/dark presentation. Phase 8 adds administrator
 summaries, audit review, safe knowledge-package validation and diffing, atomic publication, and
-retained rollback. Downloadable PDFs remain in Phase 9.
+retained rollback. Phase 9 adds immutable downloadable PDF reports, secure patient and
+administrator retrieval, checksum-backed repeatability, and server-filtered patient history.
 
 ## Technology
 
@@ -20,6 +21,7 @@ retained rollback. Downloadable PDFs remain in Phase 9.
 - Flask REST API with Python
 - SQLite for application data
 - Versioned JSON Schema Draft 2020-12 knowledge packages
+- ReportLab PDF generation with immutable SQLite-backed artifacts
 - pytest, Vitest, Testing Library, ESLint, and Ruff
 - Docker Compose for reproducible development
 

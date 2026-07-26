@@ -22,6 +22,8 @@ Repository documentation is versioned with the implementation. Collaborative aca
 - [`source-register.md`](source-register.md) — published evidence catalogue
 - [`port-registry.md`](port-registry.md) — reserved localhost ports and release policy
 - [`requirements-traceability.md`](requirements-traceability.md) — requirement-to-evidence mapping
+- [`requirements-to-test-report.md`](requirements-to-test-report.md) — concrete automated evidence for every implemented requirement
+- [`defence-demo.md`](defence-demo.md) — repeatable patient and administrator defence demonstration
 - [`evidence-register.md`](evidence-register.md) — durable evidence index
 
 - [`knowledge-runtime.md`](knowledge-runtime.md) — runtime loading, cache, activation, CLI, and recovery
@@ -43,6 +45,8 @@ Repository documentation is versioned with the implementation. Collaborative aca
 - [`adr/0008-database-retained-immutable-pdf-reports.md`](adr/0008-database-retained-immutable-pdf-reports.md) — report reproducibility and storage decision
 - [`academic/phase-09-methodology.md`](academic/phase-09-methodology.md) — snapshot document-generation methodology
 - [`phase-reports/phase-09.md`](phase-reports/phase-09.md) — Phase 9 completion record
+- [`academic/phase-10-methodology.md`](academic/phase-10-methodology.md) — requirements-based comprehensive verification methodology
+- [`phase-reports/phase-10.md`](phase-reports/phase-10.md) — Phase 10 completion record
 
 ## Project delivery
 

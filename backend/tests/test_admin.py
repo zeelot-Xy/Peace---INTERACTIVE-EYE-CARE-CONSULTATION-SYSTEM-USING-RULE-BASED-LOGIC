@@ -200,3 +200,4 @@ def test_validated_publish_and_rollback_preserve_frozen_consultations(tmp_path: 
     with application.app_context():
         db.session.remove()
         db.drop_all()
+        db.engine.dispose()

@@ -106,3 +106,12 @@ and a generation-time patient snapshot. The service stores both the composition 
 PDF bytes with a checksum; later downloads never rerun inference or read the current profile.
 Owner-scoped resources and governed administrator access protect retrieval. See ADR 0008 and
 the reports and history guide.
+
+## Verification boundary
+
+Phase 10 links every implemented requirement to named automated and review evidence. A
+cross-layer Flask scenario exercises the patient safety path through immutable report
+generation, while React interaction tests verify browser semantics and recovery behavior. The
+canonical verification command enforces a 90% backend application-coverage floor alongside
+lint, component tests, type checking, and production build. Test passage establishes software
+conformance for authored scenarios; it does not establish clinical validity.

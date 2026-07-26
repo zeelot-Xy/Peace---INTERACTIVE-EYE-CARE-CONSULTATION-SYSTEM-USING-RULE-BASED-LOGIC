@@ -60,3 +60,8 @@
 | REP-903 | Enforce secure patient ownership and governed administrator review | 9 | Report resource ownership query and role claim | Privacy and administrator tests | Implemented |
 | HIS-901 | Filter patient history by status, risk, and date | 9 | Authenticated server filters and React controls | API and frontend tests | Implemented |
 | DOC-901 | Document report architecture, privacy, API, testing, and methodology | 9 | Report guide, ADR 0008, methodology, and report | Documentation review | Implemented |
+| VER-1001 | Run one reproducible comprehensive verification gate | 10 | `scripts/verify-phase10.ps1` | Backend coverage, frontend tests, lint, and build | Implemented |
+| E2E-1001 | Rehearse critical patient and administrator defence journeys | 10 | Cross-layer scenarios and defence guide | Backend integration and React flow tests | Implemented |
+| TRC-1001 | Map every implemented requirement to concrete verification evidence | 10 | Requirements-to-test evidence report | Executable completeness test | Implemented |
+| ACC-1001 | Verify accessibility semantics and failure recovery | 10 | React semantic and recovery scenarios | Component tests and live inspection | Implemented |
+| DOC-1001 | Document Phase 10 verification method, evidence, and limitations | 10 | Testing, methodology, defence, and phase report documents | Documentation review | Implemented |

@@ -13,6 +13,7 @@ def app():
     with application.app_context():
         db.session.remove()
         db.drop_all()
+        db.engine.dispose()
 
 
 @pytest.fixture()

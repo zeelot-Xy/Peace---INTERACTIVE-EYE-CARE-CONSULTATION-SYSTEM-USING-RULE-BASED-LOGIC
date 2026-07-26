@@ -337,4 +337,137 @@ describe('App authentication experience', () => {
     expect(await screen.findByRole('heading', { name: /hello, test patient/i })).toBeInTheDocument()
     expect(screen.queryByRole('heading', { name: /operations and knowledge governance/i })).not.toBeInTheDocument()
   })
+
+  it('announces a history API failure and recovers through the retry control', async () => {
+    let historyAttempts = 0
+    apiMock.get.mockImplementation((url: string) => {
+      if (url === '/users/me') {
+        return Promise.resolve({ data: { data: { user: patient }, errors: [] } })
+      }
+      historyAttempts += 1
+      if (historyAttempts === 1) return Promise.reject(new Error('temporary failure'))
+      return Promise.resolve({ data: { data: { items: [] }, errors: [] } })
+    })
+
+    render(<MemoryRouter initialEntries={['/history']}><App /></MemoryRouter>)
+
+    const alert = await screen.findByRole('alert')
+    expect(alert).toHaveTextContent(/we could not load this page/i)
+    fireEvent.click(screen.getByRole('button', { name: /try again/i }))
+    expect(await screen.findByRole('heading', { name: /no consultations in this view/i })).toBeInTheDocument()
+    expect(historyAttempts).toBe(2)
+  })
+
+  it('reloads consultation state after a stale revision conflict', async () => {
+    const consultation = {
+      id: 'conflicted-1',
+      status: 'in_progress',
+      revision: 5,
+      knowledge: { package_id: 'eye-care-en-1.0.0', content_version: '1.0.0', fingerprint: 'abc' },
+      progress: { resolved: 5, total_applicable: 36, percentage: 13.89 },
+      next_question: {
+        id: 'question_redness',
+        fact_id: 'fact_redness',
+        prompt: 'Is your eye red?',
+        help_text: null,
+        answer_type: 'yes_no',
+        required: true,
+        safety_critical: false,
+        options: [],
+        citation_ids: ['source-1'],
+      },
+      answers: [],
+      skipped_question_ids: [],
+      safety_alert: null,
+      created_at: '2026-07-26T00:00:00Z',
+      updated_at: '2026-07-26T00:00:00Z',
+      completed_at: null,
+      cancelled_at: null,
+    }
+    let consultationLoads = 0
+    apiMock.get.mockImplementation((url: string) => {
+      if (url === '/users/me') {
+        return Promise.resolve({ data: { data: { user: patient }, errors: [] } })
+      }
+      consultationLoads += 1
+      return Promise.resolve({ data: { data: { consultation }, errors: [] } })
+    })
+    apiMock.put.mockRejectedValue({ response: { status: 409 } })
+
+    render(<MemoryRouter initialEntries={['/consultations/conflicted-1']}><App /></MemoryRouter>)
+    fireEvent.click(await screen.findByText('Yes'))
+    fireEvent.click(screen.getByRole('button', { name: /save and continue/i }))
+
+    expect(await screen.findByRole('alert')).toHaveTextContent(/request could not be completed/i)
+    await waitFor(() => expect(consultationLoads).toBe(2))
+  })
+
+  it('keeps report generation failures visible without losing the result', async () => {
+    const result = {
+      outcome_state: 'no_match',
+      completeness_state: 'complete',
+      knowledge: { package_id: 'eye-care-en-1.0.0', content_version: '1.0.0', fingerprint: 'abc' },
+      overall_risk: { id: 'risk_routine', label: 'Routine', rank: 1, action_window: 'Arrange routine care.' },
+      matched_rules: [],
+      pending_rules: [],
+      possible_indications: [],
+      recommendations: [],
+      red_flags: [],
+      missing_fact_ids: [],
+      evidence: [],
+      inference_trace: [],
+      disclaimer: 'This is not a diagnosis.',
+      match_score_notice: 'Scores describe authored criteria only.',
+    }
+    apiMock.get.mockImplementation((url: string) => Promise.resolve({
+      data: { data: url === '/users/me' ? { user: patient } : { result }, errors: [] },
+    }))
+    apiMock.post.mockRejectedValue(new Error('report unavailable'))
+
+    render(<MemoryRouter initialEntries={['/consultations/complete-2/results']}><App /></MemoryRouter>)
+    fireEvent.click(await screen.findByRole('button', { name: /generate pdf/i }))
+
+    expect(await screen.findByRole('alert')).toHaveTextContent(/request could not be completed/i)
+    expect(screen.getByRole('heading', { name: /educational eye-care guidance/i })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: /generate pdf/i })).toBeEnabled()
+  })
+
+  it('exposes navigation and progress controls with accessible names', async () => {
+    const consultation = {
+      id: 'accessible-1',
+      status: 'in_progress',
+      revision: 1,
+      knowledge: { package_id: 'eye-care-en-1.0.0', content_version: '1.0.0', fingerprint: 'abc' },
+      progress: { resolved: 1, total_applicable: 4, percentage: 25 },
+      next_question: {
+        id: 'question_redness',
+        fact_id: 'fact_redness',
+        prompt: 'Is your eye red?',
+        help_text: null,
+        answer_type: 'yes_no',
+        required: true,
+        safety_critical: true,
+        options: [],
+        citation_ids: ['source-1'],
+      },
+      answers: [],
+      skipped_question_ids: [],
+      safety_alert: null,
+      created_at: '2026-07-26T00:00:00Z',
+      updated_at: '2026-07-26T00:00:00Z',
+      completed_at: null,
+      cancelled_at: null,
+    }
+    apiMock.get.mockImplementation((url: string) => Promise.resolve({
+      data: { data: url === '/users/me' ? { user: patient } : { consultation }, errors: [] },
+    }))
+
+    render(<MemoryRouter initialEntries={['/consultations/accessible-1']}><App /></MemoryRouter>)
+
+    expect(await screen.findByRole('progressbar', { name: /25% complete/i })).toHaveAttribute('aria-valuenow', '25')
+    expect(screen.getByRole('navigation', { name: /primary navigation/i })).toBeInTheDocument()
+    expect(screen.getByRole('radio', { name: /yes/i })).toBeInTheDocument()
+    expect(screen.getByRole('radio', { name: /no/i })).toBeInTheDocument()
+    expect(screen.getByText(/important safety question/i)).toBeInTheDocument()
+  })
 })

@@ -37,5 +37,10 @@
 | E-P7-002 | 7 | Semantic patient-flow and safety tests | Phase 7 completion report | 2026-07-25 |
 | E-P7-003 | 7 | Patient journey, accessibility, privacy, and recovery guide | `docs/patient-interface.md` | 2026-07-25 |
 | E-P7-004 | 7 | Safety-first interface decision and interaction methodology | ADR 0006 and Phase 7 methodology | 2026-07-25 |
+| E-P7-005 | 7 | Approved and merged patient interface | GitHub pull request #6 | 2026-07-26 |
+| E-P8-001 | 8 | Administrator resources, workspace, and authorization | `backend/app/routes/admin.py`, `frontend/src/pages/AdminPage.tsx` | 2026-07-26 |
+| E-P8-002 | 8 | Staged validation, diff, publication, retention, and rollback service | `backend/app/services/knowledge_admin_service.py` | 2026-07-26 |
+| E-P8-003 | 8 | Authorization, invalid archive, publish, restart, frozen-history, and rollback tests | Phase 8 completion report | 2026-07-26 |
+| E-P8-004 | 8 | Administration guide and retained publication decision | `docs/administration.md`, ADR 0007 | 2026-07-26 |
 
 External screenshots and large artifacts may be mirrored in the project Google Drive. Each external item must retain a stable filename or link and must not contain patient data or secrets.

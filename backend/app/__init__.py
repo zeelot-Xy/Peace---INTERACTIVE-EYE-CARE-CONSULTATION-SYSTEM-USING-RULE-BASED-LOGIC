@@ -1,3 +1,4 @@
+import json
 from pathlib import Path
 
 from flask import Flask
@@ -38,16 +39,38 @@ def create_app(
         app.config.update(config_overrides)
     Path(app.instance_path).mkdir(parents=True, exist_ok=True)
 
+    packages_dir = Path(app.config["KNOWLEDGE_PACKAGES_DIR"]).resolve()
+    state_file = Path(
+        app.config["KNOWLEDGE_STATE_FILE"]
+        or Path(app.instance_path) / "knowledge-active.json"
+    ).resolve()
+    app.config["KNOWLEDGE_PACKAGES_DIR"] = str(packages_dir)
+    app.config["KNOWLEDGE_STATE_FILE"] = str(state_file)
+    active_package = app.config["KNOWLEDGE_ACTIVE_PACKAGE"]
+    expected_fingerprint = None
+    if state_file.exists():
+        try:
+            state = json.loads(state_file.read_text(encoding="utf-8"))
+            candidate = state["package_id"]
+            if not isinstance(candidate, str) or Path(candidate).name != candidate:
+                raise ValueError("Invalid active package identifier.")
+            active_package = candidate
+            expected_fingerprint = state.get("fingerprint")
+        except (OSError, ValueError, KeyError, TypeError, json.JSONDecodeError) as error:
+            raise KnowledgeLoadError("The active knowledge state file is invalid.") from error
+
     knowledge = KnowledgeManager(Path(app.config["KNOWLEDGE_SCHEMAS_DIR"]))
-    active_path = (
-        Path(app.config["KNOWLEDGE_PACKAGES_DIR"]) / app.config["KNOWLEDGE_ACTIVE_PACKAGE"]
-    )
+    active_path = packages_dir / active_package
     report = knowledge.activate(active_path)
     if not report.valid:
         codes = ", ".join(sorted({issue.code for issue in report.issues}))
         raise KnowledgeLoadError(
             f"Unable to start without a valid knowledge package "
             f"'{app.config['KNOWLEDGE_ACTIVE_PACKAGE']}': {codes}."
+        )
+    if expected_fingerprint and report.fingerprint != expected_fingerprint:
+        raise KnowledgeLoadError(
+            "The active knowledge package does not match its published fingerprint."
         )
     app.extensions["knowledge"] = knowledge
     app.extensions["inference"] = InferenceEngine()

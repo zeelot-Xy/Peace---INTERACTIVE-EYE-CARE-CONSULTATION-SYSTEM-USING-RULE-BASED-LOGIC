@@ -31,6 +31,11 @@ when container configuration or runtime dependencies change, and during the Phas
 and Phase 14 final clean-machine audit. This avoids repeated CPU-intensive image work while
 preserving final deployment assurance.
 
+Phase 8 administrator verification additionally covers role denial, safe summaries and audit
+serialization, bounded invalid archives, valid package diffs, explicit publication, restart
+restoration, historical consultation package resolution, rollback, and audit actions. Docker
+configuration and dependencies did not change, so the approved deferred-build policy applies.
+
 ## Phase 3 quality gates
 
 - Draft 2020-12 meta-validation checks every schema.

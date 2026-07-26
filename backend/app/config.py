@@ -57,6 +57,10 @@ class BaseConfig:
         "KNOWLEDGE_ACTIVE_PACKAGE", "eye-care-en-1.0.0"
     )
     KNOWLEDGE_RELOAD_ON_CHANGE: bool = _as_bool("KNOWLEDGE_RELOAD_ON_CHANGE")
+    KNOWLEDGE_STATE_FILE: str = os.getenv("KNOWLEDGE_STATE_FILE", "")
+    KNOWLEDGE_UPLOAD_MAX_BYTES: int = int(
+        os.getenv("KNOWLEDGE_UPLOAD_MAX_BYTES", str(5 * 1024 * 1024))
+    )
 
 
 @dataclass(frozen=True)

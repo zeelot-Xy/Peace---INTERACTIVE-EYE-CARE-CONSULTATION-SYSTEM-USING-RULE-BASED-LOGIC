@@ -16,6 +16,7 @@ Repository documentation is versioned with the implementation. Collaborative aca
 - [`inference-engine.md`](inference-engine.md) — tri-state evaluation, safety conflicts, scores, traces, and CLI
 - [`consultation-api.md`](consultation-api.md) — lifecycle resources, branching, concurrency, safety, and reproducibility
 - [`patient-interface.md`](patient-interface.md) — patient journey, accessibility, safety, recovery, and privacy
+- [`administration.md`](administration.md) — administrator resources, knowledge publishing, rollback, and recovery
 - [`knowledge-scope-and-safety.md`](knowledge-scope-and-safety.md) — supported population and safety policy
 - [`source-register.md`](source-register.md) — published evidence catalogue
 - [`port-registry.md`](port-registry.md) — reserved localhost ports and release policy
@@ -35,6 +36,9 @@ Repository documentation is versioned with the implementation. Collaborative aca
 - [`adr/0006-accessible-safety-first-patient-interface.md`](adr/0006-accessible-safety-first-patient-interface.md) — patient interaction and risk-communication decision
 - [`academic/phase-07-methodology.md`](academic/phase-07-methodology.md) — patient interaction-design methodology
 - [`phase-reports/phase-07.md`](phase-reports/phase-07.md) — Phase 7 completion record
+- [`adr/0007-retained-atomic-knowledge-publication.md`](adr/0007-retained-atomic-knowledge-publication.md) — retained package and atomic publication decision
+- [`academic/phase-08-methodology.md`](academic/phase-08-methodology.md) — administrative governance methodology
+- [`phase-reports/phase-08.md`](phase-reports/phase-08.md) — Phase 8 completion record
 
 ## Project delivery
 

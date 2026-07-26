@@ -2,8 +2,9 @@
 
 - Phase: Patient Interface
 - Date: 2026-07-25
-- Status: Ready for review
+- Status: Approved and merged
 - Pull request: #6
+- Merge commit: `7e7b6c5`
 
 ## Delivered
 
@@ -46,4 +47,4 @@ phases.
 
 ## Approval gate
 
-Phase 7 must be reviewed and explicitly approved before Phase 8 begins.
+Phase 7 was approved on 2026-07-26. Phase 8 began from merge commit `7e7b6c5`.

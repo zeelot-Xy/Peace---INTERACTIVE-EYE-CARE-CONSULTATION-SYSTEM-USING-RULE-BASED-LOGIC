@@ -34,6 +34,7 @@ def validation_error_response(errors: dict):
 def register_error_handlers(app: Flask) -> None:
     from app.services.auth_service import AuthenticationError, ConflictError, PasswordPolicyError
     from app.services.consultation_service import ConsultationError
+    from app.services.knowledge_admin_service import KnowledgeAdminError
     from app.utils.validation import RequestValidationError
 
     @app.errorhandler(RequestValidationError)
@@ -54,6 +55,10 @@ def register_error_handlers(app: Flask) -> None:
 
     @app.errorhandler(ConsultationError)
     def handle_consultation_error(error: ConsultationError):
+        return error_response(str(error), error.status_code, error.code)
+
+    @app.errorhandler(KnowledgeAdminError)
+    def handle_knowledge_admin_error(error: KnowledgeAdminError):
         return error_response(str(error), error.status_code, error.code)
 
     @app.errorhandler(HTTPException)

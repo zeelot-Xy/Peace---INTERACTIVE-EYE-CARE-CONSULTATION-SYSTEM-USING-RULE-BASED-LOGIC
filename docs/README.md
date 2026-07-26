@@ -17,6 +17,7 @@ Repository documentation is versioned with the implementation. Collaborative aca
 - [`consultation-api.md`](consultation-api.md) — lifecycle resources, branching, concurrency, safety, and reproducibility
 - [`patient-interface.md`](patient-interface.md) — patient journey, accessibility, safety, recovery, and privacy
 - [`administration.md`](administration.md) — administrator resources, knowledge publishing, rollback, and recovery
+- [`reports-and-history.md`](reports-and-history.md) — immutable PDFs, secure downloads, history filters, and privacy
 - [`knowledge-scope-and-safety.md`](knowledge-scope-and-safety.md) — supported population and safety policy
 - [`source-register.md`](source-register.md) — published evidence catalogue
 - [`port-registry.md`](port-registry.md) — reserved localhost ports and release policy
@@ -39,6 +40,9 @@ Repository documentation is versioned with the implementation. Collaborative aca
 - [`adr/0007-retained-atomic-knowledge-publication.md`](adr/0007-retained-atomic-knowledge-publication.md) — retained package and atomic publication decision
 - [`academic/phase-08-methodology.md`](academic/phase-08-methodology.md) — administrative governance methodology
 - [`phase-reports/phase-08.md`](phase-reports/phase-08.md) — Phase 8 completion record
+- [`adr/0008-database-retained-immutable-pdf-reports.md`](adr/0008-database-retained-immutable-pdf-reports.md) — report reproducibility and storage decision
+- [`academic/phase-09-methodology.md`](academic/phase-09-methodology.md) — snapshot document-generation methodology
+- [`phase-reports/phase-09.md`](phase-reports/phase-09.md) — Phase 9 completion record
 
 ## Project delivery
 

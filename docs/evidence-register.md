@@ -42,5 +42,10 @@
 | E-P8-002 | 8 | Staged validation, diff, publication, retention, and rollback service | `backend/app/services/knowledge_admin_service.py` | 2026-07-26 |
 | E-P8-003 | 8 | Authorization, invalid archive, publish, restart, frozen-history, and rollback tests | Phase 8 completion report | 2026-07-26 |
 | E-P8-004 | 8 | Administration guide and retained publication decision | `docs/administration.md`, ADR 0007 | 2026-07-26 |
+| E-P8-005 | 8 | Approved and merged administration implementation | GitHub pull request #7 | 2026-07-26 |
+| E-P9-001 | 9 | Immutable report persistence, secure resources, and PDF composer | `backend/app/services/report_service.py` | 2026-07-26 |
+| E-P9-002 | 9 | PDF, ownership, repeatability, long-content, history, and audit tests | Phase 9 completion report | 2026-07-26 |
+| E-P9-003 | 9 | Extracted-text and rendered-page PDF inspection | Phase 9 completion report | 2026-07-26 |
+| E-P9-004 | 9 | Report architecture and snapshot-generation methodology | `docs/reports-and-history.md`, ADR 0008 | 2026-07-26 |
 
 External screenshots and large artifacts may be mirrored in the project Google Drive. Each external item must retain a stable filename or link and must not contain patient data or secrets.

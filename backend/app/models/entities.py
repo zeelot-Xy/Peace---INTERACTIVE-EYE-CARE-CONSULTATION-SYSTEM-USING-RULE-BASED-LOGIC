@@ -10,6 +10,7 @@ from sqlalchemy import (
     ForeignKey,
     Index,
     Integer,
+    LargeBinary,
     String,
     Text,
     UniqueConstraint,
@@ -119,6 +120,12 @@ class Report(TimestampMixin, db.Model):
     )
     user_id: Mapped[str] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"), index=True)
     snapshot: Mapped[dict[str, Any]] = mapped_column(JSON, nullable=False)
+    filename: Mapped[str] = mapped_column(String(255), nullable=False)
+    content_type: Mapped[str] = mapped_column(
+        String(80), nullable=False, default="application/pdf"
+    )
+    pdf_sha256: Mapped[str] = mapped_column(String(64), nullable=False, unique=True)
+    pdf_data: Mapped[bytes] = mapped_column(LargeBinary, nullable=False)
     generated_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), server_default=func.now()
     )

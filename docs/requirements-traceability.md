@@ -55,3 +55,8 @@
 | KB-802 | Publish only valid packages and preserve prior versions | 8 | Retained directories, version records, atomic manager activation | Publish and frozen-consultation tests | Implemented |
 | KB-803 | Support audited rollback and restart restoration | 8 | Fingerprint-protected state file and rollback service | Restart, rollback, and audit tests | Implemented |
 | DOC-801 | Document administration, knowledge governance, recovery, and methodology | 8 | Admin guide, ADR 0007, methodology, and report | Documentation review | Implemented |
+| REP-901 | Generate a printable and downloadable completed consultation report | 9 | Report service, ReportLab composer, and patient controls | PDF and frontend tests | Implemented |
+| REP-902 | Keep repeated reports reproducible and tied to frozen knowledge | 9 | Stored composition snapshot, exact PDF bytes, checksum, and one-report constraint | Repeat-generation and migration tests | Implemented |
+| REP-903 | Enforce secure patient ownership and governed administrator review | 9 | Report resource ownership query and role claim | Privacy and administrator tests | Implemented |
+| HIS-901 | Filter patient history by status, risk, and date | 9 | Authenticated server filters and React controls | API and frontend tests | Implemented |
+| DOC-901 | Document report architecture, privacy, API, testing, and methodology | 9 | Report guide, ADR 0008, methodology, and report | Documentation review | Implemented |

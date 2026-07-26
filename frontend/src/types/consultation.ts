@@ -86,6 +86,19 @@ export interface HistoryItem {
   completed_at: string | null
   cancelled_at: string | null
   risk: KnowledgeItem | null
+  report_id: string | null
+}
+
+export interface ConsultationReport {
+  id: string
+  consultation_id: string
+  filename: string
+  content_type: string
+  sha256: string
+  generated_at: string
+  risk: KnowledgeItem | null
+  knowledge_version: string
+  download_url: string
 }
 
 export interface ConsultationResult {

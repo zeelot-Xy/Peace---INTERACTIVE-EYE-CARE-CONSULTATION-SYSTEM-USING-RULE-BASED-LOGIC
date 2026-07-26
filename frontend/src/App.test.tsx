@@ -5,6 +5,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest'
 import App from './App'
 
 const apiMock = vi.hoisted(() => ({
+  defaults: { baseURL: 'http://localhost:5000/api/v1' },
   get: vi.fn(),
   post: vi.fn(),
   put: vi.fn(),
@@ -209,6 +210,74 @@ describe('App authentication experience', () => {
     expect(screen.getByText(/a safety warning matched/i)).toBeInTheDocument()
     expect(screen.getByText(/this is not a diagnosis/i)).toBeInTheDocument()
     expect(screen.getByRole('link', { name: /dry eye/i })).toHaveAttribute('target', '_blank')
+  })
+
+  it('generates an immutable PDF report and exposes its secure download', async () => {
+    const result = {
+      outcome_state: 'matched',
+      completeness_state: 'complete',
+      knowledge: { package_id: 'eye-care-en-1.0.0', content_version: '1.0.0', fingerprint: 'abc' },
+      overall_risk: { id: 'risk_routine', label: 'Routine', rank: 1, action_window: 'Arrange routine care.' },
+      matched_rules: [],
+      pending_rules: [],
+      possible_indications: [],
+      recommendations: [],
+      red_flags: [],
+      missing_fact_ids: [],
+      evidence: [],
+      inference_trace: [],
+      disclaimer: 'This is not a diagnosis.',
+      match_score_notice: 'Scores describe authored criteria only.',
+    }
+    apiMock.get.mockImplementation((url: string) => Promise.resolve({
+      data: { data: url === '/users/me' ? { user: patient } : { result }, errors: [] },
+    }))
+    apiMock.post.mockResolvedValue({
+      data: {
+        data: {
+          report: {
+            id: 'report-1',
+            consultation_id: 'complete-1',
+            filename: 'eye-care-report.pdf',
+            content_type: 'application/pdf',
+            sha256: 'abc123',
+            generated_at: '2026-07-26T08:00:00Z',
+            risk: result.overall_risk,
+            knowledge_version: '1.0.0',
+            download_url: '/api/v1/reports/report-1/download',
+          },
+        },
+        errors: [],
+      },
+    })
+
+    render(<MemoryRouter initialEntries={['/consultations/complete-1/results']}><App /></MemoryRouter>)
+    fireEvent.click(await screen.findByRole('button', { name: /generate pdf/i }))
+
+    await waitFor(() => expect(apiMock.post).toHaveBeenCalledWith('/consultations/complete-1/report'))
+    expect(await screen.findByRole('link', { name: /download pdf/i })).toHaveAttribute(
+      'href',
+      'http://localhost:5000/api/v1/reports/report-1/download',
+    )
+    expect(screen.getByRole('status')).toHaveTextContent(/immutable pdf report is ready/i)
+  })
+
+  it('sends patient history filters to the API', async () => {
+    apiMock.get.mockImplementation((url: string) => Promise.resolve({
+      data: {
+        data: url === '/users/me' ? { user: patient } : { items: [] },
+        errors: [],
+      },
+    }))
+
+    render(<MemoryRouter initialEntries={['/history']}><App /></MemoryRouter>)
+    await screen.findByRole('heading', { name: /consultation history/i })
+    fireEvent.change(screen.getByLabelText(/status/i), { target: { value: 'completed' } })
+    fireEvent.change(screen.getByLabelText(/action level/i), { target: { value: 'risk_urgent' } })
+
+    await waitFor(() => expect(apiMock.get).toHaveBeenCalledWith(
+      '/consultations?per_page=50&status=completed&risk=risk_urgent',
+    ))
   })
 
   it('renders administrator summaries and retained knowledge versions for administrators', async () => {

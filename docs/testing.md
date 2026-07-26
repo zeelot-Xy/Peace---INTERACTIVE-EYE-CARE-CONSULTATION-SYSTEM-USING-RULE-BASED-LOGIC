@@ -36,6 +36,13 @@ serialization, bounded invalid archives, valid package diffs, explicit publicati
 restoration, historical consultation package resolution, rollback, and audit actions. Docker
 configuration and dependencies did not change, so the approved deferred-build policy applies.
 
+Phase 9 report verification covers completed-state enforcement, owner privacy, administrator
+review, idempotent generation, retained byte checksums, PDF extraction, Unicode names, missing
+optional profile fields, long pagination, audit events, and server-side history filters.
+Representative pages are rendered to images and visually inspected. ReportLab is a new runtime
+dependency, so the deferred-build policy requires one Docker image build and live report smoke
+test at the end of this phase.
+
 ## Phase 3 quality gates
 
 - Draft 2020-12 meta-validation checks every schema.

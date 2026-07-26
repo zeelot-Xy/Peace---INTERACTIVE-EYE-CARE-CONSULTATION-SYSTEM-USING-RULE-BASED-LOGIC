@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from datetime import UTC, datetime
+from datetime import UTC, date, datetime, time, timedelta
 from pathlib import Path
 from typing import Any
 
@@ -11,7 +11,7 @@ from flask import current_app
 from app.extensions import db
 from app.inference import FactValidationError, TruthValue, evaluate_expression, normalize_facts
 from app.knowledge import KnowledgeLoadError, KnowledgePackage
-from app.models import ConsultationResponse, ConsultationSession
+from app.models import ConsultationResponse, ConsultationSession, Report
 from app.services.audit_service import record_audit
 
 
@@ -426,17 +426,63 @@ def get_result(user_id: str, consultation_id: str) -> dict[str, Any]:
 
 
 def list_consultations(
-    user_id: str, *, page: int = 1, per_page: int = 20
+    user_id: str,
+    *,
+    page: int = 1,
+    per_page: int = 20,
+    status: str | None = None,
+    risk_id: str | None = None,
+    date_from: date | None = None,
+    date_to: date | None = None,
 ) -> dict[str, Any]:
+    statement = db.select(ConsultationSession).where(
+        ConsultationSession.user_id == user_id
+    )
+    if status:
+        if status not in {"in_progress", "completed", "cancelled"}:
+            raise ConsultationInputError("Status filter is invalid.")
+        statement = statement.where(ConsultationSession.status == status)
+    if risk_id:
+        valid_risks = current_app.extensions["knowledge"].get_active().indexes[
+            "risk_levels"
+        ]
+        if risk_id not in valid_risks:
+            raise ConsultationInputError("Risk filter is invalid.")
+        statement = statement.where(
+            db.func.json_extract(
+                ConsultationSession.result_snapshot, "$.overall_risk.id"
+            )
+            == risk_id
+        )
+    if date_from:
+        statement = statement.where(
+            ConsultationSession.created_at
+            >= datetime.combine(date_from, time.min, tzinfo=UTC)
+        )
+    if date_to:
+        statement = statement.where(
+            ConsultationSession.created_at
+            < datetime.combine(date_to + timedelta(days=1), time.min, tzinfo=UTC)
+        )
     pagination = db.paginate(
-        db.select(ConsultationSession)
-        .where(ConsultationSession.user_id == user_id)
-        .order_by(ConsultationSession.created_at.desc(), ConsultationSession.id),
+        statement.order_by(
+            ConsultationSession.created_at.desc(), ConsultationSession.id
+        ),
         page=page,
         per_page=per_page,
         max_per_page=50,
         error_out=False,
     )
+    report_by_consultation = {
+        report.consultation_id: report.id
+        for report in db.session.scalars(
+            db.select(Report).where(
+                Report.consultation_id.in_(
+                    [session.id for session in pagination.items]
+                )
+            )
+        )
+    }
     return {
         "items": [
             {
@@ -457,6 +503,7 @@ def list_consultations(
                     if session.result_snapshot
                     else None
                 ),
+                "report_id": report_by_consultation.get(session.id),
             }
             for session in pagination.items
         ],

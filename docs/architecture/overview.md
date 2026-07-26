@@ -98,3 +98,11 @@ explicit publish request revalidates and atomically activates it. The active ID 
 are persisted outside the package directory and verified during startup. Retired versions are
 never overwritten, allowing frozen consultations and controlled rollback to resolve the exact
 package they reference. See ADR 0007 and the administration guide.
+
+## Report boundary
+
+Phase 9 composes an immutable PDF from the completed result, stored answers, frozen package,
+and a generation-time patient snapshot. The service stores both the composition JSON and exact
+PDF bytes with a checksum; later downloads never rerun inference or read the current profile.
+Owner-scoped resources and governed administrator access protect retrieval. See ADR 0008 and
+the reports and history guide.

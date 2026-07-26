@@ -47,3 +47,24 @@ def test_phase_six_consultation_constraints(app):
     } <= session_columns
     assert "fact_id" in response_columns
     assert "uq_response_consultation_question" in unique_constraints
+
+
+def test_phase_nine_report_columns_are_immutable_artifacts(app):
+    with app.app_context():
+        inspector = inspect(db.engine)
+        columns = {
+            column["name"] for column in inspector.get_columns("reports")
+        }
+        unique_constraints = {
+            constraint["name"]
+            for constraint in inspector.get_unique_constraints("reports")
+        }
+
+    assert {
+        "filename",
+        "content_type",
+        "pdf_sha256",
+        "pdf_data",
+        "snapshot",
+    } <= columns
+    assert "uq_reports_pdf_sha256" in unique_constraints

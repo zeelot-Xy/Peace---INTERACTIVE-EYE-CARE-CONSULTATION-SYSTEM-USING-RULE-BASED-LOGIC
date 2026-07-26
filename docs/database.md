@@ -11,7 +11,7 @@ SQLite stores dynamic application data only. Expert-system questions, symptoms, 
 | `users` | Patient and administrator identities | UUID primary key; normalized unique email; hashed password; indexed role |
 | `consultation_sessions` | Version-frozen lifecycle, revision, skips, and completed inference snapshot | User foreign key; indexed status; package fingerprint; terminal timestamps |
 | `consultation_responses` | Autosaved typed answers tied to stable question and fact IDs | Consultation foreign key; unique consultation/question pair; indexed fact |
-| `reports` | Future immutable report snapshots | One report per consultation; user ownership |
+| `reports` | Immutable report snapshot and exact PDF artifact | One report per consultation; user ownership; unique PDF checksum |
 | `refresh_tokens` | Hashed refresh-token identifiers and rotation families | Unique JTI hash; expiry, use, and revocation timestamps |
 | `token_revocations` | Revoked access/refresh identifiers | Unique JTI hash and expiry |
 | `application_events` | Operational events without secrets | Indexed level, category, and correlation identifier |
@@ -55,3 +55,9 @@ validation report, diff preview, storage path, uploader, publication/retirement 
 active state. Package IDs and fingerprints are unique so historical knowledge cannot be
 silently overwritten. Package JSON remains in the immutable package store; SQLite holds
 governance metadata and audit references.
+
+## Phase 9 report artifact
+
+Each report row retains the JSON composition snapshot, generated filename, MIME type, SHA-256
+checksum, and exact PDF bytes. This keeps repeat downloads byte-identical and includes reports
+in the normal SQLite backup. Report blobs and their database cannot be backed up separately.

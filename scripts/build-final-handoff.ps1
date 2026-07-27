@@ -65,7 +65,7 @@ try {
     Assert-LastCommand "Source archive"
 
     $gitBundle = Join-Path $handoffRoot "EyeCareConsultation-Git.bundle"
-    & git bundle create $gitBundle --all
+    & git bundle create $gitBundle HEAD main
     Assert-LastCommand "Git bundle creation"
     & git bundle verify $gitBundle
     Assert-LastCommand "Git bundle verification"
@@ -86,7 +86,7 @@ try {
         branch = (& git branch --show-current).Trim()
         created_at_utc = [DateTime]::UtcNow.ToString("o")
         clinical_status = "Educational academic prototype; not clinically validated"
-        artifact_count = 5
+        handoff_file_count = 7
     }
     $metadata | ConvertTo-Json |
         Set-Content -Encoding utf8 (Join-Path $handoffRoot "Release-Metadata.json")
@@ -109,4 +109,3 @@ finally {
 }
 
 Write-Host "Final handoff created at $handoffArchive"
-

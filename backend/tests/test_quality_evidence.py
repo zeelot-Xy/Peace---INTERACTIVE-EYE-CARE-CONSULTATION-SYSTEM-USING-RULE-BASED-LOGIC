@@ -73,3 +73,17 @@ def test_phase_13_evidence_names_complete_documentation_gate():
         "verify-phase13.ps1",
     ):
         assert expected in report_text
+
+
+def test_phase_14_evidence_names_final_audit_and_handoff():
+    report_text = REPORT.read_text(encoding="utf-8")
+
+    for expected in (
+        "client-handoff.md",
+        "final-audit-checklist.md",
+        "presentation-outline.md",
+        "validate_final_handoff.py",
+        "build-final-handoff.ps1",
+        "verify-phase14.ps1",
+    ):
+        assert expected in report_text

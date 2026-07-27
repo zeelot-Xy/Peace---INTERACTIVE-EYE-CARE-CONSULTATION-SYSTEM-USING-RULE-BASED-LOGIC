@@ -81,3 +81,6 @@
 | DOC-1301 | Provide complete reader-oriented user, API, troubleshooting, and architecture documentation | 13 | Final reader set and Mermaid diagram catalogue | Documentation integrity validation | Implemented |
 | ACD-1301 | Produce an evidence-based adaptable academic manuscript without unsupported clinical claims | 13 | `docs/academic-report.md` and Phase 13 methodology | Heading and source-coverage validation | Implemented |
 | DOC-1302 | Prevent broken links and missing final documentation from passing review | 13 | `scripts/validate_documentation.py` and Phase 13 gate | Automated documentation and backend evidence tests | Implemented |
+| AUD-1401 | Trace and verify the complete implementation before delivery | 14 | Final audit checklist and `validate_final_handoff.py` | Phase 14 regression and handoff gate | Implemented |
+| REL-1401 | Produce a verifiable portable source, history, Windows, and checksum handoff | 14 | `build-final-handoff.ps1` and client handoff guide | Git bundle verification, artifact smoke tests, and SHA-256 manifest | Implemented |
+| DEF-1401 | Provide a reproducible defence and safe demonstration package | 14 | Presentation outline, defence guide, and fictional fixtures | Defence scenarios and final documentation validation | Implemented |

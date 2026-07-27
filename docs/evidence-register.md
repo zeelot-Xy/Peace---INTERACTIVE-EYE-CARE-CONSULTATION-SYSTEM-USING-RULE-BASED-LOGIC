@@ -67,5 +67,10 @@
 | E-P13-003 | 13 | Executable document, link, heading, index, and source validation | `scripts/validate_documentation.py`, `scripts/verify-phase13.ps1` | 2026-07-27 |
 | E-P13-004 | 13 | Consolidated traceability and completion evidence | `docs/requirements-to-test-report.md`, `docs/phase-reports/phase-13.md` | 2026-07-27 |
 | E-P13-005 | 13 | Non-sensitive public application screenshot | `docs/images/landing-page.png` | 2026-07-27 |
+| E-P14-001 | 14 | Complete repository, requirement, safety, security, accessibility, and release audit | `docs/final-audit-checklist.md`, `scripts/validate_final_handoff.py` | 2026-07-27 |
+| E-P14-002 | 14 | Client inventory, first-run acceptance, backup, transfer, and support procedure | `docs/client-handoff.md` | 2026-07-27 |
+| E-P14-003 | 14 | Safe fictional demonstration procedure, fixtures, and defence presentation | `docs/demo-data-and-credentials.md`, `backend/examples/`, `docs/presentation-outline.md` | 2026-07-27 |
+| E-P14-004 | 14 | Portable source, full Git history, Windows release, and SHA-256 handoff automation | `scripts/build-final-handoff.ps1` | 2026-07-27 |
+| E-P14-005 | 14 | Canonical inherited and final-handoff verification gate | `scripts/verify-phase14.ps1`, `docs/phase-reports/phase-14.md` | 2026-07-27 |
 
 External screenshots and large artifacts may be mirrored in the project Google Drive. Each external item must retain a stable filename or link and must not contain patient data or secrets.

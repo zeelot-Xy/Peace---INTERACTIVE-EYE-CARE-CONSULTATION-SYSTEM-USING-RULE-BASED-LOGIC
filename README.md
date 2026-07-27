@@ -24,6 +24,8 @@ Phase 12 adds a unified same-origin release runtime, one-click Windows packaging
 installation-local data, and a persistent single-instance Docker/Linux server deployment.
 Phase 13 consolidates the patient, administrator, developer, operator, API, architecture,
 troubleshooting, defence, and academic documentation and enforces its integrity automatically.
+Phase 14 adds the final release audit, client delivery inventory, defence presentation,
+fictional demonstration procedure, portable source/Git history, and checksum-backed handoff.
 
 ## Technology
 
@@ -70,7 +72,7 @@ The frontend runs at `http://localhost:5173` and reads `VITE_API_BASE_URL` from 
 ### Verification
 
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\verify-phase13.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\verify-phase14.ps1
 ```
 
 Individual checks can also be run directly:
@@ -114,6 +116,15 @@ docker compose --env-file .env.server -f compose.server.yml up -d --build
 Replace both server secrets before starting it. See
 [`docs/windows-release.md`](docs/windows-release.md) and
 [`docs/server-deployment.md`](docs/server-deployment.md).
+
+Create the final client delivery set after verification:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\build-final-handoff.ps1 `
+  -IncludeHeavyBuilds
+```
+
+See [`docs/client-handoff.md`](docs/client-handoff.md) before transferring artifacts.
 
 ## Documentation
 

@@ -158,3 +158,16 @@ deferred Docker-build policy applies. The live services may be smoke-tested with
   rehearsal.
 - Passing software tests demonstrates conformance to authored requirements and tested scenarios;
   it does not establish clinical safety, diagnostic accuracy, or medical-device approval.
+
+## Phase 14 final audit and handoff gates
+
+- `scripts/verify-phase14.ps1` inherits the complete Phase 13 gate and adds required handoff,
+  fourteen-phase-report, traceability-state, demonstration-fixture, and tracked-file hygiene
+  validation.
+- `-IncludeHeavyBuilds` is mandatory at the final delivery boundary. It rebuilds and smokes the
+  Windows edition and isolated Docker server once after all source changes are complete.
+- `scripts/build-final-handoff.ps1` verifies the gate, exports the reviewed source at `HEAD`,
+  creates and verifies a complete Git bundle, copies the Windows release, exports readable
+  history, generates per-file SHA-256 values, and creates the final handoff archive.
+- The final archive contains no operational database, secret, token, report, log, backup,
+  virtual environment, dependency directory, or real patient information.

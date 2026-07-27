@@ -4,6 +4,14 @@ Repository documentation is versioned with the implementation. Collaborative aca
 
 ## Final reader set
 
+- [`client-handoff.md`](client-handoff.md) — client delivery inventory, acceptance, transfer,
+  backup, and support procedure
+- [`final-audit-checklist.md`](final-audit-checklist.md) — final implementation and delivery
+  audit
+- [`demo-data-and-credentials.md`](demo-data-and-credentials.md) — fictional demonstration data
+  and no-default-credential procedure
+- [`presentation-outline.md`](presentation-outline.md) — fourteen-slide defence narrative and
+  likely questions
 - [`user-guide.md`](user-guide.md) — patient operation and result interpretation
 - [`administration.md`](administration.md) — administrator governance and knowledge operations
 - [`api-reference.md`](api-reference.md) — consolidated versioned REST contract
@@ -15,6 +23,9 @@ Repository documentation is versioned with the implementation. Collaborative aca
 - [`academic/phase-13-methodology.md`](academic/phase-13-methodology.md) — evidence-led
   documentation synthesis
 - [`phase-reports/phase-13.md`](phase-reports/phase-13.md) — Phase 13 completion record
+- [`academic/phase-14-methodology.md`](academic/phase-14-methodology.md) — final release audit
+  methodology
+- [`phase-reports/phase-14.md`](phase-reports/phase-14.md) — final audit and handoff record
 
 ## Governance and engineering
 

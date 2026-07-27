@@ -1,4 +1,8 @@
-# Academic Report Working Outline
+# Academic Report Structure
+
+The complete adaptable manuscript is maintained in [`academic-report.md`](academic-report.md).
+This page is the concise formatting checklist for transferring that verified content into the
+institution's template.
 
 ## Preliminary pages
 
@@ -28,7 +32,8 @@ Summary, findings, contribution, limitations, conclusion, and recommendations fo
 
 Use one consistent citation style once the institution confirms it. Appendices will include selected source code, schemas, test evidence, user documentation, screenshots, and project-management evidence.
 
-## Phase-writing rule
+## Evidence rule
 
-Every phase adds verified facts and evidence to this outline. Claims about completed features must not be written before their acceptance checks pass.
-
+Only accepted implementation and test evidence may be presented as a result. The report must
+continue to distinguish software conformance from clinical validation and must not invent
+participants, expert review, diagnostic accuracy, or patient outcomes.

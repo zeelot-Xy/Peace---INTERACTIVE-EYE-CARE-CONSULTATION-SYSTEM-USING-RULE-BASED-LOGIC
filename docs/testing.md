@@ -134,3 +134,27 @@ deferred Docker-build policy applies. The live services may be smoke-tested with
 - Contract tests verify saved answers carry their original safe question context.
 - TypeScript, Vite, ESLint, Ruff, all backend regressions, Docker, hygiene, and hosted secret
   checks remain mandatory.
+
+## Phase 12 packaging gates
+
+- `scripts/verify-phase12.ps1` inherits the complete Phase 11 regression gate and validates the
+  server Compose projection with fresh non-committed secrets.
+- Runtime tests cover application-data paths, first-run secrets, knowledge seeding, compiled
+  frontend routing, port selection, single-instance locking, migrations, backup, restore, demo
+  reset, and safe diagnostics.
+- `-IncludeHeavyBuilds` creates and smokes the PyInstaller Windows archive and isolated Docker
+  server deployment. It verifies first run, restart, retained accounts, stable secrets, health,
+  database migrations, and volume persistence.
+- Heavy builds are run at release acceptance rather than during every implementation cycle.
+
+## Phase 13 documentation gates
+
+- `scripts/validate_documentation.py` verifies required reader documents, every repository-local
+  Markdown link, academic chapter headings, documentation-index coverage, and all 16 source IDs.
+- `test_quality_evidence.py` prevents a traceability requirement from lacking named test evidence
+  and checks the Phase 13 final-documentation artifacts.
+- `scripts/verify-phase13.ps1` runs the Phase 12 regression gate, Compose validation, and the
+  documentation validator. `-IncludeHeavyBuilds` remains available for final clean-artifact
+  rehearsal.
+- Passing software tests demonstrates conformance to authored requirements and tested scenarios;
+  it does not establish clinical safety, diagnostic accuracy, or medical-device approval.

@@ -70,7 +70,8 @@ inside the authenticated ownership boundary. Invalid dates, statuses, or risk ID
 Reports contain sensitive user-provided information and must not be copied into Slack, public
 issues, screenshots, or test fixtures using real identities. A profile edit after generation
 does not rewrite an existing report. Formal deletion and configurable retention behavior remain
-Phase 11 work; backup and restore must keep the database and its report blobs together.
+Governed retention, deletion, backup, and restore operations keep the database and its report
+blobs together.
 
 The report is reproducible evidence of software behavior, not evidence of clinical validity.
 The knowledge base has not received expert clinical validation.

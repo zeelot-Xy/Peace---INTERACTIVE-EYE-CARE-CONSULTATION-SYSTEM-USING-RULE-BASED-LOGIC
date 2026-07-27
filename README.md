@@ -22,6 +22,8 @@ rotation, current-role enforcement, hardened uploads, redacted append-only audit
 verified SQLite maintenance, retention controls, and dependency advisory checks.
 Phase 12 adds a unified same-origin release runtime, one-click Windows packaging with
 installation-local data, and a persistent single-instance Docker/Linux server deployment.
+Phase 13 consolidates the patient, administrator, developer, operator, API, architecture,
+troubleshooting, defence, and academic documentation and enforces its integrity automatically.
 
 ## Technology
 
@@ -68,7 +70,7 @@ The frontend runs at `http://localhost:5173` and reads `VITE_API_BASE_URL` from 
 ### Verification
 
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\verify-phase11.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\verify-phase13.ps1
 ```
 
 Individual checks can also be run directly:

@@ -47,18 +47,20 @@ requirement is absent from this report.
 | `OPS-1201` | `test_runtime.py` | Port, lock, migration, backup, restore, reset, and diagnostics scenarios |
 | `DEP-1201` | `verify-phase12.ps1` | Compose validation, Docker build, health, restart, and volume persistence |
 | `DOC-1201` | `test_quality_evidence.py` | ADR 0009, Windows/server guides, methodology, and completion report |
+| `DOC-1301`, `ACD-1301`, `DOC-1302` | `validate_documentation.py`, `test_quality_evidence.py`, `verify-phase13.ps1` | `user-guide.md`, `api-reference.md`, `troubleshooting.md`, `architecture/diagrams.md`, and `academic-report.md` |
 
 ## Gate commands
 
 The canonical Windows command is:
 
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\verify-phase12.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\verify-phase13.ps1
 ```
 
 It runs Git whitespace validation, Ruff, pytest with a 90% minimum application-coverage gate,
 ESLint, Vitest, TypeScript, the Vite production build, Python dependency compatibility and
-vulnerability review, the npm production dependency audit, and server Compose validation.
+vulnerability review, the npm production dependency audit, server Compose validation, and
+documentation integrity validation.
 Passing `-IncludeHeavyBuilds` additionally creates and smokes the Windows release once, then
 builds, starts, restarts, and verifies persistent data in an isolated Docker server project.
 

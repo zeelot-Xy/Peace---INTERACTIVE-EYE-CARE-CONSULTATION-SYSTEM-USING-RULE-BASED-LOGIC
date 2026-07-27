@@ -53,7 +53,9 @@ by the runtime loader.
 }
 ```
 
-Phase 2 adds cookie-authenticated `/api/v1/auth`, `/api/v1/users`, and `/api/v1/admin` resources. See the authentication contract for the complete endpoint table.
+Cookie-authenticated `/api/v1/auth`, `/api/v1/users`, and `/api/v1/admin` resources provide
+session, profile, and governed administrator access. See the authentication contract for the
+complete endpoint table.
 
 ## Persistence and authentication flow
 
@@ -93,7 +95,7 @@ unchanged, and browser storage contains only the non-sensitive theme preference.
 
 ## Administration boundary
 
-Phase 8 adds administrator-only reporting and knowledge governance. Uploaded archives are
+Administrator-only reporting and knowledge governance accept complete uploaded archives that are
 bounded, inspected, staged, passed through the shared validator, and compared with the active
 snapshot. A candidate is retained under a unique package ID but remains inactive until an
 explicit publish request revalidates and atomically activates it. The active ID and fingerprint

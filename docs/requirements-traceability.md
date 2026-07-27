@@ -78,3 +78,6 @@
 | OPS-1201 | Provide safe local startup and maintenance operations | 12 | Port selection, single-instance lock, migrations, backup, restore, reset, diagnostics | Runtime and maintenance tests | Implemented |
 | DEP-1201 | Deliver a persistent single-instance Linux server release | 12 | Multi-stage Dockerfile, Compose service, `/data` volume | Image and live persistence smoke tests | Implemented |
 | DOC-1201 | Document Windows, server, free-tier, security, and methodology boundaries | 12 | Release guides, ADR 0009, methodology, and phase report | Documentation review | Implemented |
+| DOC-1301 | Provide complete reader-oriented user, API, troubleshooting, and architecture documentation | 13 | Final reader set and Mermaid diagram catalogue | Documentation integrity validation | Implemented |
+| ACD-1301 | Produce an evidence-based adaptable academic manuscript without unsupported clinical claims | 13 | `docs/academic-report.md` and Phase 13 methodology | Heading and source-coverage validation | Implemented |
+| DOC-1302 | Prevent broken links and missing final documentation from passing review | 13 | `scripts/validate_documentation.py` and Phase 13 gate | Automated documentation and backend evidence tests | Implemented |

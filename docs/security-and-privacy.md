@@ -24,7 +24,8 @@ clinically validated system or replace an independently managed production secur
 
 The thread-safe application-local limiter protects every API endpoint. Login, registration,
 refresh, and knowledge upload have stricter configurable limits. Exceeded limits return HTTP 429
-with `Retry-After`.
+with `Retry-After`. Unmatched URLs share one bounded scope per client, so arbitrary path names
+cannot create unbounded per-path limiter state.
 
 The implementation matches the packaged single-process release. A future multi-instance hosted
 deployment must use a shared limiter such as Redis or an API-gateway control so counters remain

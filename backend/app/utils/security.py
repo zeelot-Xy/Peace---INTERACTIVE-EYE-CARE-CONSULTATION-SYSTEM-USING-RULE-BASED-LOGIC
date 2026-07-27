@@ -150,7 +150,11 @@ class RateLimiter:
 
     def _check_default(self):
         return self._enforce(
-            request.endpoint or request.path,
+            (
+                f"default:{request.endpoint}"
+                if request.endpoint
+                else "default:unmatched"
+            ),
             current_app.config["RATELIMIT_DEFAULT"],
         )
 

@@ -19,7 +19,7 @@
 
 ## Verification evidence
 
-- Ruff and all 129 backend tests passed with 92.56% statement coverage.
+- Ruff and all 130 backend tests passed with at least 90% statement coverage.
 - Python runtime dependency audit reported no known vulnerabilities.
 - Frontend lint, all 17 Vitest tests, TypeScript, and the production build passed.
 - npm identified high-severity advisory `GHSA-qwww-vcr4-c8h2` in React Router `7.18.1`.
@@ -30,6 +30,9 @@
 - The pre-hardening review identified rate limiting, request sizing, refresh rotation, and
   stale-role enforcement as reportable baseline gaps. Phase 11 implements direct controls and
   regression coverage for all four.
+- A final diff review found that unmatched URLs initially used attacker-controlled paths as
+  limiter keys. The implementation now groups every unmatched URL into one scope per client, with
+  regression coverage proving that distinct fake paths cannot grow per-path limiter state.
 
 ## Architecture boundary
 

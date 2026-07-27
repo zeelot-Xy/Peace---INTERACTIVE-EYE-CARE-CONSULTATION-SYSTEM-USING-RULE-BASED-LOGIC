@@ -98,6 +98,28 @@ def test_registration_rate_limit_returns_retry_after():
         db.engine.dispose()
 
 
+def test_unknown_paths_share_one_bounded_rate_limit_scope():
+    application = create_app(
+        "testing",
+        {
+            "RATELIMIT_ENABLED": True,
+            "RATELIMIT_DEFAULT": "2 per minute",
+        },
+    )
+    client = application.test_client()
+
+    first = client.get("/not-a-route-one")
+    second = client.get("/not-a-route-two")
+    third = client.get("/not-a-route-three")
+
+    assert first.status_code == 404
+    assert second.status_code == 404
+    assert third.status_code == 429
+    limiter = application.extensions["rate_limiter"]
+    assert list(limiter._events) == ["default:unmatched:127.0.0.1"]
+    assert len(limiter._events["default:unmatched:127.0.0.1"]) == 2
+
+
 def test_invalid_cors_wildcard_is_rejected(monkeypatch):
     monkeypatch.setenv("CORS_ORIGINS", "*")
 

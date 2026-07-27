@@ -9,6 +9,10 @@ class RequestValidationError(Exception):
 
 
 def load_json(schema: Schema) -> dict:
+    if not request.is_json:
+        raise RequestValidationError(
+            {"body": ["Content-Type must be application/json."]}
+        )
     payload = request.get_json(silent=True)
     if not isinstance(payload, dict):
         raise RequestValidationError({"body": ["A JSON object is required."]})

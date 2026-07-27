@@ -1,8 +1,31 @@
 from marshmallow import Schema, ValidationError, fields, validates, validates_schema
 
+from app.utils.security import normalize_text
+
+
+class NormalizedString(fields.String):
+    def __init__(self, *args, field_label: str, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.field_label = field_label
+
+    def _deserialize(self, value, attr, data, **kwargs):
+        result = super()._deserialize(value, attr, data, **kwargs)
+        try:
+            return normalize_text(
+                result,
+                max_length=self.metadata.get("max_length", 120),
+                field_name=self.field_label,
+            )
+        except ValueError as error:
+            raise ValidationError(str(error)) from error
+
 
 class RegistrationSchema(Schema):
-    full_name = fields.String(required=True)
+    full_name = NormalizedString(
+        required=True,
+        field_label="Full name",
+        metadata={"max_length": 120},
+    )
     email = fields.Email(required=True)
     password = fields.String(required=True, load_only=True)
 
@@ -18,8 +41,18 @@ class LoginSchema(Schema):
 
 
 class ProfileUpdateSchema(Schema):
-    full_name = fields.String(load_default=None, allow_none=True)
-    phone = fields.String(load_default=None, allow_none=True)
+    full_name = NormalizedString(
+        load_default=None,
+        allow_none=True,
+        field_label="Full name",
+        metadata={"max_length": 120},
+    )
+    phone = NormalizedString(
+        load_default=None,
+        allow_none=True,
+        field_label="Phone",
+        metadata={"max_length": 30},
+    )
     date_of_birth = fields.Date(load_default=None, allow_none=True)
 
     @validates_schema

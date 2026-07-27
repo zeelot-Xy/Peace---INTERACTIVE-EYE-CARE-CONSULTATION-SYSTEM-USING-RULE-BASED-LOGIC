@@ -9,6 +9,7 @@ from app.schemas import PasswordChangeSchema, ProfileUpdateSchema
 from app.services.audit_service import record_audit
 from app.services.auth_service import revoke_all_sessions, revoke_token, validate_password
 from app.utils.responses import error_response, success_response
+from app.utils.security import normalize_text
 from app.utils.validation import load_json
 
 users_blueprint = Blueprint("users", __name__)
@@ -27,9 +28,15 @@ def update_profile():
     user = db.session.get(User, get_jwt_identity())
     data = load_json(ProfileUpdateSchema())
     if "full_name" in data and data["full_name"] is not None:
-        user.full_name = data["full_name"].strip()
+        user.full_name = normalize_text(
+            data["full_name"], max_length=120, field_name="Full name"
+        )
     if "phone" in data:
-        user.phone = data["phone"].strip() or None if data["phone"] is not None else None
+        user.phone = (
+            normalize_text(data["phone"], max_length=30, field_name="Phone") or None
+            if data["phone"] is not None
+            else None
+        )
     if "date_of_birth" in data:
         user.date_of_birth = data["date_of_birth"]
     record_audit("profile.update", actor_user_id=user.id, resource_type="user", resource_id=user.id)

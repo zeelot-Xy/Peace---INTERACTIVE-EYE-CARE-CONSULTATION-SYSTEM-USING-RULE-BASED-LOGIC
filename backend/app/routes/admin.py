@@ -17,6 +17,7 @@ from app.services.knowledge_admin_service import (
 )
 from app.utils.auth import role_required
 from app.utils.responses import error_response, success_response
+from app.utils.security import rate_limiter
 
 admin_blueprint = Blueprint("admin", __name__)
 
@@ -96,6 +97,7 @@ def knowledge_version(version_id: str):
 
 
 @admin_blueprint.post("/knowledge/validate")
+@rate_limiter.limit("RATELIMIT_KNOWLEDGE_UPLOAD")
 @jwt_required()
 @role_required("admin")
 def validate_knowledge():

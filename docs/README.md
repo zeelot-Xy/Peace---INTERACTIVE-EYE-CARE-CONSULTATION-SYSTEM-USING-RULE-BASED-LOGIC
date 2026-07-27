@@ -25,6 +25,8 @@ Repository documentation is versioned with the implementation. Collaborative aca
 - [`requirements-to-test-report.md`](requirements-to-test-report.md) — concrete automated evidence for every implemented requirement
 - [`defence-demo.md`](defence-demo.md) — repeatable patient and administrator defence demonstration
 - [`evidence-register.md`](evidence-register.md) — durable evidence index
+- [`security-and-privacy.md`](security-and-privacy.md) — controls, threat boundaries, retention,
+  backup, restore, deletion, and residual risks
 
 - [`knowledge-runtime.md`](knowledge-runtime.md) — runtime loading, cache, activation, CLI, and recovery
 - [`adr/0003-atomic-runtime-knowledge-snapshots.md`](adr/0003-atomic-runtime-knowledge-snapshots.md) — fail-closed atomic snapshot decision
@@ -47,6 +49,9 @@ Repository documentation is versioned with the implementation. Collaborative aca
 - [`phase-reports/phase-09.md`](phase-reports/phase-09.md) — Phase 9 completion record
 - [`academic/phase-10-methodology.md`](academic/phase-10-methodology.md) — requirements-based comprehensive verification methodology
 - [`phase-reports/phase-10.md`](phase-reports/phase-10.md) — Phase 10 completion record
+- [`academic/phase-11-methodology.md`](academic/phase-11-methodology.md) — threat-model-led
+  security and privacy methodology
+- [`phase-reports/phase-11.md`](phase-reports/phase-11.md) — Phase 11 completion record
 
 ## Project delivery
 

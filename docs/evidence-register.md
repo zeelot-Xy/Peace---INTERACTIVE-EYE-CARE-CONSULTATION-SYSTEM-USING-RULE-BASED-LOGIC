@@ -52,5 +52,10 @@
 | E-P10-003 | 10 | Executable requirement-to-test completeness evidence | `docs/requirements-to-test-report.md`, `backend/tests/test_quality_evidence.py` | 2026-07-26 |
 | E-P10-004 | 10 | Reproducible full local verification command | `scripts/verify-phase10.ps1` | 2026-07-26 |
 | E-P10-005 | 10 | Full gate, migration cycle, live health, and browser smoke evidence | `docs/phase-reports/phase-10.md` | 2026-07-26 |
+| E-P11-001 | 11 | Threat-model-led baseline security review and closure candidates | Codex Security scan and Phase 11 report | 2026-07-26 |
+| E-P11-002 | 11 | Request, session, privilege, upload, audit, and privacy controls | `backend/app/`, `backend/tests/test_security.py` | 2026-07-26 |
+| E-P11-003 | 11 | Verified backup, restore, retention, and deletion operations | `backend/app/commands.py` | 2026-07-26 |
+| E-P11-004 | 11 | Python and frontend production dependency review | `scripts/verify-phase11.ps1` | 2026-07-26 |
+| E-P11-005 | 11 | Security, privacy, residual-risk, and methodology documentation | `docs/security-and-privacy.md`, Phase 11 methodology and report | 2026-07-26 |
 
 External screenshots and large artifacts may be mirrored in the project Google Drive. Each external item must retain a stable filename or link and must not contain patient data or secrets.

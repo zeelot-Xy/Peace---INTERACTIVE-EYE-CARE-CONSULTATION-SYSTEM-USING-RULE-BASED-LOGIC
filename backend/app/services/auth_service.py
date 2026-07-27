@@ -9,6 +9,7 @@ from flask_jwt_extended import create_access_token, create_refresh_token, decode
 from app.extensions import db
 from app.models import RefreshToken, TokenRevocation, User
 from app.services.audit_service import record_audit
+from app.utils.security import normalize_text
 
 
 class AuthenticationError(Exception):
@@ -49,7 +50,8 @@ def register_user(data: dict[str, Any]) -> User:
     if db.session.scalar(db.select(User).where(User.email == email)):
         raise ConflictError("An account could not be created with those details.")
     validate_password(data["password"])
-    user = User(email=email, full_name=data["full_name"].strip(), role="patient")
+    full_name = normalize_text(data["full_name"], max_length=120, field_name="Full name")
+    user = User(email=email, full_name=full_name, role="patient")
     user.set_password(data["password"])
     db.session.add(user)
     db.session.flush()
@@ -92,16 +94,25 @@ def issue_token_pair(user: User, family_id: str | None = None) -> tuple[str, str
 
 
 def rotate_refresh_token(user: User, claims: dict[str, Any]) -> tuple[str, str]:
-    token = db.session.scalar(
-        db.select(RefreshToken).where(RefreshToken.jti_hash == _hash_jti(claims["jti"]))
+    now = datetime.now(UTC)
+    token_hash = _hash_jti(claims["jti"])
+    result = db.session.execute(
+        db.update(RefreshToken)
+        .where(
+            RefreshToken.jti_hash == token_hash,
+            RefreshToken.used_at.is_(None),
+            RefreshToken.revoked_at.is_(None),
+            RefreshToken.expires_at > now,
+        )
+        .values(used_at=now)
     )
-    if not token or token.used_at or token.revoked_at:
+    if result.rowcount != 1:
+        db.session.rollback()
         revoke_token_family(claims.get("family_id"), "refresh_reuse")
         raise AuthenticationError("The session is no longer valid.")
-    token.used_at = datetime.now(UTC)
     record_audit("auth.refresh", actor_user_id=user.id, resource_type="user", resource_id=user.id)
     db.session.commit()
-    return issue_token_pair(user, token.family_id)
+    return issue_token_pair(user, claims["family_id"])
 
 
 def revoke_token(claims: dict[str, Any], reason: str) -> None:
@@ -156,6 +167,8 @@ def is_token_revoked(claims: dict[str, Any]) -> bool:
         return True
     user = db.session.get(User, claims["sub"])
     if not user or not user.is_active:
+        return True
+    if claims.get("role") == "admin" and user.role != "admin":
         return True
     if claims["type"] == "refresh":
         token = db.session.scalar(

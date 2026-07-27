@@ -17,3 +17,11 @@ All notable changes are documented here using a simplified Keep a Changelog form
 - Phase 8 administrator workspace, operational summaries, audit and result review, retained knowledge-package validation, diff preview, atomic publication, rollback, tests, and documentation.
 - Phase 9 immutable PDF reports, checksum-backed reproducibility, secure report APIs, filtered patient history, patient download controls, tests, and documentation.
 - Phase 10 cross-layer defence scenarios, a 90% backend coverage gate, React accessibility and recovery checks, executable requirements-to-test evidence, and a repeatable verification command.
+- Phase 11 request throttling and limits, strict browser and CORS controls, atomic token rotation, privilege-state checks, upload hardening, redacted immutable audits, dependency review, and governed SQLite retention, backup, restore, and deletion operations.
+
+### Security
+
+- Added a narrowly scoped audit exception for React Router advisory `GHSA-qwww-vcr4-c8h2`,
+  which affects unused unstable RSC APIs; every other high or critical advisory still fails.
+- Closed the baseline gaps for authentication throttling, request size, refresh rotation, and
+  stale administrator claims.

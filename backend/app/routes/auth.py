@@ -22,6 +22,7 @@ from app.services.auth_service import (
     rotate_refresh_token,
 )
 from app.utils.responses import success_response
+from app.utils.security import rate_limiter
 from app.utils.validation import load_json
 
 auth_blueprint = Blueprint("auth", __name__)
@@ -35,6 +36,7 @@ def _authenticated_response(user: User, access: str, refresh: str, status_code: 
 
 
 @auth_blueprint.post("/register")
+@rate_limiter.limit("RATELIMIT_REGISTER")
 def register():
     user = register_user(load_json(RegistrationSchema()))
     access, refresh = issue_token_pair(user)
@@ -42,6 +44,7 @@ def register():
 
 
 @auth_blueprint.post("/login")
+@rate_limiter.limit("RATELIMIT_LOGIN")
 def login():
     data = load_json(LoginSchema())
     user = authenticate(data["email"], data["password"])
@@ -50,6 +53,7 @@ def login():
 
 
 @auth_blueprint.post("/refresh")
+@rate_limiter.limit("RATELIMIT_REFRESH")
 @jwt_required(refresh=True)
 def refresh():
     user = db.session.get(User, get_jwt_identity())

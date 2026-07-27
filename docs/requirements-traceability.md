@@ -65,3 +65,11 @@
 | TRC-1001 | Map every implemented requirement to concrete verification evidence | 10 | Requirements-to-test evidence report | Executable completeness test | Implemented |
 | ACC-1001 | Verify accessibility semantics and failure recovery | 10 | React semantic and recovery scenarios | Component tests and live inspection | Implemented |
 | DOC-1001 | Document Phase 10 verification method, evidence, and limitations | 10 | Testing, methodology, defence, and phase report documents | Documentation review | Implemented |
+| SEC-1101 | Limit abusive or oversized API requests | 11 | Application and endpoint limiter, request cap, media-type checks | Security-negative API tests | Implemented |
+| SEC-1102 | Harden browser, CORS, cookie, error, and input boundaries | 11 | Security response hooks, strict configuration, normalized fields | Configuration, header, and normalization tests | Implemented |
+| SEC-1103 | Prevent refresh replay races and stale administrator privilege | 11 | Atomic token update and persisted-role comparison | Authentication regression and security review | Implemented |
+| SEC-1104 | Defend knowledge uploads and publication integrity | 11 | Bounded ZIP reader, immutable identity comparison, publication lock | Archive, publication, and regression tests | Implemented |
+| PRIV-1101 | Redact and protect security audit evidence | 11 | Central audit sanitizer, log filter, append-only model events | Redaction and mutation-negative tests | Implemented |
+| PRIV-1102 | Operate retention, deletion, backup, and restore | 11 | Dry-run maintenance and verified SQLite CLI commands | CLI backup, restore, and retention tests | Implemented |
+| DEP-1101 | Review runtime dependencies for vulnerabilities | 11 | pip-audit, npm audit, React Router advisory remediation | Phase 11 verification gate | Implemented |
+| DOC-1101 | Document Phase 11 controls, limitations, and methodology | 11 | Security guide, methodology, and completion report | Documentation review | Implemented |

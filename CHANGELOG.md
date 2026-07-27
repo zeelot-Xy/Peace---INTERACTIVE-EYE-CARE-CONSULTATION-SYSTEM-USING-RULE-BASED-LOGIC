@@ -18,6 +18,9 @@ All notable changes are documented here using a simplified Keep a Changelog form
 - Phase 9 immutable PDF reports, checksum-backed reproducibility, secure report APIs, filtered patient history, patient download controls, tests, and documentation.
 - Phase 10 cross-layer defence scenarios, a 90% backend coverage gate, React accessibility and recovery checks, executable requirements-to-test evidence, and a repeatable verification command.
 - Phase 11 request throttling and limits, strict browser and CORS controls, atomic token rotation, privilege-state checks, upload hardening, redacted immutable audits, dependency review, and governed SQLite retention, backup, restore, and deletion operations.
+- Phase 12 unified same-origin runtime, persistent Windows application-data policy, installation
+  secrets, safe launcher and maintenance tools, PyInstaller release pipeline, and persistent
+  Docker/Linux server deployment.
 
 ### Security
 

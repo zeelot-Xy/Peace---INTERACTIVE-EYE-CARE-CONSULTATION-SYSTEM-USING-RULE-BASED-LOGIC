@@ -2,6 +2,7 @@
 .env
 .env.*
 !.env.example
+!.env.server.example
 
 # Python
 __pycache__/
@@ -19,6 +20,7 @@ instance/
 # Node
 node_modules/
 frontend/dist/
+backend/static/
 frontend/coverage/
 *.tsbuildinfo
 
@@ -31,4 +33,6 @@ Thumbs.db
 # Build and packaging output
 build/
 dist/
+release/
 *.spec
+!packaging/windows/*.spec

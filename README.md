@@ -20,6 +20,8 @@ requirements-to-test evidence.
 Phase 11 adds request throttling and bounds, strict browser and CORS policy, atomic session
 rotation, current-role enforcement, hardened uploads, redacted append-only audit handling,
 verified SQLite maintenance, retention controls, and dependency advisory checks.
+Phase 12 adds a unified same-origin release runtime, one-click Windows packaging with
+installation-local data, and a persistent single-instance Docker/Linux server deployment.
 
 ## Technology
 
@@ -30,6 +32,7 @@ verified SQLite maintenance, retention controls, and dependency advisory checks.
 - ReportLab PDF generation with immutable SQLite-backed artifacts
 - pytest, Vitest, Testing Library, ESLint, and Ruff
 - Docker Compose for reproducible development
+- PyInstaller/Waitress Windows release and Docker/Linux server release
 
 ## Local development
 
@@ -90,6 +93,25 @@ npm.cmd run build
 Copy-Item .env.example .env
 docker compose up --build
 ```
+
+### Client and server releases
+
+The Windows release requires no separately installed Python, Node.js, or Docker:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\build-windows-release.ps1
+```
+
+The server release uses a persistent Docker volume:
+
+```powershell
+Copy-Item .env.server.example .env.server
+docker compose --env-file .env.server -f compose.server.yml up -d --build
+```
+
+Replace both server secrets before starting it. See
+[`docs/windows-release.md`](docs/windows-release.md) and
+[`docs/server-deployment.md`](docs/server-deployment.md).
 
 ## Documentation
 

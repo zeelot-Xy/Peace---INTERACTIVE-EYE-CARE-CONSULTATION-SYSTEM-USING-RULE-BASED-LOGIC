@@ -57,5 +57,10 @@
 | E-P11-003 | 11 | Verified backup, restore, retention, and deletion operations | `backend/app/commands.py` | 2026-07-26 |
 | E-P11-004 | 11 | Python and frontend production dependency review | `scripts/verify-phase11.ps1` | 2026-07-26 |
 | E-P11-005 | 11 | Security, privacy, residual-risk, and methodology documentation | `docs/security-and-privacy.md`, Phase 11 methodology and report | 2026-07-26 |
+| E-P12-001 | 12 | Windows runtime, maintenance, and persistence implementation | `backend/app/runtime.py`, `backend/app/launcher.py`, `backend/app/maintenance.py` | 2026-07-27 |
+| E-P12-002 | 12 | Windows build specification, archive, and checksum process | `packaging/windows/`, `scripts/build-windows-release.ps1` | 2026-07-27 |
+| E-P12-003 | 12 | Persistent non-root Docker/Linux server release | `Dockerfile`, `compose.server.yml`, `backend/app/server.py` | 2026-07-27 |
+| E-P12-004 | 12 | Runtime path, secret, routing, locking, backup, restore, reset, and diagnostics tests | `backend/tests/test_runtime.py` | 2026-07-27 |
+| E-P12-005 | 12 | Local/server deployment decision and operator guidance | `docs/windows-release.md`, `docs/server-deployment.md`, ADR 0009 | 2026-07-27 |
 
 External screenshots and large artifacts may be mirrored in the project Google Drive. Each external item must retain a stable filename or link and must not contain patient data or secrets.

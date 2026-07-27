@@ -73,3 +73,8 @@
 | PRIV-1102 | Operate retention, deletion, backup, and restore | 11 | Dry-run maintenance and verified SQLite CLI commands | CLI backup, restore, and retention tests | Implemented |
 | DEP-1101 | Review runtime dependencies for vulnerabilities | 11 | pip-audit, npm audit, React Router advisory remediation | Phase 11 verification gate | Implemented |
 | DOC-1101 | Document Phase 11 controls, limitations, and methodology | 11 | Security guide, methodology, and completion report | Documentation review | Implemented |
+| PKG-1201 | Deliver a client-operated Windows release without development runtimes | 12 | PyInstaller specification, launcher, and build script | Package build and clean-start smoke test | Implemented |
+| PKG-1202 | Preserve mutable local data outside immutable program resources | 12 | `%LOCALAPPDATA%` paths, first-run secrets, writable knowledge seed | Runtime path, secret, and seed tests | Implemented |
+| OPS-1201 | Provide safe local startup and maintenance operations | 12 | Port selection, single-instance lock, migrations, backup, restore, reset, diagnostics | Runtime and maintenance tests | Implemented |
+| DEP-1201 | Deliver a persistent single-instance Linux server release | 12 | Multi-stage Dockerfile, Compose service, `/data` volume | Image and live persistence smoke tests | Implemented |
+| DOC-1201 | Document Windows, server, free-tier, security, and methodology boundaries | 12 | Release guides, ADR 0009, methodology, and phase report | Documentation review | Implemented |

@@ -1,4 +1,4 @@
-"""Executable checks for requirements-to-test evidence through Phase 12."""
+"""Executable checks for requirements-to-test evidence through Phase 13."""
 
 import re
 from pathlib import Path
@@ -58,5 +58,18 @@ def test_phase_12_evidence_names_packaging_and_server_gates():
         "verify-phase12.ps1",
         "PyInstaller build",
         "volume persistence",
+    ):
+        assert expected in report_text
+
+
+def test_phase_13_evidence_names_complete_documentation_gate():
+    report_text = REPORT.read_text(encoding="utf-8")
+
+    for expected in (
+        "academic-report.md",
+        "api-reference.md",
+        "user-guide.md",
+        "validate_documentation.py",
+        "verify-phase13.ps1",
     ):
         assert expected in report_text

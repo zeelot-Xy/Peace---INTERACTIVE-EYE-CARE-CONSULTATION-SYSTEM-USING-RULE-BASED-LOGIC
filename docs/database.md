@@ -2,7 +2,9 @@
 
 ## Data ownership
 
-SQLite stores dynamic application data only. Expert-system questions, symptoms, conditions, rules, recommendations, and risk levels remain outside the database and will be introduced as versioned JSON.
+SQLite stores dynamic application data only. Expert-system questions, symptoms, conditions,
+rules, recommendations, and risk levels remain outside the database in immutable versioned JSON
+knowledge packages.
 
 ## Data dictionary
 

@@ -62,5 +62,10 @@
 | E-P12-003 | 12 | Persistent non-root Docker/Linux server release | `Dockerfile`, `compose.server.yml`, `backend/app/server.py` | 2026-07-27 |
 | E-P12-004 | 12 | Runtime path, secret, routing, locking, backup, restore, reset, and diagnostics tests | `backend/tests/test_runtime.py` | 2026-07-27 |
 | E-P12-005 | 12 | Local/server deployment decision and operator guidance | `docs/windows-release.md`, `docs/server-deployment.md`, ADR 0009 | 2026-07-27 |
+| E-P13-001 | 13 | Complete patient, API, troubleshooting, and architecture reader set | `docs/user-guide.md`, `docs/api-reference.md`, `docs/troubleshooting.md`, `docs/architecture/diagrams.md` | 2026-07-27 |
+| E-P13-002 | 13 | Evidence-led adaptable academic manuscript and methodology | `docs/academic-report.md`, `docs/academic/phase-13-methodology.md` | 2026-07-27 |
+| E-P13-003 | 13 | Executable document, link, heading, index, and source validation | `scripts/validate_documentation.py`, `scripts/verify-phase13.ps1` | 2026-07-27 |
+| E-P13-004 | 13 | Consolidated traceability and completion evidence | `docs/requirements-to-test-report.md`, `docs/phase-reports/phase-13.md` | 2026-07-27 |
+| E-P13-005 | 13 | Non-sensitive public application screenshot | `docs/images/landing-page.png` | 2026-07-27 |
 
 External screenshots and large artifacts may be mirrored in the project Google Drive. Each external item must retain a stable filename or link and must not contain patient data or secrets.

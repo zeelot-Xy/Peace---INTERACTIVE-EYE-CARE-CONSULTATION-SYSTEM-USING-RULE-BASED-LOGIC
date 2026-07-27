@@ -21,6 +21,9 @@ All notable changes are documented here using a simplified Keep a Changelog form
 - Phase 12 unified same-origin runtime, persistent Windows application-data policy, installation
   secrets, safe launcher and maintenance tools, PyInstaller release pipeline, and persistent
   Docker/Linux server deployment.
+- Phase 13 complete patient and API guides, cross-environment troubleshooting, architecture
+  diagrams, adaptable academic manuscript, consolidated traceability, and automated
+  documentation integrity verification.
 
 ### Security
 

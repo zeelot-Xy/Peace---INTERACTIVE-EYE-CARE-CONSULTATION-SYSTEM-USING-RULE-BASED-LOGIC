@@ -2,6 +2,20 @@
 
 Repository documentation is versioned with the implementation. Collaborative academic drafts, review comments, presentation assets, and large evidence files may be mirrored in Google Drive, but accepted technical truth remains here.
 
+## Final reader set
+
+- [`user-guide.md`](user-guide.md) — patient operation and result interpretation
+- [`administration.md`](administration.md) — administrator governance and knowledge operations
+- [`api-reference.md`](api-reference.md) — consolidated versioned REST contract
+- [`architecture/diagrams.md`](architecture/diagrams.md) — architecture and defence diagrams
+- [`troubleshooting.md`](troubleshooting.md) — development, Windows, server, and recovery support
+- [`academic-report.md`](academic-report.md) — complete adaptable final-year manuscript
+- [`academic-report-outline.md`](academic-report-outline.md) — institution-format transfer
+  checklist
+- [`academic/phase-13-methodology.md`](academic/phase-13-methodology.md) — evidence-led
+  documentation synthesis
+- [`phase-reports/phase-13.md`](phase-reports/phase-13.md) — Phase 13 completion record
+
 ## Governance and engineering
 
 - [`architecture/overview.md`](architecture/overview.md) — system boundaries and layered design

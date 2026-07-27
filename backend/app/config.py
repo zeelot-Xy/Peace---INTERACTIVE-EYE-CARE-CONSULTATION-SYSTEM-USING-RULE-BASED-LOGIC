@@ -110,6 +110,7 @@ class BaseConfig:
     KNOWLEDGE_ARCHIVE_MAX_COMPRESSION_RATIO: int = int(
         os.getenv("KNOWLEDGE_ARCHIVE_MAX_COMPRESSION_RATIO", "100")
     )
+    STATIC_DIST_DIR: str = os.getenv("STATIC_DIST_DIR", "")
 
 
 @dataclass(frozen=True)
@@ -128,7 +129,7 @@ class TestingConfig(BaseConfig):
 @dataclass(frozen=True)
 class ProductionConfig(BaseConfig):
     DEBUG: bool = False
-    JWT_COOKIE_SECURE: bool = True
+    JWT_COOKIE_SECURE: bool = _as_bool("JWT_COOKIE_SECURE", True)
 
 
 @dataclass(frozen=True)

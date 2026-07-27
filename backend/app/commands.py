@@ -11,7 +11,7 @@ from app.extensions import db
 from app.inference import FactValidationError, InferenceConfigurationError
 from app.models import ConsultationSession, RefreshToken, TokenRevocation, User
 from app.services.audit_service import record_audit
-from app.services.auth_service import normalize_email, validate_password
+from app.services.auth_service import ConflictError, bootstrap_administrator
 
 
 def register_commands(app: Flask) -> None:
@@ -108,21 +108,11 @@ def register_commands(app: Flask) -> None:
     @click.password_option(confirmation_prompt=True)
     def bootstrap_admin(email: str, name: str, password: str) -> None:
         """Create the first administrator without default credentials."""
-        normalized = normalize_email(email)
-        if db.session.scalar(db.select(User).where(User.email == normalized)):
-            raise click.ClickException(
-                "An account with that email already exists; no changes made."
-            )
-        validate_password(password)
-        user = User(email=normalized, full_name=name.strip(), role="admin")
-        user.set_password(password)
-        db.session.add(user)
-        db.session.flush()
-        record_audit(
-            "admin.bootstrap", actor_user_id=user.id, resource_type="user", resource_id=user.id
-        )
-        db.session.commit()
-        click.echo(f"Administrator created for {normalized}.")
+        try:
+            user = bootstrap_administrator(email, name, password)
+        except ConflictError as error:
+            raise click.ClickException(str(error)) from error
+        click.echo(f"Administrator created for {user.email}.")
 
     @app.cli.command("database-backup")
     @click.option(

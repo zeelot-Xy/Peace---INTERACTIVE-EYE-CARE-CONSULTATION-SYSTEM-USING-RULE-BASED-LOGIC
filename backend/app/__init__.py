@@ -1,7 +1,7 @@
 import json
 from pathlib import Path
 
-from flask import Flask
+from flask import Flask, send_from_directory
 from flask_cors import CORS
 from sqlalchemy import event
 from sqlalchemy.engine import Engine
@@ -34,7 +34,7 @@ def create_app(
     config_name: str | None = None, config_overrides: dict[str, object] | None = None
 ) -> Flask:
     """Create and configure the Flask application."""
-    app = Flask(__name__)
+    app = Flask(__name__, static_folder=None)
     config = get_config(config_name)
     app.config.from_object(config)
     if config_overrides:
@@ -97,6 +97,23 @@ def create_app(
     app.register_blueprint(reports_blueprint, url_prefix="/api/v1/reports")
     register_commands(app)
     register_error_handlers(app)
+
+    static_directory = app.config.get("STATIC_DIST_DIR")
+    if static_directory:
+        static_root = Path(static_directory).resolve()
+        index_file = static_root / "index.html"
+        if not index_file.is_file():
+            raise RuntimeError(f"Compiled frontend is missing: {index_file}")
+
+        @app.get("/")
+        @app.get("/<path:requested_path>")
+        def serve_frontend(requested_path: str = ""):
+            if requested_path == "api" or requested_path.startswith("api/"):
+                return error_response("The requested resource was not found.", 404, "not_found")
+            candidate = static_root / requested_path
+            if requested_path and candidate.is_file():
+                return send_from_directory(static_root, requested_path)
+            return send_from_directory(static_root, "index.html")
 
     @jwt.token_in_blocklist_loader
     def token_in_blocklist(jwt_header, jwt_payload):

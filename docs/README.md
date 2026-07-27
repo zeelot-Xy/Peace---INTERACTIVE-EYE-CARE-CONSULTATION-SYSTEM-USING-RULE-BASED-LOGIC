@@ -53,6 +53,15 @@ Repository documentation is versioned with the implementation. Collaborative aca
   security and privacy methodology
 - [`phase-reports/phase-11.md`](phase-reports/phase-11.md) — Phase 11 completion record
 
+## Packaging and deployment
+
+- [`windows-release.md`](windows-release.md) — client startup, data, maintenance, and build guide
+- [`server-deployment.md`](server-deployment.md) — persistent Docker/Linux deployment and HTTPS
+- [`adr/0009-dual-local-and-server-release.md`](adr/0009-dual-local-and-server-release.md) —
+  local and hosted delivery decision
+- [`academic/phase-12-methodology.md`](academic/phase-12-methodology.md) — release methodology
+- [`phase-reports/phase-12.md`](phase-reports/phase-12.md) — Phase 12 completion record
+
 ## Project delivery
 
 - [`academic-report-outline.md`](academic-report-outline.md) — evolving final-year report structure

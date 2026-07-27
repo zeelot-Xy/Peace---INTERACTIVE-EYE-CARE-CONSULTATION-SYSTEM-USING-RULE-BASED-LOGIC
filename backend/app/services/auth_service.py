@@ -37,6 +37,38 @@ def validate_password(password: str) -> None:
         )
 
 
+def bootstrap_administrator(email: str, full_name: str, password: str) -> User:
+    normalized_email = normalize_email(email)
+    if db.session.scalar(db.select(User).where(User.email == normalized_email)):
+        raise ConflictError(
+            "An account with that email already exists; no changes made."
+        )
+    normalized_name = normalize_text(
+        full_name,
+        max_length=120,
+        field_name="Full name",
+    )
+    if not normalized_name:
+        raise ValueError("Full name is required.")
+    validate_password(password)
+    user = User(
+        email=normalized_email,
+        full_name=normalized_name,
+        role="admin",
+    )
+    user.set_password(password)
+    db.session.add(user)
+    db.session.flush()
+    record_audit(
+        "admin.bootstrap",
+        actor_user_id=user.id,
+        resource_type="user",
+        resource_id=user.id,
+    )
+    db.session.commit()
+    return user
+
+
 def _hash_jti(jti: str) -> str:
     return hashlib.sha256(jti.encode("utf-8")).hexdigest()
 

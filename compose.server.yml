@@ -1,0 +1,21 @@
+services:
+  eye-care:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      APP_ENV: production
+      APP_DATA_DIR: /data
+      SECRET_KEY: ${SECRET_KEY:?Set SECRET_KEY to a random value of at least 32 characters}
+      JWT_SECRET_KEY: ${JWT_SECRET_KEY:?Set JWT_SECRET_KEY to a different random value}
+      CORS_ORIGINS: ${PUBLIC_ORIGIN:-http://localhost:8080}
+      JWT_COOKIE_SECURE: ${JWT_COOKIE_SECURE:-false}
+      SECURITY_HSTS_SECONDS: ${SECURITY_HSTS_SECONDS:-31536000}
+    ports:
+      - "${SERVER_PORT:-8080}:5000"
+    volumes:
+      - eye-care-server-data:/data
+    restart: unless-stopped
+
+volumes:
+  eye-care-server-data:

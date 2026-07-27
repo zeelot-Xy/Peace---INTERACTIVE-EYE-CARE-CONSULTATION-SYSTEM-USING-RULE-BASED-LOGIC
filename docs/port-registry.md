@@ -9,4 +9,9 @@ Host ports are reserved per active project to prevent conflicts between concurre
 
 Neither port may be allocated to another active project while this reservation is in force. Container-internal ports may be reused because Docker isolates them; the reservation applies to host-facing bindings on `localhost`.
 
+The Windows client release prefers loopback port `8765` and automatically advances to an
+available port. This dynamic runtime selection does not consume another development reservation.
+The server Compose example defaults to host port `8080`, which is deployment-specific and is not
+registered as a development port.
+
 Before starting this project, check that both ports are available. If a conflict occurs, identify and stop the unintended process instead of silently changing the registered ports. Any approved reassignment must update the environment configuration, Docker Compose bindings, CORS configuration, documentation, and the shared tracker together.

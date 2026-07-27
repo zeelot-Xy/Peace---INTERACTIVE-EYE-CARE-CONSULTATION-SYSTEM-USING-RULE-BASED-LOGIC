@@ -190,11 +190,17 @@ def configure_security(app: Flask) -> None:
         response.headers["Permissions-Policy"] = (
             "camera=(), microphone=(), geolocation=(), payment=()"
         )
-        response.headers["Content-Security-Policy"] = (
-            "default-src 'none'; frame-ancestors 'none'; base-uri 'none'"
-        )
         if request.path.startswith("/api/"):
+            response.headers["Content-Security-Policy"] = (
+                "default-src 'none'; frame-ancestors 'none'; base-uri 'none'"
+            )
             response.headers.setdefault("Cache-Control", "no-store")
+        else:
+            response.headers["Content-Security-Policy"] = (
+                "default-src 'self'; script-src 'self'; style-src 'self'; "
+                "img-src 'self' data:; font-src 'self'; connect-src 'self'; "
+                "frame-ancestors 'none'; base-uri 'none'; form-action 'self'"
+            )
         if request.is_secure:
             response.headers["Strict-Transport-Security"] = (
                 f"max-age={app.config['SECURITY_HSTS_SECONDS']}; includeSubDomains"

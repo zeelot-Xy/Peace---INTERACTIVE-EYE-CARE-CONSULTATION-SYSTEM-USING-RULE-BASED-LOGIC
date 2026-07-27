@@ -31,8 +31,10 @@ by the runtime loader.
 - **Development:** Vite and Flask development servers with explicit CORS origins.
 - **Testing:** isolated Flask application configuration and jsdom frontend tests.
 - **Docker:** two development containers with a persistent application-data volume.
-- **Production:** Waitress-backed Flask container and an Nginx-served frontend build.
-- **Packaged:** reserved production profile for the Phase 12 Windows release.
+- **Production:** one non-root Docker/Linux service where Waitress serves the compiled React
+  interface and API from the same origin; mutable state resides in a persistent `/data` volume.
+- **Packaged:** one-folder Windows release where Waitress binds to loopback and mutable state
+  resides under `%LOCALAPPDATA%\EyeCareConsultation`.
 
 ## Current public API
 
@@ -115,3 +117,12 @@ generation, while React interaction tests verify browser semantics and recovery 
 canonical verification command enforces a 90% backend application-coverage floor alongside
 lint, component tests, type checking, and production build. Test passage establishes software
 conformance for authored scenarios; it does not establish clinical validity.
+
+## Release boundary
+
+Phase 12 compiles the browser interface into the Flask service for same-origin delivery. The
+Windows launcher creates persistent installation secrets, seeds writable knowledge, applies
+migrations, selects an available loopback port, and prevents concurrent instances. The
+Docker/Linux release obtains secrets and its public origin from deployment configuration and
+retains SQLite and knowledge state in `/data`. Both remain single-process projections; scaling
+requires shared persistence, rate limiting, and publication coordination. See ADR 0009.

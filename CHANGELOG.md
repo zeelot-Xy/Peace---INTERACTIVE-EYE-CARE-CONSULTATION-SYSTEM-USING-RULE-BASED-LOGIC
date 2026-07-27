@@ -24,6 +24,9 @@ All notable changes are documented here using a simplified Keep a Changelog form
 - Phase 13 complete patient and API guides, cross-environment troubleshooting, architecture
   diagrams, adaptable academic manuscript, consolidated traceability, and automated
   documentation integrity verification.
+- Phase 14 final audit checklist, client handoff guide, safe demonstration procedure, defence
+  presentation outline, portable source and Git history packaging, checksum manifest, and
+  delivery verification automation.
 
 ### Security
 
